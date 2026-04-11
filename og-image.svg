@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Barely Booting. Building new hardware for old computers.">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#12181a"/>
+
+  <!-- Faint scanline overlay -->
+  <defs>
+    <pattern id="scanlines" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="4" height="2" fill="rgba(0,0,0,0.08)"/>
+    </pattern>
+    <pattern id="dots" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="9" cy="9" r="0.7" fill="#7bbf8f" opacity="0.18"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#scanlines)"/>
+
+  <!-- PCB trace decorations -->
+  <g stroke="#7bbf8f" stroke-width="1.5" fill="none" opacity="0.28" stroke-linecap="round">
+    <path d="M 50 110 L 180 110 L 180 230 L 280 230"/>
+    <path d="M 50 520 L 220 520 L 220 420 L 340 420"/>
+    <path d="M 1150 110 L 1020 110 L 1020 230 L 920 230"/>
+    <path d="M 1150 520 L 980 520 L 980 420 L 860 420"/>
+    <path d="M 120 315 L 250 315"/>
+    <path d="M 1080 315 L 950 315"/>
+  </g>
+  <g fill="#7bbf8f" opacity="0.55">
+    <circle cx="50" cy="110" r="4"/>
+    <circle cx="50" cy="520" r="4"/>
+    <circle cx="1150" cy="110" r="4"/>
+    <circle cx="1150" cy="520" r="4"/>
+    <circle cx="120" cy="315" r="3"/>
+    <circle cx="1080" cy="315" r="3"/>
+    <circle cx="280" cy="230" r="3"/>
+    <circle cx="340" cy="420" r="3"/>
+    <circle cx="920" cy="230" r="3"/>
+    <circle cx="860" cy="420" r="3"/>
+  </g>
+
+  <!-- Chip icon (large) -->
+  <g transform="translate(540, 130)">
+    <rect x="0" y="0" width="120" height="120" rx="6" fill="#1a2024" stroke="#7bbf8f" stroke-width="3"/>
+    <circle cx="12" cy="12" r="3.5" fill="#7bbf8f"/>
+    <circle cx="108" cy="12" r="3.5" fill="#7bbf8f"/>
+    <circle cx="12" cy="108" r="3.5" fill="#7bbf8f"/>
+    <circle cx="108" cy="108" r="3.5" fill="#7bbf8f"/>
+    <text x="60" y="82" font-family="'Courier New', ui-monospace, monospace" font-size="58" font-weight="bold" fill="#7bbf8f" text-anchor="middle">BB</text>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="600" y="340" font-family="'Courier New', ui-monospace, monospace" font-size="76" font-weight="bold" fill="#e8dcc4" text-anchor="middle" letter-spacing="6">BARELY BOOTING</text>
+
+  <!-- Tagline -->
+  <text x="600" y="400" font-family="'Courier New', ui-monospace, monospace" font-size="24" fill="#d4a355" text-anchor="middle" letter-spacing="5">BUILDING NEW HARDWARE FOR OLD COMPUTERS</text>
+
+  <!-- Bottom status strip -->
+  <rect x="0" y="575" width="1200" height="55" fill="#1a2024"/>
+  <line x1="0" y1="572" x2="1200" y2="572" stroke="#a06d3c" stroke-width="1" opacity="0.5"/>
+  <text x="60" y="608" font-family="'Courier New', ui-monospace, monospace" font-size="18" fill="#7bbf8f" letter-spacing="3">BARELYBOOTING.COM</text>
+  <text x="1140" y="608" font-family="'Courier New', ui-monospace, monospace" font-size="18" fill="#7e755f" letter-spacing="3" text-anchor="end">v0.1 // 2026</text>
+</svg>
