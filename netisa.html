@@ -4,29 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
-<title>NetISA | Barely Booting</title>
-<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings TLS 1.3, WiFi, and modern internet connectivity to IBM PC/XT/AT and 386/486 systems.">
+<title>NetISA | Open-Source WiFi and TLS 1.3 ISA Card for DOS</title>
+<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT/AT and 386/486 systems running DOS.">
 <meta name="author" content="Tony Atkins">
+<meta name="keywords" content="NetISA, ISA card, ISA WiFi, DOS TLS, DOS HTTPS, vintage PC networking, retro computing, CPLD, ATF1508AS, ESP32-S3, TLS 1.3, 8088, 286, 386, 486, open-source hardware">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://barelybooting.com/netisa.html">
 
 <!-- Open Graph -->
-<meta property="og:title" content="NetISA: TLS 1.3 and WiFi for Vintage ISA PCs">
-<meta property="og:description" content="Open-source ISA expansion card bringing TLS 1.3 networking to DOS and vintage PCs. CPLD bus interface, ESP32-S3 crypto offload, full 16-bit address decode.">
-<meta property="og:type" content="website">
+<meta property="og:title" content="NetISA | WiFi and TLS 1.3 for Vintage ISA PCs">
+<meta property="og:description" content="Open-source ISA expansion card bringing WiFi, TLS 1.3, and HTTPS to DOS and vintage PCs. CPLD bus interface, ESP32-S3 crypto offload, full 16-bit address decode.">
+<meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/netisa.html">
 <meta property="og:image" content="https://barelybooting.com/og-image.svg">
+<meta property="og:image:alt" content="NetISA. Open-source TLS 1.3 and WiFi for vintage ISA PCs.">
 <meta property="og:site_name" content="Barely Booting">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Tony Atkins">
+<meta property="article:section" content="Hardware Projects">
+<meta property="article:tag" content="ISA">
+<meta property="article:tag" content="CPLD">
+<meta property="article:tag" content="TLS 1.3">
+<meta property="article:tag" content="DOS">
+<meta property="article:tag" content="Retro Computing">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="NetISA: TLS 1.3 and WiFi for Vintage ISA PCs">
-<meta name="twitter:description" content="Open-source ISA expansion card bringing TLS 1.3 networking to DOS and vintage PCs.">
+<meta name="twitter:title" content="NetISA | WiFi and TLS 1.3 for Vintage ISA PCs">
+<meta name="twitter:description" content="Open-source ISA expansion card bringing WiFi, TLS 1.3, and HTTPS to DOS and vintage PCs.">
 <meta name="twitter:image" content="https://barelybooting.com/og-image.svg">
+<meta name="twitter:image:alt" content="NetISA. Open-source TLS 1.3 and WiFi for vintage ISA PCs.">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 <link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://barelybooting.com/netisa.html#article",
+      "headline": "NetISA: WiFi and TLS 1.3 for Vintage ISA PCs",
+      "description": "Open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT, AT, 386, and 486 systems running DOS. CPLD bus interface, ESP32-S3 hardware crypto offload, full 16-bit address decode.",
+      "author": {
+        "@type": "Person",
+        "name": "Tony Atkins",
+        "url": "https://barelybooting.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Barely Booting",
+        "url": "https://barelybooting.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://barelybooting.com/favicon.svg"
+        }
+      },
+      "datePublished": "2026-04-11",
+      "dateModified": "2026-04-11",
+      "image": "https://barelybooting.com/og-image.svg",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://barelybooting.com/netisa.html"
+      },
+      "proficiencyLevel": "Expert",
+      "dependencies": "ATF1508AS CPLD, ESP32-S3, DOS TSR driver",
+      "keywords": "ISA, CPLD, ESP32-S3, TLS 1.3, DOS, retro computing, vintage PC, WiFi, Ethernet, open-source hardware, NetISA, Barely Booting",
+      "about": [
+        { "@type": "Thing", "name": "ISA bus" },
+        { "@type": "Thing", "name": "TLS 1.3" },
+        { "@type": "Thing", "name": "Vintage computing" },
+        { "@type": "Thing", "name": "Open-source hardware" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://barelybooting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "NetISA",
+          "item": "https://barelybooting.com/netisa.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
