@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f1216">
+<title>NetISA | Barely Booting</title>
+<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings TLS 1.3, WiFi, and modern internet connectivity to IBM PC/XT/AT and 386/486 systems.">
+<meta name="author" content="Tony Atkins">
+
+<!-- Open Graph -->
+<meta property="og:title" content="NetISA: TLS 1.3 and WiFi for Vintage ISA PCs">
+<meta property="og:description" content="Open-source ISA expansion card bringing TLS 1.3 networking to DOS and vintage PCs. CPLD bus interface, ESP32-S3 crypto offload, full 16-bit address decode.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://barelybooting.com/netisa.html">
+<meta property="og:image" content="https://barelybooting.com/og-image.png">
+<meta property="og:site_name" content="Barely Booting">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NetISA: TLS 1.3 and WiFi for Vintage ISA PCs">
+<meta name="twitter:description" content="Open-source ISA expansion card bringing TLS 1.3 networking to DOS and vintage PCs.">
+<meta name="twitter:image" content="https://barelybooting.com/og-image.png">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="/" class="brand">Barely Booting</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/netisa.html" class="active">NetISA</a>
+            <a href="/about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <h1>NetISA</h1>
+    <p class="subtitle">Open-source TLS 1.3 and WiFi for vintage ISA PCs.</p>
+
+    <div class="status">
+        <strong>Phase 0:</strong> Parts ordered. All firmware and CPLD logic validated in simulation (160/160 tests passing, 95/128 CPLD macrocells, positive timing slack at 16 MHz). Awaiting hardware for prototype build.
+    </div>
+
+    <p>NetISA is an 8/16-bit ISA expansion card that gives IBM PC/XT, AT, 386, and 486 systems a first-class path to the modern internet. A Microchip ATF1508AS CPLD handles ISA bus timing deterministically. An Espressif ESP32-S3 handles WiFi, TLS 1.3, and the full TCP/IP stack using hardware-accelerated AES, SHA, RSA, and ECC. The retro PC sees a register-mapped coprocessor and talks to it through a small DOS TSR. No proxy box. No serial bottleneck. No software crypto on the retro CPU.</p>
+
+    <h2>What this unlocks</h2>
+    <ul>
+        <li><strong>HTTPS browsing from DOS</strong> via Lynx, Links, or Arachne against real TLS 1.3 sites.</li>
+        <li><strong>Gmail, Outlook, Fastmail from Pine or Pegasus</strong> via IMAPS and SMTPS.</li>
+        <li><strong>git clone over HTTPS</strong> on a 486 against GitHub.</li>
+        <li><strong>Discord, Mastodon, Bluesky, Matrix</strong> via REST APIs, plus IRC over TLS for Libera.Chat.</li>
+        <li><strong>Dropbox, OneDrive, Nextcloud sync</strong> via WebDAV over HTTPS.</li>
+        <li><strong>MQTT over TLS</strong> for smart home publishing from an 8088.</li>
+    </ul>
+
+    <h2>Features</h2>
+    <ul>
+        <li>WiFi 802.11 b/g/n with external bracket-mounted antenna for reliability inside metal PC cases</li>
+        <li>Hardware-accelerated TLS 1.3 with certificate validation and session resumption</li>
+        <li>Optional Ethernet via Wiznet W5500 in v1.5 (pads and footprint present on v1 board)</li>
+        <li>Works in any ISA slot from XT through 486, 8-bit and 16-bit</li>
+        <li>DOS TSR driver with <code>INT 63h</code> API, under 2 KB resident</li>
+        <li>PC/TCP Packet Driver compatibility for mTCP and WATTCP applications</li>
+        <li>Full 16-bit I/O address decode with no aliasing on AT+ systems</li>
+        <li>Open source: MIT for software, CERN-OHL-P for hardware</li>
+    </ul>
+
+    <h2>Hardware</h2>
+    <ul>
+        <li><strong>Bus logic:</strong> Microchip ATF1508AS CPLD in TQFP-100, 128 macrocells, native 5V operation, 10 ns pin-to-pin propagation. No level shifters on the ISA side.</li>
+        <li><strong>Main processor:</strong> Espressif ESP32-S3-WROOM-1U-N8R8 with hardware AES-128/256, SHA-256/384/512, RSA up to 4096-bit, ECC, hardware RNG, and built-in WiFi.</li>
+        <li><strong>Ethernet (optional, v1.5):</strong> Wiznet W5500 with 8 hardware TCP sockets, 10/100 Mbps.</li>
+        <li><strong>Configuration:</strong> Physical jumpers for base address, IRQ, and safe mode. No Plug-and-Play.</li>
+    </ul>
+
+    <h2>Design verification</h2>
+    <ul>
+        <li><strong>160 of 160</strong> Verilog testbench tests passing (iverilog), covering address decode, IOCHRDY wait states, watchdog timeout, IRQ state machine retrigger, back-to-back cycles, mid-cycle reset, status flag merge, and alias rejection.</li>
+        <li><strong>95 of 128</strong> CPLD macrocells used, 61 of 84 pins, fits EPM7128STC100-15 clean on Quartus II 13.0sp1.</li>
+        <li><strong>Timing slack:</strong> +39.5 ns setup, +5.0 ns hold, +26.25 ns minimum pulse width at 16 MHz. Zero total negative slack.</li>
+        <li><strong>Zero bus contention events</strong> across the entire simulation suite.</li>
+        <li><strong>Lint clean</strong> on <code>iverilog -Wall</code>.</li>
+    </ul>
+
+    <h2>Looking ahead</h2>
+    <p>v1 ships as a DOS and Windows 3.x peripheral using Session Mode (the card owns TCP/IP and TLS, host talks at the session level). The firmware and CPLD are deliberately architected so v2 can add native drivers for Windows 95/98/NT NDIS, Linux kernel <code>net_device</code>, and NetBSD/FreeBSD, without hardware changes. v2.5 adds Linux <code>kTLS</code> offload, matching the architecture Mellanox and Chelsio use for their datacenter TLS-capable NICs, brought to a 486.</p>
+
+    <h2>Links</h2>
+    <ul class="link-list">
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">GitHub repository</a> (source, schematics, build log)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/netisa-architecture-spec.md" rel="noopener">Architecture specification</a> (the full design document)</li>
+        <li><a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube: @BarelyBooting</a> (build videos)</li>
+    </ul>
+
+    <p>Interested? Follow the build on <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a> or star the <a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">repo on GitHub</a>.</p>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div>&copy; 2026 Tony Atkins</div>
+        <div class="footer-links">
+            <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a>
+            <a href="https://github.com/tonyuatkins-afk" rel="noopener">GitHub</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
