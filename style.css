@@ -281,6 +281,52 @@ hr {
 
 .muted { color: var(--fg-2); }
 
+/* === Screenshots === */
+
+.screenshots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.screenshots figure {
+    margin: 0;
+}
+
+/* Center a lone trailing figure in a 2-col grid */
+.screenshots figure:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 0.625rem);
+    justify-self: center;
+}
+
+.screenshots img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    display: block;
+    image-rendering: pixelated;
+}
+
+.screenshots figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--fg-2);
+    margin-top: 0.4rem;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 640px) {
+    .screenshots {
+        grid-template-columns: 1fr;
+    }
+    .screenshots figure:last-child:nth-child(odd) {
+        max-width: 100%;
+    }
+}
+
 /* === Navigation === */
 
 nav.site-nav {

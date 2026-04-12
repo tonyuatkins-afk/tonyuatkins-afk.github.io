@@ -137,6 +137,25 @@
 
     <p>NetISA is an 8/16-bit ISA expansion card that gives IBM PC/XT, AT, 386, and 486 systems a first-class path to the modern internet. A Microchip ATF1508AS CPLD handles ISA bus timing deterministically. An Espressif ESP32-S3 handles WiFi, TLS 1.3, and the full TCP/IP stack using hardware-accelerated AES, SHA, RSA, and ECC. The retro PC sees a register-mapped coprocessor and talks to it through a small DOS TSR. No proxy box. No serial bottleneck. No software crypto on the retro CPU.</p>
 
+    <div class="screenshots">
+        <figure>
+            <img src="/img/discord.png" alt="NetISA Discord client running in DOS, showing the #general channel of Retro Computing Hub with color-coded usernames, timestamps, and a compose bar at the bottom" width="720" height="400">
+            <figcaption>Discord client for DOS</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/cathode.png" alt="Cathode text-mode web browser start page with block-letter CATHODE logo, quick links, and version 0.1" width="720" height="400">
+            <figcaption>Cathode text-mode browser</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/wifi-setup.png" alt="NetISA control panel WiFi setup screen showing scanned networks with signal strength bars, security type, and channel number for each network" width="720" height="400">
+            <figcaption>WiFi network scanner</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/card-status.png" alt="NetISA control panel card status screen showing network info (SSID, IP, signal), card info (firmware v1.0.1, sessions, uptime), and system info (CPU, FPU, DOS version, free RAM)" width="720" height="400">
+            <figcaption>Card status and diagnostics</figcaption>
+        </figure>
+    </div>
+
     <h2>What this unlocks</h2>
     <ul>
         <li><strong>HTTPS browsing from DOS</strong> via Cathode (built-in text-mode browser), Lynx, Links, or Arachne against real TLS 1.3 sites.</li>
@@ -157,6 +176,21 @@
         <li><strong>Stub layer</strong> &mdash; Fake data layer for DOSBox-X testing without hardware. Simulates WiFi networks, connection states, version info, and BIOS tick-based delays.</li>
     </ul>
 
+    <div class="screenshots">
+        <figure>
+            <img src="/img/launcher-menu.png" alt="NetISA control panel main menu with WiFi Setup, Card Status, and About options" width="720" height="400">
+            <figcaption>NETISA.EXE main menu</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/about.png" alt="NetISA about screen showing hardware info (ATF1508AS CPLD + ESP32-S3), license, project URLs, and tagline" width="720" height="400">
+            <figcaption>About screen</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/dos-session.png" alt="DOS command line session showing directory listing, loading the TSR, and running nisatest.com bus loopback test" width="720" height="400">
+            <figcaption>DOS session with TSR and bus test</figcaption>
+        </figure>
+    </div>
+
     <h2>Cathode: text-mode browser</h2>
     <p>Cathode is a built-in text-mode web browser that renders HTTPS websites in CP437 on any DOS machine. The browser is split between DOS and ESP32: the DOS side receives a cell stream, manages scrollback, and renders to the VGA text buffer. The ESP32 fetches URLs, parses HTML, and converts to a (char, attr) cell stream.</p>
     <ul>
@@ -168,6 +202,21 @@
         <li>Quality-gated: 5 rounds of adversarial review</li>
     </ul>
 
+    <div class="screenshots">
+        <figure>
+            <img src="/img/cathode.png" alt="Cathode start page with block-letter CATHODE logo, quick links to keyboard shortcuts, feature test page, and barelybooting.com" width="720" height="400">
+            <figcaption>Start page with block-art logo</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/cathode-test.png" alt="Cathode feature test page showing text styles (normal, bold, red error, dim), numbered links, and a CP437 box-drawing table" width="720" height="400">
+            <figcaption>Feature test: text styles, links, tables</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/cathode-table.png" alt="Cathode test page scrolled to show a feature status table (Scrolling, Link Navigation, URL Bar all Working; HTTPS Fetch Stub only), bulleted list, and scrolling test" width="720" height="400">
+            <figcaption>Tables, lists, and scroll test</figcaption>
+        </figure>
+    </div>
+
     <h2>Discord client</h2>
     <p>A text-mode Discord client demonstrating the card's ability to connect vintage PCs to modern chat platforms. Runs with stub data for DOSBox-X testing.</p>
     <ul>
@@ -178,6 +227,17 @@
         <li>PgUp/PgDn scrolling with position tracking</li>
         <li>Quality-gated: 6 rounds of adversarial review</li>
     </ul>
+
+    <div class="screenshots">
+        <figure>
+            <img src="/img/discord.png" alt="Discord client #general channel showing Retro Computing Hub conversation with color-coded usernames (VintageNerd, RetroGamer, BarelyBooting, ChipCollector, DOSenthusiast), timestamps, and message list" width="720" height="400">
+            <figcaption>Channel view with message history</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/discord-compose.png" alt="Discord client with compose bar active showing typed message, new messages from multiple users scrolled into view, and 19-message count" width="720" height="400">
+            <figcaption>Compose bar with live message feed</figcaption>
+        </figure>
+    </div>
 
     <h2>v1 Firmware</h2>
     <p>The v1 ESP32-S3 firmware replaces the Phase 0 loopback with production networking. It preserves the PSTROBE ISR and register file architecture &mdash; the ISA bus interface is unchanged.</p>
