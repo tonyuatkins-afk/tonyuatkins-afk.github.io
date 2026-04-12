@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>NetISA | Open-Source WiFi and TLS 1.3 ISA Card for DOS</title>
-<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT/AT and 386/486 systems running DOS. Includes Cathode text-mode browser, Discord client, and full ESP32-S3 firmware.">
+<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT/AT and 386/486 systems running DOS. Includes Cathode text-mode browser, Discord client, Claude AI chat client, and full ESP32-S3 firmware.">
 <meta name="author" content="Tony Atkins">
-<meta name="keywords" content="NetISA, ISA card, ISA WiFi, DOS TLS, DOS HTTPS, vintage PC networking, retro computing, CPLD, ATF1508AS, ESP32-S3, TLS 1.3, 8088, 286, 386, 486, open-source hardware, Cathode browser, DOS Discord">
+<meta name="keywords" content="NetISA, ISA card, ISA WiFi, DOS TLS, DOS HTTPS, vintage PC networking, retro computing, CPLD, ATF1508AS, ESP32-S3, TLS 1.3, 8088, 286, 386, 486, open-source hardware, Cathode browser, DOS Discord, Claude for DOS">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://barelybooting.com/netisa.html">
@@ -134,7 +134,7 @@
 
     <div class="status">
         <strong>Phase 0:</strong> Hardware designed. CPLD logic validated (160/160 tests). Parts ordered, awaiting prototype build.<br>
-        <strong>Phase 1:</strong> DOS software stack complete. v1 ESP32-S3 firmware complete. Cathode browser and Discord client running in DOSBox-X. All code quality-gated with iterative adversarial review.
+        <strong>Phase 1:</strong> DOS software stack complete. v1 ESP32-S3 firmware complete. Cathode browser, Discord client, and Claude AI client running in DOSBox-X. All code quality-gated with iterative adversarial review.
     </div>
 
     <p>NetISA is an 8/16-bit ISA expansion card that gives IBM PC/XT, AT, 386, and 486 systems a first-class path to the modern internet. A Microchip ATF1508AS CPLD handles ISA bus timing deterministically. An Espressif ESP32-S3 handles WiFi, TLS 1.3, and the full TCP/IP stack using hardware-accelerated AES, SHA, RSA, and ECC. The retro PC sees a register-mapped coprocessor and talks to it through a small DOS TSR. No proxy box. No serial bottleneck. No software crypto on the retro CPU.</p>
@@ -164,6 +164,7 @@
         <li><strong>Gmail, Outlook, Fastmail from Pine or Pegasus</strong> via IMAPS and SMTPS.</li>
         <li><strong>git clone over HTTPS</strong> on a 486 against GitHub.</li>
         <li><strong>Discord, Mastodon, Bluesky, Matrix</strong> via REST APIs, plus IRC over TLS for Libera.Chat.</li>
+        <li><strong>Claude AI on a vintage PC</strong> via the Anthropic API over TLS 1.3, with agent mode for running DOS commands.</li>
         <li><strong>Dropbox, OneDrive, Nextcloud sync</strong> via WebDAV over HTTPS.</li>
         <li><strong>MQTT over TLS</strong> for smart home publishing from an 8088.</li>
     </ul>
@@ -240,6 +241,18 @@
             <figcaption>Compose bar with live message feed</figcaption>
         </figure>
     </div>
+
+    <h2>Claude for DOS</h2>
+    <p>A text-mode Claude AI chat client that talks to the Anthropic API over TLS 1.3. Includes a 3-mode agent system for running DOS commands directly from the conversation. Runs with stub responses for DOSBox-X testing.</p>
+    <ul>
+        <li>Chat, Ask, and Auto agent modes (F4 to cycle)</li>
+        <li>Far-heap message pool for small memory model</li>
+        <li>Word-wrapped chat rendering with newline support</li>
+        <li>3-line compose area with cursor editing</li>
+        <li>[EXEC] tag parsing for command execution with output capture</li>
+        <li>Iterative agent loop with 5-deep safety cap (no recursive stack growth)</li>
+        <li>Quality-gated: 2 rounds of adversarial review</li>
+    </ul>
 
     <h2>v1 Firmware</h2>
     <p>The v1 ESP32-S3 firmware replaces the Phase 0 loopback with production networking. It preserves the PSTROBE ISR and register file architecture &mdash; the ISA bus interface is unchanged.</p>

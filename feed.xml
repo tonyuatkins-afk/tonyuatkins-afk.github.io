@@ -9,6 +9,14 @@
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>Claude Code for DOS</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-12b</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-12b</guid>
+      <pubDate>Sun, 12 Apr 2026 18:00:00 +0000</pubDate>
+      <description>Built CLAUDE.EXE — Claude AI chat client for DOS with 3-mode agent system (Chat/Ask/Auto), far-heap message pool, word-wrapped rendering, and command execution via [EXEC] tags. Quality-gated with adversarial review.</description>
+    </item>
+
+    <item>
       <title>Site launch + community pages</title>
       <link>https://barelybooting.com/log.html#entry-2026-04-12</link>
       <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-12</guid>
