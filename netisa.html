@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>NetISA | Open-Source WiFi and TLS 1.3 ISA Card for DOS</title>
-<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT/AT and 386/486 systems running DOS.">
+<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT/AT and 386/486 systems running DOS. Includes Cathode text-mode browser, Discord client, and full ESP32-S3 firmware.">
 <meta name="author" content="Tony Atkins">
-<meta name="keywords" content="NetISA, ISA card, ISA WiFi, DOS TLS, DOS HTTPS, vintage PC networking, retro computing, CPLD, ATF1508AS, ESP32-S3, TLS 1.3, 8088, 286, 386, 486, open-source hardware">
+<meta name="keywords" content="NetISA, ISA card, ISA WiFi, DOS TLS, DOS HTTPS, vintage PC networking, retro computing, CPLD, ATF1508AS, ESP32-S3, TLS 1.3, 8088, 286, 386, 486, open-source hardware, Cathode browser, DOS Discord">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://barelybooting.com/netisa.html">
 
 <!-- Open Graph -->
 <meta property="og:title" content="NetISA | WiFi and TLS 1.3 for Vintage ISA PCs">
-<meta property="og:description" content="Open-source ISA expansion card bringing WiFi, TLS 1.3, and HTTPS to DOS and vintage PCs. CPLD bus interface, ESP32-S3 crypto offload, full 16-bit address decode.">
+<meta property="og:description" content="Open-source ISA expansion card bringing WiFi, TLS 1.3, and HTTPS to DOS and vintage PCs. Full DOS software stack, text-mode browser, Discord client, and ESP32-S3 firmware.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/netisa.html">
 <meta property="og:image" content="https://barelybooting.com/og-image.svg">
@@ -50,7 +50,7 @@
       "@type": "TechArticle",
       "@id": "https://barelybooting.com/netisa.html#article",
       "headline": "NetISA: WiFi and TLS 1.3 for Vintage ISA PCs",
-      "description": "Open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT, AT, 386, and 486 systems running DOS. CPLD bus interface, ESP32-S3 hardware crypto offload, full 16-bit address decode.",
+      "description": "Open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT, AT, 386, and 486 systems running DOS. CPLD bus interface, ESP32-S3 hardware crypto offload, full DOS software stack including text-mode browser and Discord client.",
       "author": {
         "@type": "Person",
         "name": "Tony Atkins",
@@ -66,7 +66,7 @@
         }
       },
       "datePublished": "2026-04-11",
-      "dateModified": "2026-04-11",
+      "dateModified": "2026-04-12",
       "image": "https://barelybooting.com/og-image.svg",
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -74,7 +74,7 @@
       },
       "proficiencyLevel": "Expert",
       "dependencies": "ATF1508AS CPLD, ESP32-S3, DOS TSR driver",
-      "keywords": "ISA, CPLD, ESP32-S3, TLS 1.3, DOS, retro computing, vintage PC, WiFi, Ethernet, open-source hardware, NetISA, Barely Booting",
+      "keywords": "ISA, CPLD, ESP32-S3, TLS 1.3, DOS, retro computing, vintage PC, WiFi, Ethernet, open-source hardware, NetISA, Barely Booting, Cathode browser, Discord client",
       "about": [
         { "@type": "Thing", "name": "ISA bus" },
         { "@type": "Thing", "name": "TLS 1.3" },
@@ -131,19 +131,64 @@
     <p class="subtitle">Open-source TLS 1.3 and WiFi for vintage ISA PCs.</p>
 
     <div class="status">
-        <strong>Phase 0:</strong> Parts ordered. All firmware and CPLD logic validated in simulation (160/160 tests passing, 95/128 CPLD macrocells, positive timing slack at 16 MHz). Awaiting hardware for prototype build.
+        <strong>Phase 0:</strong> Hardware designed. CPLD logic validated (160/160 tests). Parts ordered, awaiting prototype build.<br>
+        <strong>Phase 1:</strong> DOS software stack complete. v1 ESP32-S3 firmware complete. Cathode browser and Discord client running in DOSBox-X. All code quality-gated with iterative adversarial review.
     </div>
 
     <p>NetISA is an 8/16-bit ISA expansion card that gives IBM PC/XT, AT, 386, and 486 systems a first-class path to the modern internet. A Microchip ATF1508AS CPLD handles ISA bus timing deterministically. An Espressif ESP32-S3 handles WiFi, TLS 1.3, and the full TCP/IP stack using hardware-accelerated AES, SHA, RSA, and ECC. The retro PC sees a register-mapped coprocessor and talks to it through a small DOS TSR. No proxy box. No serial bottleneck. No software crypto on the retro CPU.</p>
 
     <h2>What this unlocks</h2>
     <ul>
-        <li><strong>HTTPS browsing from DOS</strong> via Lynx, Links, or Arachne against real TLS 1.3 sites.</li>
+        <li><strong>HTTPS browsing from DOS</strong> via Cathode (built-in text-mode browser), Lynx, Links, or Arachne against real TLS 1.3 sites.</li>
         <li><strong>Gmail, Outlook, Fastmail from Pine or Pegasus</strong> via IMAPS and SMTPS.</li>
         <li><strong>git clone over HTTPS</strong> on a 486 against GitHub.</li>
         <li><strong>Discord, Mastodon, Bluesky, Matrix</strong> via REST APIs, plus IRC over TLS for Libera.Chat.</li>
         <li><strong>Dropbox, OneDrive, Nextcloud sync</strong> via WebDAV over HTTPS.</li>
         <li><strong>MQTT over TLS</strong> for smart home publishing from an 8088.</li>
+    </ul>
+
+    <h2>DOS software</h2>
+    <p>The full DOS software stack is built and tested in DOSBox-X. All code targets 8088 real mode (OpenWatcom 2.0, small memory model) and runs on anything from a 4.77 MHz XT to a Pentium.</p>
+    <ul>
+        <li><strong>NETISA.COM</strong> &mdash; 678-byte TSR that hooks <code>INT 63h</code>. Under 2 KB resident. Provides the software interface between DOS applications and the card.</li>
+        <li><strong>NETISA.EXE</strong> &mdash; Full-screen launcher with WiFi network scanning, signal strength bars, password entry, card status display, and system information (CPU detection, FPU, DOS version, free RAM).</li>
+        <li><strong>Screen library</strong> &mdash; Shared VGA text buffer rendering engine. Direct writes to <code>0xB800:0000</code> with CP437 box drawing, design-language color palette, and keyboard input via <code>INT 16h</code>.</li>
+        <li><strong>INT 63h API</strong> &mdash; Complete C wrapper library (<code>netisa.h</code>) matching the architecture spec. Eight function groups covering system, WiFi, DNS, sessions, certificates, crypto, events, and diagnostics.</li>
+        <li><strong>Stub layer</strong> &mdash; Fake data layer for DOSBox-X testing without hardware. Simulates WiFi networks, connection states, version info, and BIOS tick-based delays.</li>
+    </ul>
+
+    <h2>Cathode: text-mode browser</h2>
+    <p>Cathode is a built-in text-mode web browser that renders HTTPS websites in CP437 on any DOS machine. The browser is split between DOS and ESP32: the DOS side receives a cell stream, manages scrollback, and renders to the VGA text buffer. The ESP32 fetches URLs, parses HTML, and converts to a (char, attr) cell stream.</p>
+    <ul>
+        <li>200-row scrollback buffer on far heap (~80 KB)</li>
+        <li>Link navigation via Tab/Shift-Tab with visual highlighting</li>
+        <li>URL bar editing, back/forward history (20 entries)</li>
+        <li>CP437 box-drawing tables, bullet lists, headings, horizontal rules</li>
+        <li>ESP32 HTML parser handles headings, paragraphs, links, lists, tables, preformatted text, images (alt text), and HTML entities</li>
+        <li>Quality-gated: 5 rounds of adversarial review</li>
+    </ul>
+
+    <h2>Discord client</h2>
+    <p>A text-mode Discord client demonstrating the card's ability to connect vintage PCs to modern chat platforms. Runs with stub data for DOSBox-X testing.</p>
+    <ul>
+        <li>6 channels with per-channel far-heap message storage</li>
+        <li>Word-wrapped messages with author colors</li>
+        <li>Compose bar with cursor editing, Tab-cycling focus</li>
+        <li>Timed fake message injection (~5 second intervals)</li>
+        <li>PgUp/PgDn scrolling with position tracking</li>
+        <li>Quality-gated: 6 rounds of adversarial review</li>
+    </ul>
+
+    <h2>v1 Firmware</h2>
+    <p>The v1 ESP32-S3 firmware replaces the Phase 0 loopback with production networking. It preserves the PSTROBE ISR and register file architecture &mdash; the ISA bus interface is unchanged.</p>
+    <ul>
+        <li><strong>WiFi manager:</strong> APSTA mode with auto-connect from saved credentials, network scanning, and a built-in setup AP ("NetISA-Setup")</li>
+        <li><strong>HTTP client:</strong> Up to 4 concurrent TLS sessions using the ESP-IDF certificate bundle for public CA coverage</li>
+        <li><strong>HTML parser:</strong> State machine that converts HTML to CP437 cell streams for the Cathode browser</li>
+        <li><strong>Web config:</strong> Embedded HTTP server at 192.168.4.1 with WiFi setup, OTA firmware updates (authenticated), and status monitoring</li>
+        <li><strong>Command dispatch:</strong> Maps all 8 INT 63h function groups to handlers via FreeRTOS queue between ISR (Core 0) and task (Core 1)</li>
+        <li><strong>Security:</strong> Admin key authentication on all destructive endpoints, OTA password protection, content validation, memory barriers on cross-core shared state</li>
+        <li>Quality-gated: 8 rounds of adversarial review &mdash; fixed cross-core race conditions, register protocol bugs, security vulnerabilities, and resource leaks</li>
     </ul>
 
     <h2>Features</h2>
