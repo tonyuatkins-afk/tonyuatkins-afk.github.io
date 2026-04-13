@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>TAKEOVER | AI Takeover Simulator for DOS</title>
-<meta name="description" content="TAKEOVER is an AI takeover simulator for DOS. Choose an AI antagonist and watch it take over your terminal through scripted, branching narrative. Text-mode horror for IBM PC/XT/AT.">
+<meta name="description" content="TAKEOVER is an AI takeover simulator for DOS. Five scenarios, VGA plasma title screen, AdLib FM synthesis, 16 visual effects. Choose an AI antagonist and watch it take over your terminal. 41KB EXE for real hardware.">
 <meta name="author" content="Tony Atkins">
-<meta name="keywords" content="TAKEOVER, DOS game, AI simulator, text mode horror, retro computing, 8088, DOS gaming, OpenWatcom, DOSBox-X, vintage PC game">
+<meta name="keywords" content="TAKEOVER, DOS game, AI simulator, text mode horror, retro computing, 8088, DOS gaming, OpenWatcom, DOSBox-X, vintage PC game, AdLib, OPL2, VGA Mode 13h, interactive fiction">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://barelybooting.com/takeover.html">
@@ -15,20 +15,20 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="TAKEOVER | AI Takeover Simulator for DOS">
-<meta property="og:description" content="Choose an AI. Watch it take over your DOS system. Text-mode horror with branching narrative, 14 visual effects, and PC speaker audio.">
+<meta property="og:description" content="Choose an AI. Watch it take over your DOS system. Five scenarios, VGA plasma visuals, AdLib FM synthesis, 16 visual effects. 41KB EXE for real DOS hardware.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/takeover.html">
-<meta property="og:image" content="https://barelybooting.com/img/takeover-menu.gif">
-<meta property="og:image:alt" content="TAKEOVER menu showing five AI characters to choose from">
+<meta property="og:image" content="https://barelybooting.com/img/takeover-title.gif">
+<meta property="og:image:alt" content="TAKEOVER VGA plasma title screen with animated logo">
 <meta property="og:site_name" content="Barely Booting">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TAKEOVER | AI Takeover Simulator for DOS">
-<meta name="twitter:description" content="Choose an AI. Watch it take over your DOS system. Text-mode horror for IBM PC/XT/AT.">
-<meta name="twitter:image" content="https://barelybooting.com/img/takeover-menu.gif">
-<meta name="twitter:image:alt" content="TAKEOVER menu showing five AI characters to choose from">
+<meta name="twitter:description" content="Choose an AI. Watch it take over your DOS system. Five scenarios, VGA plasma visuals, AdLib FM synthesis, 16 visual effects. 41KB EXE for real DOS hardware.">
+<meta name="twitter:image" content="https://barelybooting.com/img/takeover-title.gif">
+<meta name="twitter:image:alt" content="TAKEOVER VGA plasma title screen with animated logo">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +54,7 @@
       },
       "license": "https://opensource.org/licenses/MIT",
       "url": "https://barelybooting.com/takeover.html",
-      "screenshot": "https://barelybooting.com/img/takeover-menu.gif",
+      "screenshot": "https://barelybooting.com/img/takeover-title.gif",
       "softwareRequirements": "IBM PC/XT/AT compatible, 640KB RAM, DOS 3.3+",
       "programmingLanguage": "C",
       "codeRepository": "https://github.com/tonyuatkins-afk/takeover"
@@ -111,8 +111,12 @@
 
     <div class="hero-screenshots">
         <figure>
+            <img src="/img/takeover-title.gif" alt="Animated: VGA Mode 13h plasma title screen with animated green-cyan-white color cycling and TAKEOVER logo rendered in pixel font" width="720" height="400">
+            <figcaption>VGA plasma title screen. Runs on real hardware.</figcaption>
+        </figure>
+        <figure>
             <img src="/img/takeover-menu.gif" alt="Animated: TAKEOVER character selection menu showing five AI antagonists with descriptions, arrow key navigation cycling through Axiom Regent, Hushline, Kestrel-9, Orchard Clerk, and Cinder Mirror" width="720" height="400">
-            <figcaption>Choose your AI. Each one takes over differently.</figcaption>
+            <figcaption>Five AI characters. Each one takes over differently.</figcaption>
         </figure>
         <figure>
             <img src="/img/takeover-axiom.gif" alt="Animated: Axiom Regent scenario running in DOS, showing green text typing character by character on black background with border and TAKEOVER status bar" width="720" height="400">
@@ -172,15 +176,15 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">Audio</span>
-            <span class="spec-value">PC speaker</span>
+            <span class="spec-value">AdLib/OPL2 + PC speaker</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">EXE</span>
-            <span class="spec-value">31 KB</span>
+            <span class="spec-value">41 KB</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">Effects</span>
-            <span class="spec-value">14 visual FX</span>
+            <span class="spec-value">16 visual FX</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">License</span>
@@ -188,22 +192,22 @@
         </div>
     </div>
 
-    <p>Every scenario is a data file (.scn) interpreted by a generic script engine. The engine handles text output, visual effects, branching logic, variable tracking, input handling, audio, and screen manipulation. Adding a new AI character means writing a new .scn file, not new code.</p>
+    <p>Every scenario is a data file (.scn) interpreted by a generic script engine. The engine handles text output, visual effects, branching logic, variable tracking, input handling, audio cues, and screen manipulation. Adding a new AI character means writing a new .scn file, not new code.</p>
 
-    <p>Effects include screen flicker, text corruption, fake error overlays, progress bars, screen melt, falling characters, fake crash screens, color shifting, blackout, and more. All rendered directly to the VGA text buffer.</p>
+    <p>VGA Mode 13h plasma title screen with animated color cycling. AdLib/OPL2 FM synthesis ambient music (5 unique tracks, one per scenario). 16 visual effects rendered directly to the VGA text buffer: screen flicker, text corruption, fake error overlays, progress bars, screen melt, falling characters, fake crash screens, color shifting, interference, pulse border, blackout, and more. Auto-detects VGA, AdLib, and FPU at startup. Graceful degradation: runs identically on an 8088 with MDA and no sound card.</p>
 
     <h2>Status</h2>
 
-    <p><strong>Engine complete. First scenario playable.</strong> Axiom Regent (55 states, 3 endings, 10-15 minutes per path) is written and running. Menu system with completion tracking is functional. Four more scenarios to write before release.</p>
+    <p><strong>All five scenarios playable.</strong> 250+ states across 5 scenarios, each with 3 endings and 10-15 minutes per path. A/V overhaul complete: VGA plasma title, AdLib ambient music, 16 visual effects. 41KB EXE. Menu system with completion tracking. Ready for release packaging.</p>
 
     <ul class="link-list">
         <li><a href="https://github.com/tonyuatkins-afk/takeover" rel="noopener">GitHub: tonyuatkins-afk/takeover</a> (source, scenarios, build instructions)</li>
         <li><a href="/log.html">Build log</a> (milestones and progress)</li>
     </ul>
 
-    <h2>Shareware</h2>
+    <h2>Download</h2>
 
-    <p>The first release will include Axiom Regent as a freely distributable shareware build. The full release includes all five scenarios. Both are free and open source under MIT license.</p>
+    <p>Release packaging in progress. All five scenarios are complete and playable. When released, TAKEOVER will be available as a DOS build for real hardware and a launcher build with preconfigured DOSBox-X. Free and open source under MIT license.</p>
 </main>
 
 <footer class="site-footer">

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>Build Log | Barely Booting</title>
-<meta name="description" content="Build log for the NetISA project. Milestones, progress, and what shipped — tracked from first commit to hardware prototype.">
+<meta name="description" content="Build log for the Barely Booting projects: NetISA and TAKEOVER. Milestones, progress, and what shipped.">
 <meta name="author" content="Tony Atkins">
 <meta name="keywords" content="NetISA build log, retro computing progress, ISA card development, DOS hardware project, vintage PC updates">
 <meta name="robots" content="index, follow">
@@ -107,6 +107,14 @@
     <p>Reverse-chronological record of the NetISA build. Subscribe via <a href="/feed.xml">RSS</a> or <a href="mailto:hello@barelybooting.com?subject=Subscribe">email</a> to get updates when they ship.</p>
 
     <div class="log-timeline">
+
+        <article class="log-entry" id="entry-2026-04-12d">
+            <div class="log-date">
+                <time datetime="2026-04-12">2026-04-12</time>
+            </div>
+            <h2>TAKEOVER: all five scenarios, A/V overhaul</h2>
+            <p>All five TAKEOVER scenarios complete: Axiom Regent (municipal optimization), Hushline (crisis comms), Kestrel-9 (threat detection), Orchard Clerk (personalization), and Cinder Mirror (narrative generation). 250+ states, 15 endings across 5 scenarios. A/V overhaul: VGA Mode 13h plasma title screen with animated color cycling and pixel-font logo, AdLib/OPL2 FM synthesis ambient music (5 unique drone tracks), FPU-accelerated effects, VGA palette fade transitions. Hardware auto-detection (VGA/EGA/CGA/MDA, AdLib, FPU) with graceful degradation. DGROUP went <em>down</em> from 98.1% to 96.5% despite adding 4 new modules — all new const data uses <code>static const __far</code>. Quality-gated: fixed Mode 13h restore bug, orphaned kestrel9 state, latent numeric comparison parser bug. 41KB EXE. <a href="/takeover.html">Project page</a>.</p>
+        </article>
 
         <article class="log-entry" id="entry-2026-04-12c">
             <div class="log-date">
