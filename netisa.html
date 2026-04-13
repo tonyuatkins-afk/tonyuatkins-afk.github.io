@@ -185,6 +185,14 @@
             <figcaption>NETISA.EXE main menu</figcaption>
         </figure>
         <figure>
+            <img src="/img/wifi-setup.png" alt="NetISA control panel WiFi setup screen showing scanned networks with signal strength bars, security type, and channel number for each network" width="720" height="400">
+            <figcaption>WiFi network scanner</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/card-status.png" alt="NetISA control panel card status screen showing network info (SSID, IP, signal), card info (firmware v1.0.1, sessions, uptime), and system info (CPU, FPU, DOS version, free RAM)" width="720" height="400">
+            <figcaption>Card status and diagnostics</figcaption>
+        </figure>
+        <figure>
             <img src="/img/about.png" alt="NetISA about screen showing hardware info (ATF1508AS CPLD + ESP32-S3), license, project URLs, and tagline" width="720" height="400">
             <figcaption>About screen</figcaption>
         </figure>
@@ -334,7 +342,7 @@
 
 <div class="lightbox" id="lightbox">
     <span class="lightbox-close">&times;</span>
-    <img src="" alt="">
+    <img alt="">
     <div class="lightbox-caption"></div>
 </div>
 
@@ -343,35 +351,26 @@
     var lb = document.getElementById('lightbox');
     var lbImg = lb.querySelector('img');
     var lbCap = lb.querySelector('.lightbox-caption');
-    var lbClose = lb.querySelector('.lightbox-close');
 
-    // Click any screenshot to open lightbox
+    function closeLb() { lb.classList.remove('active'); lbImg.removeAttribute('src'); }
+
     document.querySelectorAll('.screenshots img, .hero-screenshots img').forEach(function(img) {
-        img.addEventListener('click', function() {
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             lbImg.src = this.src;
             lbImg.alt = this.alt;
-            var cap = this.closest('figure');
-            lbCap.textContent = cap ? cap.querySelector('figcaption').textContent : '';
+            var fig = this.closest('figure');
+            var fc = fig ? fig.querySelector('figcaption') : null;
+            lbCap.textContent = fc ? fc.textContent : '';
             lb.classList.add('active');
         });
     });
-
-    // Close on click overlay, close button, or Escape
     lb.addEventListener('click', function(e) {
-        if (e.target === lb || e.target === lbClose) {
-            lb.classList.remove('active');
-            lbImg.src = '';
-        }
-    });
-    lbClose.addEventListener('click', function() {
-        lb.classList.remove('active');
-        lbImg.src = '';
+        if (e.target !== lb.querySelector('.lightbox-caption')) closeLb();
     });
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lb.classList.contains('active')) {
-            lb.classList.remove('active');
-            lbImg.src = '';
-        }
+        if (e.key === 'Escape' && lb.classList.contains('active')) closeLb();
     });
 })();
 </script>

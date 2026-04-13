@@ -5,15 +5,15 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 12 Apr 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 18:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
-      <title>Claude Code for DOS</title>
+      <title>Claude for DOS</title>
       <link>https://barelybooting.com/log.html#entry-2026-04-12b</link>
       <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-12b</guid>
       <pubDate>Sun, 12 Apr 2026 18:00:00 +0000</pubDate>
-      <description>Built CLAUDE.EXE — Claude AI chat client for DOS with 3-mode agent system (Chat/Ask/Auto), far-heap message pool, word-wrapped rendering, and command execution via [EXEC] tags. Quality-gated with adversarial review.</description>
+      <description>Built CLAUDE.EXE, a Claude AI chat client for DOS with 3-mode agent system (Chat/Ask/Auto), far-heap message pool, word-wrapped rendering, and command execution via [EXEC] tags. Quality-gated with adversarial review.</description>
     </item>
 
     <item>
