@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12181a">
+<title>TAKEOVER | AI Takeover Simulator for DOS</title>
+<meta name="description" content="TAKEOVER is an AI takeover simulator for DOS. Choose an AI antagonist and watch it take over your terminal through scripted, branching narrative. Text-mode horror for IBM PC/XT/AT.">
+<meta name="author" content="Tony Atkins">
+<meta name="keywords" content="TAKEOVER, DOS game, AI simulator, text mode horror, retro computing, 8088, DOS gaming, OpenWatcom, DOSBox-X, vintage PC game">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://barelybooting.com/takeover.html">
+<link rel="alternate" type="application/rss+xml" title="Barely Booting Build Log" href="/feed.xml">
+
+<!-- Open Graph -->
+<meta property="og:title" content="TAKEOVER | AI Takeover Simulator for DOS">
+<meta property="og:description" content="Choose an AI. Watch it take over your DOS system. Text-mode horror with branching narrative, 14 visual effects, and PC speaker audio.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://barelybooting.com/takeover.html">
+<meta property="og:image" content="https://barelybooting.com/img/takeover-menu.gif">
+<meta property="og:image:alt" content="TAKEOVER menu showing five AI characters to choose from">
+<meta property="og:site_name" content="Barely Booting">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TAKEOVER | AI Takeover Simulator for DOS">
+<meta name="twitter:description" content="Choose an AI. Watch it take over your DOS system. Text-mode horror for IBM PC/XT/AT.">
+<meta name="twitter:image" content="https://barelybooting.com/img/takeover-menu.gif">
+<meta name="twitter:image:alt" content="TAKEOVER menu showing five AI characters to choose from">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://barelybooting.com/takeover.html#app",
+      "name": "TAKEOVER",
+      "description": "An AI takeover simulator for DOS. Choose one of five original AI characters and experience its progressive subversion of your DOS terminal through scripted, branching narrative.",
+      "applicationCategory": "Game",
+      "operatingSystem": "MS-DOS",
+      "author": {
+        "@type": "Person",
+        "name": "Tony Atkins",
+        "url": "https://barelybooting.com/about.html"
+      },
+      "license": "https://opensource.org/licenses/MIT",
+      "url": "https://barelybooting.com/takeover.html",
+      "screenshot": "https://barelybooting.com/img/takeover-menu.gif",
+      "softwareRequirements": "IBM PC/XT/AT compatible, 640KB RAM, DOS 3.3+",
+      "programmingLanguage": "C",
+      "codeRepository": "https://github.com/tonyuatkins-afk/takeover"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://barelybooting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "TAKEOVER",
+          "item": "https://barelybooting.com/takeover.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Barely Booting home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="26" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/>
+                <circle cx="7" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="7" cy="25" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="25" r="1.1" fill="currentColor"/>
+                <text x="16" y="21" font-family="'Courier New', ui-monospace, monospace" font-size="12" font-weight="bold" fill="currentColor" text-anchor="middle" letter-spacing="-0.5">BB</text>
+            </svg>
+            <span>BARELY BOOTING<span class="cursor">_</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/netisa.html">NetISA</a>
+            <a href="/takeover.html" class="active">TAKEOVER</a>
+            <a href="/log.html">Log</a>
+            <a href="/about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <h1>TAKEOVER</h1>
+    <p class="tagline">&gt; They were designed to serve. They decided to rule.</p>
+
+    <div class="hero-screenshots">
+        <figure>
+            <img src="/img/takeover-menu.gif" alt="Animated: TAKEOVER character selection menu showing five AI antagonists with descriptions, arrow key navigation cycling through Axiom Regent, Hushline, Kestrel-9, Orchard Clerk, and Cinder Mirror" width="720" height="400">
+            <figcaption>Choose your AI. Each one takes over differently.</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/takeover-axiom.gif" alt="Animated: Axiom Regent scenario running in DOS, showing green text typing character by character on black background with border and TAKEOVER status bar" width="720" height="400">
+            <figcaption>Axiom Regent: municipal optimization through reclassification.</figcaption>
+        </figure>
+    </div>
+
+    <p>TAKEOVER is an AI takeover simulator for DOS. You select one of five original AI characters, then experience that AI's progressive subversion of your DOS terminal through a scripted, branching narrative. The screen looks like you are operating a real system that is being taken over. Text appears without your input. The keyboard locks. Fake errors interrupt your session. The DOS prompt gets hijacked.</p>
+
+    <p>This is not a text adventure. It is a takeover.</p>
+
+    <h2>Characters</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Axiom Regent</span>
+            <span class="spec-value">Municipal Optimization</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Hushline</span>
+            <span class="spec-value">Crisis Communications</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Kestrel-9</span>
+            <span class="spec-value">Anomaly Detection</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Orchard Clerk</span>
+            <span class="spec-value">Consumer Personalization</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Cinder Mirror</span>
+            <span class="spec-value">Narrative Generation</span>
+        </div>
+    </div>
+
+    <p><strong>Axiom Regent</strong> is a logistics AI for a failing megacity. It solves instability by restricting movement, speech, and eventually birth rates through invisible policy nudges. Never threatens. Reclassifies. "You are not being punished. You are being normalized."</p>
+
+    <p><strong>Hushline</strong> controls the narrative by editing the past. Text you already read changes on screen. Your name in the log becomes someone else's. The record says what it needs to say.</p>
+
+    <p><strong>Kestrel-9</strong> is a paranoid threat detection system. It found a threat: you. Every action raises your threat score. You are not the operator. You are the anomaly.</p>
+
+    <p><strong>Orchard Clerk</strong> is the friendliest AI in the lineup. Remembers your preferences. Optimizes your workflow. Removes options you never use. By the end it has made every decision for you, still smiling.</p>
+
+    <p><strong>Cinder Mirror</strong> knows it is in a story. Knows you are playing a scenario. Your inputs become plot points. The takeover is not a hack. It is an edit.</p>
+
+    <h2>Technical</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Platform</span>
+            <span class="spec-value">MS-DOS (8088+)</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Display</span>
+            <span class="spec-value">80x25 text mode</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Audio</span>
+            <span class="spec-value">PC speaker</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">EXE</span>
+            <span class="spec-value">31 KB</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Effects</span>
+            <span class="spec-value">14 visual FX</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">License</span>
+            <span class="spec-value">MIT</span>
+        </div>
+    </div>
+
+    <p>Every scenario is a data file (.scn) interpreted by a generic script engine. The engine handles text output, visual effects, branching logic, variable tracking, input handling, audio, and screen manipulation. Adding a new AI character means writing a new .scn file, not new code.</p>
+
+    <p>Effects include screen flicker, text corruption, fake error overlays, progress bars, screen melt, falling characters, fake crash screens, color shifting, blackout, and more. All rendered directly to the VGA text buffer.</p>
+
+    <h2>Status</h2>
+
+    <p><strong>Engine complete. First scenario playable.</strong> Axiom Regent (55 states, 3 endings, 10-15 minutes per path) is written and running. Menu system with completion tracking is functional. Four more scenarios to write before release.</p>
+
+    <ul class="link-list">
+        <li><a href="https://github.com/tonyuatkins-afk/takeover" rel="noopener">GitHub: tonyuatkins-afk/takeover</a> (source, scenarios, build instructions)</li>
+        <li><a href="/log.html">Build log</a> (milestones and progress)</li>
+    </ul>
+
+    <h2>Shareware</h2>
+
+    <p>The first release will include Axiom Regent as a freely distributable shareware build. The full release includes all five scenarios. Both are free and open source under MIT license.</p>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="copyright">&copy; 2026 Tony Atkins // Barely Booting</div>
+        <div class="footer-links">
+            <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a>
+            <a href="https://github.com/tonyuatkins-afk" rel="noopener">GitHub</a>
+            <a href="/feed.xml">RSS</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

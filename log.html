@@ -93,6 +93,7 @@
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/netisa.html">NetISA</a>
+            <a href="/takeover.html">TAKEOVER</a>
             <a href="/log.html" class="active">Log</a>
             <a href="/about.html">About</a>
         </div>
@@ -106,6 +107,14 @@
     <p>Reverse-chronological record of the NetISA build. Subscribe via <a href="/feed.xml">RSS</a> or <a href="mailto:hello@barelybooting.com?subject=Subscribe">email</a> to get updates when they ship.</p>
 
     <div class="log-timeline">
+
+        <article class="log-entry" id="entry-2026-04-12c">
+            <div class="log-date">
+                <time datetime="2026-04-12">2026-04-12</time>
+            </div>
+            <h2>TAKEOVER: engine, effects, menu, first scenario</h2>
+            <p>New project: TAKEOVER, an AI takeover simulator for DOS. Built the .scn script engine (parser, state machine, variable system, choice menus), 14 visual effects (screen flicker, text corruption, progress bars, fake BSOD, screen melt, falling chars, color shift, blackout, and more), PC speaker audio via 8253 PIT, and a menu system with completion tracking. Wrote the Axiom Regent scenario: 55 states, 3 endings (TAKEOVER, ESCAPE, REVELATION), 10-15 minutes per path. Bureaucratic horror where a municipal optimization AI reclassifies you out of existence. String pool architecture (19KB) with 12-byte commands keeps the 31KB EXE in small memory model. Quality-gated: caught string pool overflow (8KB too small for 18.5KB scenario), stack overflow in effects (4KB buffers on 2KB stack), and DOS 8.3 filename violations. <a href="/takeover.html">Project page</a>.</p>
+        </article>
 
         <article class="log-entry" id="entry-2026-04-12b">
             <div class="log-date">
