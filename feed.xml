@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Apr 2026 18:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Apr 2026 22:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Cathode v0.2: Text-Mode Document Browser</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-13d</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-13d</guid>
+      <pubDate>Sun, 13 Apr 2026 22:00:00 +0000</pubDate>
+      <description>Major Cathode browser upgrade: streaming HTML parser, HTTP/1.0 fetch with redirects, UTF-8 to CP437 mapping, find on page, bookmarks, word-boundary wrapping, scroll bar. Renders real websites (text.npr.org, man.openbsd.org, barelybooting.com) in DOS text mode. 38.5KB EXE. Quality-gated: 5 rounds of adversarial review, 34 issues resolved.</description>
+    </item>
 
     <item>
       <title>TAKEOVER v1.1: Demoscene Enhancement Pack</title>

@@ -135,7 +135,7 @@
 
     <div class="status">
         <strong>Phase 0:</strong> Hardware designed. CPLD logic validated (160/160 tests). Parts ordered, awaiting prototype build.<br>
-        <strong>Phase 1:</strong> DOS software stack complete. v1 ESP32-S3 firmware complete. Cathode browser, Discord client, and Claude AI client running in DOSBox-X. All code quality-gated with iterative adversarial review.
+        <strong>Phase 1:</strong> DOS software stack complete. v1 ESP32-S3 firmware complete. Cathode v0.2 document browser with streaming HTML parser, Discord client, and Claude AI client running in DOSBox-X. All code quality-gated with iterative adversarial review.
     </div>
 
     <p>NetISA is an 8/16-bit ISA expansion card that gives IBM PC/XT, AT, 386, and 486 systems a first-class path to the modern internet. A Microchip ATF1508AS CPLD handles ISA bus timing deterministically. An Espressif ESP32-S3 handles WiFi, TLS 1.3, and the full TCP/IP stack using hardware-accelerated AES, SHA, RSA, and ECC. The retro PC sees a register-mapped coprocessor and talks to it through a small DOS TSR. No proxy box. No serial bottleneck. No software crypto on the retro CPU.</p>
@@ -146,8 +146,8 @@
             <figcaption>Discord client for DOS (live messages)</figcaption>
         </figure>
         <figure>
-            <img src="/img/cathode.gif" alt="Animated: Cathode text-mode browser showing start page with block-letter CATHODE logo, quick links to keyboard shortcuts, feature test page, and barelybooting.com" width="480" height="360">
-            <figcaption>Cathode text-mode browser</figcaption>
+            <img src="/img/cathode-browse.gif" alt="Animated: Cathode v0.2 text-mode document browser navigating from home page to NPR news, scrolling through real headlines in DOS text mode" width="480" height="360">
+            <figcaption>Cathode v0.2 browsing real websites in DOS text mode</figcaption>
         </figure>
         <figure>
             <img src="/img/launcher.gif" alt="Animated: NetISA control panel main menu showing WiFi Setup, Card Status, Claude, and About options with keyboard navigation" width="480" height="360">
@@ -203,29 +203,30 @@
         </figure>
     </div>
 
-    <h2>Cathode: text-mode browser</h2>
-    <p>Cathode is a built-in text-mode web browser that renders HTTPS websites in CP437 on any DOS machine. The browser is split between DOS and ESP32: the DOS side receives a cell stream, manages scrollback, and renders to the VGA text buffer. The ESP32 fetches URLs, parses HTML, and converts to a (char, attr) cell stream.</p>
+    <h2>Cathode v0.2: text-mode document browser</h2>
+    <p>Cathode is a text-mode document browser for DOS. It fetches real HTML pages over HTTPS via the NetISA card, parses them through a streaming HTML parser, and renders structured content in 80&times;25 text mode. Cathode excels at articles, documentation, wikis, and directory pages.</p>
     <ul>
-        <li>200-row scrollback buffer on far heap (~80 KB)</li>
-        <li>Link navigation via Tab/Shift-Tab with visual highlighting</li>
-        <li>URL bar editing, back/forward history (20 entries)</li>
-        <li>CP437 box-drawing tables, bullet lists, headings, horizontal rules</li>
-        <li>ESP32 HTML parser handles headings, paragraphs, links, lists, tables, preformatted text, images (alt text), and HTML entities</li>
-        <li>Quality-gated: 5 rounds of adversarial review</li>
+        <li><strong>Streaming HTML parser</strong> &mdash; headings, paragraphs, links, bold/italic/code, ordered and unordered lists, blockquotes, preformatted text, horizontal rules, HTML entities, and image alt text</li>
+        <li><strong>HTTP/1.0 fetch</strong> with redirect following, UTF-8 to CP437 character mapping, and URL resolution for relative links</li>
+        <li><strong>Find on page</strong> (Ctrl+F) with match highlighting and N/Shift+N cycling</li>
+        <li><strong>Bookmarks</strong> with disk persistence (Ctrl+D to save, Ctrl+B to view)</li>
+        <li>200-row scrollback, scroll bar, link navigation via Tab/Shift+Tab, back/forward history</li>
+        <li>CP437 block-art CATHODE logo on start page</li>
+        <li>38 KB EXE. Quality-gated: 5 rounds of adversarial code review, 34 findings resolved</li>
     </ul>
 
     <div class="screenshots">
         <figure>
-            <img src="/img/cathode.gif" alt="Animated: Cathode text-mode browser showing start page with block-letter CATHODE logo, quick links to keyboard shortcuts, feature test page, and barelybooting.com" width="720" height="400">
-            <figcaption>Cathode text-mode browser</figcaption>
+            <img src="/img/cathode-browse.gif" alt="Animated: Cathode text-mode browser navigating from home page to NPR news, scrolling through headlines, tab-cycling through links" width="720" height="400">
+            <figcaption>Cathode browsing NPR &mdash; real news headlines rendered in text mode</figcaption>
         </figure>
         <figure>
-            <img src="/img/cathode-test.png" alt="Cathode feature test page showing text styles (normal, bold, red error, dim), numbered links, and a CP437 box-drawing table" width="720" height="400">
-            <figcaption>Feature test: text styles, links, tables</figcaption>
+            <img src="/img/cathode-home.gif" alt="Animated: Cathode start page with CP437 block-art CATHODE logo, quick links, and demo site list" width="720" height="400">
+            <figcaption>Start page with CP437 block-art logo and navigation links</figcaption>
         </figure>
         <figure>
-            <img src="/img/cathode-table.png" alt="Cathode test page scrolled to show a feature status table (Scrolling, Link Navigation, URL Bar all Working; HTTPS Fetch Stub only), bulleted list, and scrolling test" width="720" height="400">
-            <figcaption>Tables, lists, and scroll test</figcaption>
+            <img src="/img/cathode-test.gif" alt="Animated: Cathode feature test page showing headings, text styles, links, ordered and unordered lists, preformatted text, and blockquotes" width="720" height="400">
+            <figcaption>Feature test: headings, lists, bold, italic, code, blockquotes</figcaption>
         </figure>
     </div>
 
