@@ -135,7 +135,7 @@
 
     <div class="status">
         <strong>Phase 0:</strong> Hardware designed. CPLD logic validated (160/160 tests). Parts ordered, awaiting prototype build.<br>
-        <strong>Phase 1:</strong> DOS software stack complete. v1 ESP32-S3 firmware complete. Cathode v0.2 document browser with streaming HTML parser, Discord client, and Claude AI client running in DOSBox-X. All code quality-gated with iterative adversarial review.
+        <strong>Phase 1:</strong> DOS software stack complete. v1 ESP32-S3 firmware complete. Cathode v0.2 web browser (sort of) with streaming HTML parser, Discord client, and Claude AI client running in DOSBox-X. All code quality-gated with iterative adversarial review.
     </div>
 
     <p>NetISA is an 8/16-bit ISA expansion card that gives IBM PC/XT, AT, 386, and 486 systems a first-class path to the modern internet. A Microchip ATF1508AS CPLD handles ISA bus timing deterministically. An Espressif ESP32-S3 handles WiFi, TLS 1.3, and the full TCP/IP stack using hardware-accelerated AES, SHA, RSA, and ECC. The retro PC sees a register-mapped coprocessor and talks to it through a small DOS TSR. No proxy box. No serial bottleneck. No software crypto on the retro CPU.</p>
@@ -203,8 +203,8 @@
         </figure>
     </div>
 
-    <h2>Cathode v0.2: text-mode document browser</h2>
-    <p>Cathode is a text-mode document browser for DOS. It fetches real HTML pages over HTTPS via the NetISA card, parses them through a streaming HTML parser, and renders structured content in 80&times;25 text mode. Cathode excels at articles, documentation, wikis, and directory pages.</p>
+    <h2>Cathode v0.2: text-mode web browser (sort of)</h2>
+    <p>Cathode is a text-mode web browser for DOS. Sort of. It fetches real HTML pages over HTTPS via the NetISA card, parses them through a streaming HTML parser, and renders structured content in 80&times;25 text mode. No JavaScript, no CSS, no regrets. Cathode excels at articles, documentation, wikis, and directory pages.</p>
     <ul>
         <li><strong>Streaming HTML parser</strong> &mdash; headings, paragraphs, links, bold/italic/code, ordered and unordered lists, blockquotes, preformatted text, horizontal rules, HTML entities, and image alt text</li>
         <li><strong>HTTP/1.0 fetch</strong> with redirect following, UTF-8 to CP437 character mapping, and URL resolution for relative links</li>
