@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Apr 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Apr 2026 18:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>DOSBox-X automation quality gate: 9 Fatal + 31 Significant fixed</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-14c</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-14c</guid>
+      <pubDate>Mon, 14 Apr 2026 18:00:00 +0000</pubDate>
+      <description>Quality-gated the DOSBox-X automation tools (capture.ps1, dosrun.py, dosbuild.py, relay batch). 3 rounds, 40 issues fixed including atomic lockfile, PID recycling, tool discovery, zombie processes, silent black GIFs, ERRORLEVEL baseline. Automation now production-grade.</description>
+    </item>
 
     <item>
       <title>NetISA end-to-end quality gate</title>

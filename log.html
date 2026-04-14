@@ -116,6 +116,14 @@
             <p>Ran adversarial quality gate across the entire NetISA codebase (14,300 lines, 7 components). Four parallel chunk reviews found 8 Fatal and 16 Significant issues. All fixed in two commits. DOS-side: NULL pointer guards, TSR return code fix, password input VGA overflow clamp, FPU detection 8088 safety, Claude stack overflow fix, command injection filter, scroll clamping. Firmware security hardening: ISR race condition fixed (per-request data buffers), open WiFi AP replaced with WPA2-PSK using device-unique MAC-derived password + AP disabled after station connects, timing-safe admin key comparison (constant-time ct_strcmp), HTTP session mutex, redirect limit (5 hops), memory barrier fix in ISR, OTA SHA256 hash verification, NVS encryption documented. <a href="/netisa.html">Project page</a>.</p>
         </article>
 
+        <article class="log-entry" id="entry-2026-04-14c">
+            <div class="log-date">
+                <time datetime="2026-04-14">2026-04-14</time>
+            </div>
+            <h2>DOSBox-X automation quality gate: 9 Fatal + 31 Significant fixed</h2>
+            <p>Ran the full adversarial quality gate on the NetISA DOSBox-X automation infrastructure (capture.ps1, dosrun.py, dosbuild.py, _RELAY.BAT, dev.conf, README) — 1,422 lines total. Three review rounds, score progression 30&rarr;28&rarr;0. Found and fixed 9 Fatal and 31 Significant issues including: atomic lockfile (Ctrl+C races), Windows PID recycling (os.kill unreliable), hardcoded WinGet paths (break on upgrade), tempDir leaks on ffmpeg failure, zombie DOSBox-X processes on early exit, CP437 silent replacement, mount path quote escaping, PrintWindow return value check (no more silent black GIFs), ERRORLEVEL baseline reset before user commands, cycles=auto for deterministic timing, $projectDir quoting, lock-timeout-aware staleness. Automation infrastructure is now production-grade reliable. <a href="/netisa.html">Project page</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-14a">
             <div class="log-date">
                 <time datetime="2026-04-14">2026-04-14</time>
