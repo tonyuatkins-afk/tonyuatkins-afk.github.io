@@ -131,9 +131,11 @@
 
     <p>The day job is in cybersecurity. That means spending years thinking about what makes systems trustworthy and where they fall apart, and developing a deep appreciation for secure design along the way. Outside work, the pull is vintage computing hardware. Barely Booting is where those two interests connect: bringing modern cryptography and properly engineered networking to machines that were built long before TLS existed.</p>
 
-    <p>The current focus is NetISA, an ISA expansion card that gives pre-Pentium PCs a working path to the modern internet. Future projects follow the same pattern: new hardware, built carefully, for old computers that deserve to keep running.</p>
+    <p>It started with a question: <em>could I turn my 286 into a daily driver?</em> Not a novelty, not a retro nostalgia prop &mdash; an actual machine you could send email from, chat with friends on, browse the web with, and get real work done on. The honest answer in 2026 is &ldquo;no, not without building a lot of new stuff.&rdquo; So that&rsquo;s what Barely Booting is: the lot of new stuff.</p>
 
-    <p>Everything is open source. Schematics, firmware, CPLD logic, documentation, build logs, test suites. The goal is for anyone to be able to build one.</p>
+    <p>The flagship is <strong>NetISA</strong>, an ISA expansion card that gives pre-Pentium PCs a working path to the modern internet &mdash; WiFi and TLS 1.3 via an ESP32-S3 crypto coprocessor, bridged to the ISA bus by a CPLD. On top of the card is a growing software stack: <strong>Cathode</strong> (a text-mode web browser, sort of), <strong>Discord v2</strong> for DOS, a <strong>Claude AI chat client</strong>, and the <strong>NetISA launcher</strong>. Alongside it, <strong>TAKEOVER</strong> is an interactive AI takeover simulator for DOS &mdash; no NetISA required, pure 8088 real mode. The common thread is making old computers do new things, properly engineered.</p>
+
+    <p>Everything is open source. Schematics, firmware, CPLD logic, DOS source, documentation, build logs, test suites, quality-gate results. The goal is for anyone to be able to build one.</p>
 
     <h2>Find me</h2>
     <ul class="link-list">

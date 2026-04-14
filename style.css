@@ -226,6 +226,15 @@ hr {
     font-style: italic;
 }
 
+/* When a subtitle follows the tagline, tighten the gap so they read
+   as a connected "headline + one-liner" pair rather than two floating
+   blocks. */
+.tagline + .subtitle {
+    margin-top: -1.5rem;
+    max-width: 56rem;
+    line-height: 1.5;
+}
+
 /* Status panel: BIOS dialog feel, corner bracket label */
 .status {
     background: var(--bg-2);
