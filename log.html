@@ -112,8 +112,8 @@
             <div class="log-date">
                 <time datetime="2026-04-14">2026-04-14</time>
             </div>
-            <h2>NetISA end-to-end quality gate</h2>
-            <p>Ran adversarial quality gate across the entire NetISA codebase (14,300 lines, 7 components). Four parallel chunk reviews found 8 Fatal and 16 Significant issues across shared lib, TSR, launcher, Claude client, and ESP32 firmware. DOS-side fixes committed: NULL pointer guards on stub functions, TSR return code fix, password input VGA overflow clamp, FPU detection 8088 safety, Claude auto-exec stack overflow fix (2KB buffers moved to static), command injection metacharacter filter, scroll position clamping. Firmware security findings (open WiFi AP, timing attack on admin key, ISR race condition, no OTA signing) documented as a hardening plan for the next firmware sprint. <a href="/netisa.html">Project page</a>.</p>
+            <h2>NetISA end-to-end quality gate + firmware security hardening</h2>
+            <p>Ran adversarial quality gate across the entire NetISA codebase (14,300 lines, 7 components). Four parallel chunk reviews found 8 Fatal and 16 Significant issues. All fixed in two commits. DOS-side: NULL pointer guards, TSR return code fix, password input VGA overflow clamp, FPU detection 8088 safety, Claude stack overflow fix, command injection filter, scroll clamping. Firmware security hardening: ISR race condition fixed (per-request data buffers), open WiFi AP replaced with WPA2-PSK using device-unique MAC-derived password + AP disabled after station connects, timing-safe admin key comparison (constant-time ct_strcmp), HTTP session mutex, redirect limit (5 hops), memory barrier fix in ISR, OTA SHA256 hash verification, NVS encryption documented. <a href="/netisa.html">Project page</a>.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-14a">
