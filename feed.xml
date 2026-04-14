@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Apr 2026 22:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2026 23:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>DOSBox-X development relay + Cathode parser fixes</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-13e</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-13e</guid>
+      <pubDate>Mon, 13 Apr 2026 23:00:00 +0000</pubDate>
+      <description>Development relay system for automated DOS testing via DOSBox-X (quality-gated, 7 review rounds). Used it to test Cathode against 11 real websites, found and fixed 3 parser bugs: HTML entity table expanded from 7 to 90+ entries, missing head-close handling, and 16-bit int overflow on pages over 32KB. All 12 tests pass.</description>
+    </item>
 
     <item>
       <title>Cathode v0.2: Text-Mode Document Browser</title>
