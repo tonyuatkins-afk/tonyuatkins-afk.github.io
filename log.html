@@ -108,6 +108,14 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-14a">
+            <div class="log-date">
+                <time datetime="2026-04-14">2026-04-14</time>
+            </div>
+            <h2>TAKEOVER quality gate: 12 bugs fixed in 5 rounds</h2>
+            <p>Ran the full adversarial quality gate on the TAKEOVER codebase (5,700 lines, 13 modules). Five review rounds, score progression 6&rarr;5&rarr;7&rarr;1&rarr;0. Found and fixed 12 issues: string pool exhaustion (silent failure &rarr; parse-time error), midnight BIOS tick wrap (music freeze), OPL2 channel bounds validation (prevent OOB register writes), LFSR dissolve safety break (prevent infinite loop), stack buffer pressure (2 buffers moved to far heap), DGROUP palette buffer (768 bytes recovered), VGA palette tearing (buffered rotation), cracktro OPL2 state corruption (chip reset after easter egg), music fast-forward after climax sequences, input buffer size mismatch, AI control level cross-scenario persistence, and cracktro integer overflow (unsigned counters). EXE: 57.8KB &rarr; 60.5KB. <a href="/takeover.html">Project page</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-13f">
             <div class="log-date">
                 <time datetime="2026-04-13">2026-04-13</time>
