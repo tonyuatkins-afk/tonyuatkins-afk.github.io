@@ -142,7 +142,7 @@
 
     <div class="screenshots">
         <figure>
-            <img src="/img/discord.gif" alt="Animated: Discord client for DOS showing #general channel with live messages appearing, color-coded usernames, timestamps, and compose bar" width="480" height="360">
+            <img src="/img/discord-v2-browse.gif" alt="Animated: Discord v2 for DOS with 8 channels, colored usernames, reactions, word-wrapped messages, and real-time message feed" width="480" height="360">
             <figcaption>Discord client for DOS (live messages)</figcaption>
         </figure>
         <figure>
@@ -234,25 +234,30 @@
         </figure>
     </div>
 
-    <h2>Discord client</h2>
-    <p>A text-mode Discord client demonstrating the card's ability to connect vintage PCs to modern chat platforms. Runs with stub data for DOSBox-X testing.</p>
+    <h2>Discord v2: text-mode client</h2>
+    <p>A text-mode Discord client for DOS. Ground-up v2 rebuild with 128 messages per channel, multi-line compose, find in messages, PC speaker notifications, and CP437 emoji reactions. 37KB EXE. Runs with stub data for DOSBox-X testing.</p>
     <ul>
-        <li>6 channels with per-channel far-heap message storage</li>
-        <li>Word-wrapped messages with author colors</li>
-        <li>Compose bar with cursor editing, Tab-cycling focus</li>
-        <li>Timed fake message injection (~5 second intervals)</li>
-        <li>PgUp/PgDn scrolling with position tracking</li>
-        <li>Quality-gated: 6 rounds of adversarial review</li>
+        <li><strong>8 channels</strong> with 128 messages each on far heap, unread counts, scroll bar</li>
+        <li><strong>Multi-line compose</strong> (Shift+Enter), word-wrapped messages, 8 hash-based author colors</li>
+        <li><strong>Ctrl+F find</strong> in messages with match highlighting and N/Shift+N cycling</li>
+        <li><strong>PC speaker notifications</strong> &mdash; blip for current channel, chirp for unread, F9 to toggle</li>
+        <li><strong>CP437 reactions</strong> (hearts, smileys, notes) and thread reply indicators</li>
+        <li>Help overlay (F1), user list overlay (Alt+U), DISCORD.CFG settings persistence</li>
+        <li>VGA palette fade in/out, notification title flash, Alt+1-8 quick channel switch</li>
     </ul>
 
     <div class="screenshots">
         <figure>
-            <img src="/img/discord.gif" alt="Animated: Discord client for DOS showing #general channel with live messages appearing, color-coded usernames, timestamps, and compose bar" width="720" height="400">
-            <figcaption>Discord client (live messages)</figcaption>
+            <img src="/img/discord-v2-browse.gif" alt="Animated: Discord v2 for DOS browsing channels, showing #general with colored usernames, word-wrapped messages, reactions, unread counts, and scrolling" width="640" height="400">
+            <figcaption>Browsing channels with colored authors and reactions</figcaption>
         </figure>
         <figure>
-            <img src="/img/discord-compose.png" alt="Discord client with compose bar active showing typed message, new messages from multiple users scrolled into view, and 19-message count" width="720" height="400">
-            <figcaption>Compose bar with live message feed</figcaption>
+            <img src="/img/discord-v2-compose.gif" alt="Animated: Discord v2 for DOS typing and sending messages in the compose bar, showing messages appearing in real-time" width="640" height="400">
+            <figcaption>Typing and sending messages in real-time</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/discord-v2-help.gif" alt="Animated: Discord v2 for DOS showing F1 help overlay with keyboard shortcuts, then navigating to hardware channel" width="640" height="400">
+            <figcaption>Help overlay and channel navigation</figcaption>
         </figure>
     </div>
 
