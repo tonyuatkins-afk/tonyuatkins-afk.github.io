@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Apr 2026 06:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Apr 2026 12:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>NetISA end-to-end quality gate</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-14b</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-14b</guid>
+      <pubDate>Mon, 14 Apr 2026 12:00:00 +0000</pubDate>
+      <description>End-to-end quality gate on 14,300 lines across 7 components. 8 Fatal + 16 Significant issues found. DOS-side fixes committed. Firmware security hardening plan documented.</description>
+    </item>
 
     <item>
       <title>TAKEOVER quality gate: 12 bugs fixed in 5 rounds</title>
