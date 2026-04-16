@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
-<title>NetISA | Open-Source WiFi and TLS 1.3 ISA Card for DOS</title>
-<meta name="description" content="NetISA is an open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT/AT and 386/486 systems running DOS. Includes Cathode text-mode browser, Discord client, Claude AI chat client, and full ESP32-S3 firmware.">
+<title>NetISA | WiFi and TLS 1.3 ISA Card for DOS PCs</title>
+<meta name="description" content="NetISA is an open-source ISA expansion card trying to give old PCs a way to talk to the modern internet. CPLD + ESP32-S3 for WiFi and TLS 1.3. Software works in DOSBox-X. Hardware isn't built yet.">
 <meta name="author" content="Tony Atkins">
-<meta name="keywords" content="NetISA, ISA card, ISA WiFi, DOS TLS, DOS HTTPS, vintage PC networking, retro computing, CPLD, ATF1508AS, ESP32-S3, TLS 1.3, 8088, 286, 386, 486, open-source hardware, Cathode browser, DOS Discord, Claude for DOS">
+<meta name="keywords" content="NetISA, ISA card, ISA WiFi, DOS TLS, DOS HTTPS, vintage PC networking, retro computing, CPLD, ATF1508AS, ESP32-S3, TLS 1.3, 8088, 286, 386, 486, open-source hardware, Cathode browser, DOS Discord">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://barelybooting.com/netisa.html">
 <link rel="alternate" type="application/rss+xml" title="Barely Booting Build Log" href="/feed.xml">
 
 <!-- Open Graph -->
-<meta property="og:title" content="NetISA | WiFi and TLS 1.3 for Vintage ISA PCs">
-<meta property="og:description" content="Open-source ISA expansion card bringing WiFi, TLS 1.3, and HTTPS to DOS and vintage PCs. Full DOS software stack, text-mode browser, Discord client, and ESP32-S3 firmware.">
+<meta property="og:title" content="NetISA | WiFi and TLS 1.3 ISA Card for DOS PCs">
+<meta property="og:description" content="An open-source ISA expansion card trying to get old PCs onto the modern internet. ESP32-S3 handles WiFi and TLS so a 4.77 MHz CPU doesn't have to. Software works. Hardware is next.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/netisa.html">
 <meta property="og:image" content="https://barelybooting.com/img/og-image.png">
-<meta property="og:image:alt" content="NetISA. Open-source TLS 1.3 and WiFi for vintage ISA PCs.">
+<meta property="og:image:alt" content="NetISA. Open-source WiFi and TLS 1.3 for vintage ISA PCs.">
 <meta property="og:site_name" content="Barely Booting">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Tony Atkins">
@@ -32,10 +32,10 @@
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="NetISA | WiFi and TLS 1.3 for Vintage ISA PCs">
-<meta name="twitter:description" content="Open-source ISA expansion card bringing WiFi, TLS 1.3, and HTTPS to DOS and vintage PCs.">
+<meta name="twitter:title" content="NetISA | WiFi and TLS 1.3 ISA Card for DOS PCs">
+<meta name="twitter:description" content="An open-source ISA expansion card trying to get old PCs onto the modern internet. ESP32-S3 handles WiFi and TLS so a 4.77 MHz CPU doesn't have to.">
 <meta name="twitter:image" content="https://barelybooting.com/img/og-image.png">
-<meta name="twitter:image:alt" content="NetISA. Open-source TLS 1.3 and WiFi for vintage ISA PCs.">
+<meta name="twitter:image:alt" content="NetISA. Open-source WiFi and TLS 1.3 for vintage ISA PCs.">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,8 +50,8 @@
     {
       "@type": "TechArticle",
       "@id": "https://barelybooting.com/netisa.html#article",
-      "headline": "NetISA: WiFi and TLS 1.3 for Vintage ISA PCs",
-      "description": "Open-source 8/16-bit ISA expansion card that brings WiFi, TLS 1.3, and HTTPS to IBM PC/XT, AT, 386, and 486 systems running DOS. CPLD bus interface, ESP32-S3 hardware crypto offload, full DOS software stack including text-mode browser and Discord client.",
+      "headline": "NetISA: Open-Source WiFi and TLS 1.3 ISA Card for DOS PCs",
+      "description": "An open-source 8/16-bit ISA expansion card attempting to bring WiFi, TLS 1.3, and HTTPS to IBM PC/XT, AT, 386, and 486 systems running DOS. CPLD bus interface, ESP32-S3 crypto offload, DOS software stack including text-mode browser and Discord client. Software validated in DOSBox-X, hardware prototype pending.",
       "author": {
         "@type": "Person",
         "name": "Tony Atkins",
@@ -67,7 +67,7 @@
         }
       },
       "datePublished": "2026-04-11",
-      "dateModified": "2026-04-12",
+      "dateModified": "2026-04-15",
       "image": "https://barelybooting.com/img/og-image.png",
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -75,7 +75,7 @@
       },
       "proficiencyLevel": "Expert",
       "dependencies": "ATF1508AS CPLD, ESP32-S3, DOS TSR driver",
-      "keywords": "ISA, CPLD, ESP32-S3, TLS 1.3, DOS, retro computing, vintage PC, WiFi, Ethernet, open-source hardware, NetISA, Barely Booting, Cathode browser, Discord client",
+      "keywords": "ISA, CPLD, ESP32-S3, TLS 1.3, DOS, retro computing, vintage PC, WiFi, open-source hardware, NetISA",
       "about": [
         { "@type": "Thing", "name": "ISA bus" },
         { "@type": "Thing", "name": "TLS 1.3" },
@@ -131,14 +131,21 @@
 
 <main>
     <h1>NetISA</h1>
-    <p class="subtitle">Open-source TLS 1.3 and WiFi for vintage ISA PCs. The hardware answer to &ldquo;can my 286 be a daily driver?&rdquo;</p>
+    <p class="subtitle">An ISA coprocessor that tries to give old PCs a way to talk to the modern internet.</p>
 
     <div class="status">
-        <strong>Phase 0:</strong> Hardware designed. CPLD logic validated (160/160 tests). Parts ordered, awaiting prototype build.<br>
-        <strong>Phase 1:</strong> DOS software stack and v1 firmware complete. Quality-gated end-to-end (8 Fatal + 16 Significant fixed across 14,300 lines). Firmware security hardened (WPA2 AP, constant-time auth, OTA SHA256). Cathode v0.2 web browser (sort of), Discord v2 (ground-up rebuild), Claude AI client, all running in DOSBox-X with automated test suites.
+        <strong>Where things stand:</strong> Hardware isn&rsquo;t built yet. Parts are on the way (DigiKey, Amazon, TexElec&hellip; this escalated a bit). The DOS software stack and firmware are working in DOSBox-X. CPLD logic passes its testbench. Real hardware bring-up is next, and I&rsquo;m fully expecting at least one thing to go wrong immediately.
     </div>
 
-    <p>NetISA is an 8/16-bit ISA expansion card that gives IBM PC/XT, AT, 386, and 486 systems a first-class path to the modern internet. A Microchip ATF1508AS CPLD handles ISA bus timing deterministically. An Espressif ESP32-S3 handles WiFi, TLS 1.3, and the full TCP/IP stack using hardware-accelerated AES, SHA, RSA, and ECC. The retro PC sees a register-mapped coprocessor and talks to it through a small DOS TSR. No proxy box. No serial bottleneck. No software crypto on the retro CPU.</p>
+    <p>Trying to do modern TLS on an 8088 (or even a 386) is just not going to work well. You either get something painfully slow or something that barely holds together. So instead of forcing the host CPU to do that work, NetISA moves it somewhere else.</p>
+
+    <ul>
+        <li>A CPLD (ATF1508AS) handles ISA bus timing and exposes a register interface</li>
+        <li>An ESP32-S3 handles WiFi, TCP/IP, and TLS using its built-in crypto hardware</li>
+        <li>The DOS side talks to it through a small TSR like it&rsquo;s just another device</li>
+    </ul>
+
+    <p>No serial bottlenecks, no second machine acting as a proxy, and no pretending a 4.77 MHz CPU wants to do RSA. That&rsquo;s the plan anyway. Hardware will probably have opinions.</p>
 
     <div class="screenshots">
         <figure>
@@ -159,25 +166,46 @@
         </figure>
     </div>
 
-    <h2>What this unlocks</h2>
+    <h2>What this should unlock</h2>
+    <p>If everything works the way I think it should, a NetISA system would be able to:</p>
     <ul>
-        <li><strong>HTTPS browsing from DOS</strong> via Cathode (built-in text-mode browser), Lynx, Links, or Arachne against real TLS 1.3 sites.</li>
-        <li><strong>Gmail, Outlook, Fastmail from Pine or Pegasus</strong> via IMAPS and SMTPS.</li>
-        <li><strong>git clone over HTTPS</strong> on a 486 against GitHub.</li>
-        <li><strong>Discord, Mastodon, Bluesky, Matrix</strong> via REST APIs, plus IRC over TLS for Libera.Chat.</li>
-        <li><strong>Claude AI on a vintage PC</strong> via the Anthropic API over TLS 1.3, with agent mode for running DOS commands.</li>
-        <li><strong>Dropbox, OneDrive, Nextcloud sync</strong> via WebDAV over HTTPS.</li>
-        <li><strong>MQTT over TLS</strong> for smart home publishing from an 8088.</li>
+        <li>Fetch content from modern HTTPS sites in text-mode browsers</li>
+        <li>Talk to APIs that require TLS 1.2/1.3</li>
+        <li>Send and receive email over IMAPS/SMTPS</li>
+        <li>Interact with Discord, Mastodon, Matrix, or IRC-over-TLS</li>
+        <li>Download software from HTTPS-only sources</li>
+        <li>Sync files via WebDAV-over-HTTPS</li>
+        <li>Push data to MQTT-over-TLS brokers</li>
     </ul>
+    <p>The goal is not &ldquo;modern browsing on a 486.&rdquo; The goal is more like: a 486 can still exist on today&rsquo;s internet without cheating. Whether that actually works in practice is still to be proven.</p>
+
+    <h2>What actually works right now</h2>
+    <p>Right now this is all running without real ISA hardware, using a stubbed backend:</p>
+    <ul>
+        <li>DOS TSR and API are working</li>
+        <li>Applications (browser, Discord client, etc.) run against simulated responses</li>
+        <li>ESP32 firmware (WiFi, HTTP, HTML parsing, config UI) is complete</li>
+        <li>CPLD logic passes the testbench (160/160)</li>
+    </ul>
+    <p>So the software side is in decent shape. None of that guarantees it works once real signals are involved.</p>
+
+    <h2>What does not work yet</h2>
+    <ul>
+        <li>No physical card assembled</li>
+        <li>No validation on real ISA machines</li>
+        <li>No real bus timing verification</li>
+        <li>No actual TLS session from DOS over the card</li>
+    </ul>
+    <p>That&rsquo;s the next phase, and also where things are most likely to break.</p>
 
     <h2>DOS software</h2>
-    <p>The full DOS software stack is built and tested in DOSBox-X. All code targets 8088 real mode (OpenWatcom 2.0, small memory model) and runs on anything from a 4.77 MHz XT to a Pentium.</p>
+    <p>The full DOS software stack targets 8088 real mode (OpenWatcom 2.0, small memory model) and runs on anything from a 4.77 MHz XT to a Pentium. At least in DOSBox-X it does.</p>
     <ul>
-        <li><strong>NETISA.COM</strong> &mdash; 678-byte TSR that hooks <code>INT 63h</code>. Under 2 KB resident. Provides the software interface between DOS applications and the card.</li>
-        <li><strong>NETISA.EXE</strong> &mdash; Full-screen launcher with WiFi network scanning, signal strength bars, password entry, card status display, and system information (CPU detection, FPU, DOS version, free RAM).</li>
-        <li><strong>Screen library</strong> &mdash; Shared VGA text buffer rendering engine. Direct writes to <code>0xB800:0000</code> with CP437 box drawing, design-language color palette, and keyboard input via <code>INT 16h</code>.</li>
-        <li><strong>INT 63h API</strong> &mdash; Complete C wrapper library (<code>netisa.h</code>) matching the architecture spec. Eight function groups covering system, WiFi, DNS, sessions, certificates, crypto, events, and diagnostics.</li>
-        <li><strong>Stub layer</strong> &mdash; Fake data layer for DOSBox-X testing without hardware. Simulates WiFi networks, connection states, version info, and BIOS tick-based delays.</li>
+        <li><strong>NETISA.COM</strong> &mdash; 678-byte TSR that hooks <code>INT 63h</code>. Under 2 KB resident.</li>
+        <li><strong>NETISA.EXE</strong> &mdash; Launcher with WiFi scanning, signal strength bars, password entry, card status, and system info.</li>
+        <li><strong>Screen library</strong> &mdash; Shared VGA text buffer rendering. Direct writes to <code>0xB800:0000</code> with CP437 box drawing.</li>
+        <li><strong>INT 63h API</strong> &mdash; C wrapper library covering system, WiFi, DNS, sessions, certificates, crypto, events, and diagnostics.</li>
+        <li><strong>Stub layer</strong> &mdash; Fake data layer for testing without hardware. Simulates WiFi networks, connection states, and delays.</li>
     </ul>
 
     <div class="screenshots">
@@ -204,15 +232,14 @@
     </div>
 
     <h2>Cathode v0.2: text-mode web browser (sort of)</h2>
-    <p>Cathode is a text-mode web browser for DOS. Sort of. It fetches real HTML pages over HTTPS via the NetISA card, parses them through a streaming HTML parser, and renders structured content in 80&times;25 text mode. No JavaScript, no CSS, no regrets. Cathode excels at articles, documentation, wikis, and directory pages.</p>
+    <p>Cathode fetches real HTML pages over HTTPS via the NetISA card, parses them through a streaming HTML parser, and renders structured content in 80&times;25 text mode. No JavaScript, no CSS, no regrets. It&rsquo;s good at articles, documentation, wikis, and directory pages. It&rsquo;s bad at everything else. 40 KB EXE.</p>
     <ul>
-        <li><strong>Streaming HTML parser</strong> &mdash; headings, paragraphs, links, bold/italic/code, ordered and unordered lists, blockquotes, preformatted text, horizontal rules, HTML entities, and image alt text</li>
-        <li><strong>HTTP/1.0 fetch</strong> with redirect following, UTF-8 to CP437 character mapping, and URL resolution for relative links</li>
-        <li><strong>Find on page</strong> (Ctrl+F) with match highlighting and N/Shift+N cycling</li>
-        <li><strong>Bookmarks</strong> with disk persistence (Ctrl+D to save, Ctrl+B to view)</li>
-        <li>200-row scrollback, scroll bar, link navigation via Tab/Shift+Tab, back/forward history</li>
+        <li>Streaming HTML parser &mdash; headings, paragraphs, links, bold/italic/code, lists, blockquotes, preformatted text, horizontal rules, entities, image alt text</li>
+        <li>HTTP/1.0 fetch with redirect following, UTF-8 to CP437 mapping, relative URL resolution</li>
+        <li>Find on page (Ctrl+F) with match highlighting and N/Shift+N cycling</li>
+        <li>Bookmarks with disk persistence (Ctrl+D to save, Ctrl+B to view)</li>
+        <li>200-row scrollback, scroll bar, Tab/Shift+Tab link navigation, back/forward history</li>
         <li>CP437 block-art CATHODE logo on start page</li>
-        <li>40 KB EXE. Quality-gated: 7 rounds + end-to-end review. 12/12 automated fixture tests (real websites)</li>
     </ul>
 
     <div class="screenshots">
@@ -235,15 +262,14 @@
     </div>
 
     <h2>Discord v2: text-mode client</h2>
-    <p>A text-mode Discord client for DOS. Ground-up v2 rebuild with 128 messages per channel, multi-line compose, find in messages, PC speaker notifications, and CP437 emoji reactions. 37KB EXE. Runs with stub data for DOSBox-X testing.</p>
+    <p>A ground-up rebuild of the Discord client. 128 messages per channel, multi-line compose, find in messages, PC speaker notifications, and CP437 emoji reactions. 37KB EXE. Runs with stub data in DOSBox-X.</p>
     <ul>
-        <li><strong>8 channels</strong> with 128 messages each on far heap, unread counts, scroll bar</li>
-        <li><strong>Multi-line compose</strong> (Shift+Enter), word-wrapped messages, 8 hash-based author colors</li>
-        <li><strong>Ctrl+F find</strong> in messages with match highlighting and N/Shift+N cycling</li>
-        <li><strong>PC speaker notifications</strong> &mdash; blip for current channel, chirp for unread, F9 to toggle</li>
-        <li><strong>CP437 reactions</strong> (hearts, smileys, notes) and thread reply indicators</li>
+        <li>8 channels with 128 messages each on far heap, unread counts, scroll bar</li>
+        <li>Multi-line compose (Shift+Enter), word-wrapped messages, 8 hash-based author colors</li>
+        <li>Ctrl+F find in messages with match highlighting and N/Shift+N cycling</li>
+        <li>PC speaker notifications &mdash; blip for current channel, chirp for unread, F9 to toggle</li>
+        <li>CP437 reactions (hearts, smileys, notes) and thread reply indicators</li>
         <li>Help overlay (F1), user list overlay (Alt+U), DISCORD.CFG settings persistence</li>
-        <li>VGA palette fade in/out, notification title flash, Alt+1-8 quick channel switch</li>
     </ul>
 
     <div class="screenshots">
@@ -253,7 +279,7 @@
         </figure>
         <figure>
             <img src="/img/discord-v2-compose.gif" alt="Animated: Discord v2 for DOS typing and sending messages in the compose bar, showing messages appearing in real-time" width="640" height="400">
-            <figcaption>Typing and sending messages in real-time</figcaption>
+            <figcaption>Typing and sending messages</figcaption>
         </figure>
         <figure>
             <img src="/img/discord-v2-help.gif" alt="Animated: Discord v2 for DOS showing F1 help overlay with keyboard shortcuts, then navigating to hardware channel" width="640" height="400">
@@ -262,38 +288,35 @@
     </div>
 
     <h2>Claude for DOS</h2>
-    <p>A text-mode Claude AI chat client that talks to the Anthropic API over TLS 1.3. Includes a 3-mode agent system for running DOS commands directly from the conversation. Runs with stub responses for DOSBox-X testing.</p>
+    <p>A text-mode Claude AI chat client that talks to the Anthropic API over TLS 1.3. Includes a 3-mode agent system for running DOS commands from the conversation. This one was partly an excuse to see what happens when you put an LLM on an 8088.</p>
     <ul>
         <li>Chat, Ask, and Auto agent modes (F4 to cycle)</li>
         <li>Far-heap message pool for small memory model</li>
         <li>Word-wrapped chat rendering with newline support</li>
-        <li>3-line compose area with cursor editing</li>
         <li>[EXEC] tag parsing for command execution with output capture</li>
-        <li>Iterative agent loop with 5-deep safety cap (no recursive stack growth)</li>
-        <li>Quality-gated: 2 rounds of adversarial review</li>
+        <li>Iterative agent loop with 5-deep safety cap</li>
     </ul>
 
     <div class="screenshots">
         <figure>
-            <img src="/img/claude-splash.gif" alt="Animated sequence showing Claude for DOS startup: fake Neural POST boot sequence with Constitutional AI check gag, CRT static burst, column-sweep block-art CLAUDE logo reveal, tagline '640K of RAM. Billions of parameters. One ISA slot.', then transition to chat interface" width="701" height="541">
-            <figcaption>Full startup sequence: Neural POST, logo reveal, chat</figcaption>
+            <img src="/img/claude-splash.gif" alt="Animated sequence showing Claude for DOS startup: fake Neural POST boot sequence, CRT static burst, block-art CLAUDE logo reveal, tagline, then transition to chat interface" width="701" height="541">
+            <figcaption>Startup sequence: Neural POST, logo reveal, chat</figcaption>
         </figure>
         <figure>
-            <img src="/img/claude-chat.png" alt="Claude for DOS chat interface showing green title bar with 'Claude for DOS' and Chat mode indicator, Claude's welcome message about running on a vintage PC via NetISA, compose area, and status bar" width="701" height="541">
-            <figcaption>Chat interface with welcome message</figcaption>
+            <img src="/img/claude-chat.png" alt="Claude for DOS chat interface showing green title bar, Claude's welcome message, compose area, and status bar" width="701" height="541">
+            <figcaption>Chat interface</figcaption>
         </figure>
     </div>
 
-    <h2>v1 Firmware</h2>
-    <p>The v1 ESP32-S3 firmware replaces the Phase 0 loopback with production networking. It preserves the PSTROBE ISR and register file architecture &mdash; the ISA bus interface is unchanged.</p>
+    <h2>Firmware</h2>
+    <p>The ESP32-S3 firmware handles the networking side. It preserves the PSTROBE ISR and register file architecture from the hardware spec &mdash; the ISA bus interface is unchanged.</p>
     <ul>
-        <li><strong>WiFi manager:</strong> APSTA mode with auto-connect from saved credentials, network scanning, and a built-in setup AP ("NetISA-Setup")</li>
-        <li><strong>HTTP client:</strong> Up to 4 concurrent TLS sessions using the ESP-IDF certificate bundle for public CA coverage</li>
-        <li><strong>HTML parser:</strong> State machine that converts HTML to CP437 cell streams for the Cathode browser</li>
-        <li><strong>Web config:</strong> Embedded HTTP server at 192.168.4.1 with WiFi setup, OTA firmware updates (authenticated), and status monitoring</li>
-        <li><strong>Command dispatch:</strong> Maps all 8 INT 63h function groups to handlers via FreeRTOS queue between ISR (Core 0) and task (Core 1)</li>
-        <li><strong>Security:</strong> Admin key authentication on all destructive endpoints, OTA password protection, content validation, memory barriers on cross-core shared state</li>
-        <li>Quality-gated: 8 rounds of adversarial review &mdash; fixed cross-core race conditions, register protocol bugs, security vulnerabilities, and resource leaks</li>
+        <li><strong>WiFi manager:</strong> APSTA mode with auto-connect, network scanning, and a setup AP (&ldquo;NetISA-Setup&rdquo;)</li>
+        <li><strong>HTTP client:</strong> Up to 4 concurrent TLS sessions using the ESP-IDF certificate bundle</li>
+        <li><strong>HTML parser:</strong> State machine that converts HTML to CP437 cell streams for Cathode</li>
+        <li><strong>Web config:</strong> Embedded HTTP server at 192.168.4.1 with WiFi setup, OTA updates, and status</li>
+        <li><strong>Command dispatch:</strong> Maps all 8 INT 63h function groups via FreeRTOS queue between ISR and task cores</li>
+        <li><strong>Security:</strong> WPA2 AP, constant-time auth, OTA password protection, memory barriers on shared state</li>
     </ul>
 
     <h2>Specs</h2>
@@ -302,12 +325,11 @@
             <tr><th>Bus interface</th><td>8/16-bit ISA (XT through 486)</td></tr>
             <tr><th>Bus logic</th><td>Microchip ATF1508AS CPLD, TQFP-100, 128 macrocells, native 5 V, 10 ns pin-to-pin</td></tr>
             <tr><th>Processor</th><td>ESP32-S3-WROOM-1U-N8R8 (dual-core Xtensa LX7, 8 MB flash, 8 MB PSRAM)</td></tr>
-            <tr><th>WiFi</th><td>802.11 b/g/n, external bracket-mount antenna for metal cases</td></tr>
+            <tr><th>WiFi</th><td>802.11 b/g/n, external bracket-mount antenna (metal cases are not RF-friendly)</td></tr>
             <tr><th>TLS</th><td>1.3 with hardware AES-128/256, SHA-256/384/512, RSA-4096, ECC, hardware RNG</td></tr>
             <tr><th>Ethernet</th><td>Wiznet W5500, 8 hardware TCP sockets, 10/100 Mbps (v1.5, pads on v1 board)</td></tr>
             <tr><th>Host CPU</th><td>Any x86: 8088 4.77 MHz through Pentium+</td></tr>
             <tr><th>DOS driver</th><td>678-byte TSR, &lt; 2 KB resident, INT 63h API</td></tr>
-            <tr><th>Packet driver</th><td>PC/TCP compatible (mTCP, WATTCP applications)</td></tr>
             <tr><th>I/O decode</th><td>Full 16-bit, no aliasing on AT+ systems</td></tr>
             <tr><th>Configuration</th><td>Physical jumpers for base address, IRQ, safe mode. No Plug-and-Play.</td></tr>
             <tr><th>License</th><td>MIT (software) / CERN-OHL-P (hardware)</td></tr>
@@ -315,16 +337,16 @@
     </table>
 
     <h2>Design verification</h2>
+    <p>The CPLD logic has been through a fairly thorough testbench. Whether that translates to working hardware is another question entirely.</p>
     <ul>
-        <li><strong>160 of 160</strong> Verilog testbench tests passing (iverilog), covering address decode, IOCHRDY wait states, watchdog timeout, IRQ state machine retrigger, back-to-back cycles, mid-cycle reset, status flag merge, and alias rejection.</li>
-        <li><strong>95 of 128</strong> CPLD macrocells used, 61 of 84 pins, fits EPM7128STC100-15 clean on Quartus II 13.0sp1.</li>
-        <li><strong>Timing slack:</strong> +39.5 ns setup, +5.0 ns hold, +26.25 ns minimum pulse width at 16 MHz. Zero total negative slack.</li>
-        <li><strong>Zero bus contention events</strong> across the entire simulation suite.</li>
-        <li><strong>Lint clean</strong> on <code>iverilog -Wall</code>.</li>
+        <li>160/160 Verilog testbench tests passing (iverilog) &mdash; address decode, IOCHRDY wait states, watchdog timeout, IRQ retrigger, back-to-back cycles, mid-cycle reset, alias rejection</li>
+        <li>95 of 128 macrocells used, 61 of 84 pins</li>
+        <li>Timing slack: +39.5 ns setup, +5.0 ns hold at 16 MHz. Zero total negative slack.</li>
+        <li>Zero bus contention events across the simulation suite</li>
     </ul>
 
-    <h2>Looking ahead</h2>
-    <p>v1 ships as a DOS and Windows 3.x peripheral using Session Mode (the card owns TCP/IP and TLS, host talks at the session level). The firmware and CPLD are deliberately architected so v2 can add native drivers for Windows 95/98/NT NDIS, Linux kernel <code>net_device</code>, and NetBSD/FreeBSD, without hardware changes. v2.5 adds Linux <code>kTLS</code> offload, matching the architecture Mellanox and Chelsio use for their datacenter TLS-capable NICs, brought to a 486.</p>
+    <h2>What comes next</h2>
+    <p>The current plan ships as a DOS peripheral using Session Mode &mdash; the card owns TCP/IP and TLS, the host talks at the session level. The firmware and CPLD are designed so that native drivers (Windows 95/98 NDIS, Linux <code>net_device</code>) could be added later without hardware changes. Whether I actually get that far depends on how the first prototype goes.</p>
 
     <h2>Links</h2>
     <ul class="link-list">
@@ -332,8 +354,6 @@
         <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/netisa-architecture-spec.md" rel="noopener">Architecture specification</a> (the full design document)</li>
         <li><a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube: @BarelyBooting</a> (build videos)</li>
     </ul>
-
-    <p>Interested? Follow the build on <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a> or star the <a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">repo on GitHub</a>.</p>
 </main>
 
 <footer class="site-footer">
