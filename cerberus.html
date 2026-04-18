@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12181a">
+<title>CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool</title>
+<meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does. Single EXE. Open source.">
+<meta name="author" content="Tony Atkins">
+<meta name="keywords" content="CERBERUS, DOS diagnostic, DOS benchmark, retro PC hardware detection, vintage computing, counterfeit CPU detection, Mann-Kendall thermal, PIT timing, 8088, 286, 386, 486, DOSBox-X, OpenWatcom, open source">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://barelybooting.com/cerberus.html">
+<link rel="alternate" type="application/rss+xml" title="Barely Booting Build Log" href="/feed.xml">
+
+<!-- Open Graph -->
+<meta property="og:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
+<meta property="og:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks the three heads against each other. Catches counterfeit CPUs, thermal throttling, and broken timing code. Open source.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://barelybooting.com/cerberus.html">
+<meta property="og:image" content="https://barelybooting.com/img/og-image.png">
+<meta property="og:image:alt" content="CERBERUS. A DOS hardware detection, diagnostic, and benchmark tool.">
+<meta property="og:site_name" content="Barely Booting">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
+<meta name="twitter:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks all three against each other. Open source.">
+<meta name="twitter:image" content="https://barelybooting.com/img/og-image.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://barelybooting.com/cerberus.html#app",
+      "name": "CERBERUS",
+      "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine that flags disagreements between what hardware claims to be and how it actually behaves. Mann-Kendall thermal stability tracker. Dual-channel PIT timing cross-check.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "MS-DOS",
+      "author": {
+        "@type": "Person",
+        "name": "Tony Atkins",
+        "url": "https://barelybooting.com/about.html"
+      },
+      "license": "https://opensource.org/licenses/MIT",
+      "url": "https://barelybooting.com/cerberus.html",
+      "softwareRequirements": "IBM PC/XT/AT or compatible, 8088 or later, 256KB RAM minimum, MDA or better, MS-DOS 3.3+",
+      "programmingLanguage": "C",
+      "codeRepository": "https://github.com/tonyuatkins-afk/CERBERUS"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://barelybooting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "CERBERUS",
+          "item": "https://barelybooting.com/cerberus.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Barely Booting home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="26" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/>
+                <circle cx="7" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="7" cy="25" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="25" r="1.1" fill="currentColor"/>
+                <text x="16" y="21" font-family="'Courier New', ui-monospace, monospace" font-size="12" font-weight="bold" fill="currentColor" text-anchor="middle" letter-spacing="-0.5">BB</text>
+            </svg>
+            <span>BARELY BOOTING<span class="cursor">_</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/netisa.html">NetISA</a>
+            <a href="/cerberus.html" class="active">CERBERUS</a>
+            <a href="/takeover.html">TAKEOVER</a>
+            <a href="/log.html">Log</a>
+            <a href="/about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <h1>CERBERUS</h1>
+    <p class="tagline">&gt; Three heads. One machine. Zero pretending.</p>
+    <p class="subtitle">A DOS-native tool that detects, diagnoses, and benchmarks vintage PC hardware &mdash; and then cross-checks the three heads against each other.</p>
+
+    <div class="status">
+        <strong>Where things stand:</strong> All five subsystems (detect, diagnose, benchmark, consistency engine, thermal stability tracker) are code-complete and have passed a 7-round adversarial quality gate. Awaiting real-hardware validation on a 486 / 386 / 8088 matrix before the <code>v0.2.0</code> tag ships. 98 host-side unit tests green. Binary is 74,948 bytes.
+    </div>
+
+    <p>CERBERUS is named after the three-headed dog of Greek myth that guarded the gates of the underworld. Each head is one of the three analysis domains:</p>
+
+    <ul>
+        <li><strong>Detect</strong> &mdash; identifies CPU, FPU, memory, cache, bus, video, audio, and BIOS using layered probes and a community-editable hardware database</li>
+        <li><strong>Diagnose</strong> &mdash; walks memory with test patterns, validates ALU correctness, runs bit-exact FPU ops, probes VRAM</li>
+        <li><strong>Benchmark</strong> &mdash; integer / FPU / memory-bandwidth passes, calibrated multi-pass mode for thermal analysis</li>
+    </ul>
+
+    <p>The three heads share a common body of timing, display, and reporting infrastructure. Their results feed a consistency engine that flags disagreements &mdash; this is the project&rsquo;s reason to exist.</p>
+
+    <h2>The consistency engine</h2>
+
+    <p>Most DOS diagnostic tools tell you what your hardware says it is. CERBERUS tells you when what your hardware <em>says</em> it is disagrees with how it <em>behaves</em>.</p>
+
+    <p>Seven rules in force today:</p>
+
+    <ul>
+        <li>A 486DX must report an integrated FPU. If it doesn&rsquo;t, that&rsquo;s a counterfeit 486SX with a faked silkscreen &mdash; a real thing, documented in the VOGONS archives.</li>
+        <li>A 486SX must NOT report an integrated FPU. If it does, your detection is confused or someone sold you a remarked chip.</li>
+        <li>A 386SX cannot be on an ISA-8 bus. It has a 16-bit external bus by design; the combination is electrically impossible.</li>
+        <li>FPU diagnostic PASS and FPU benchmark result must agree. One head saying &ldquo;it works&rdquo; while the other couldn&rsquo;t exercise it means something is wrong.</li>
+        <li>Extended memory reported on an 8088 is physically impossible. 8088-class CPUs cannot address memory above 1MB.</li>
+        <li><strong>PIT Channel 2 timing must agree with BIOS-tick timing within 15% over a fixed interval.</strong> The two PIT channels share the 1.193182 MHz crystal but run independently. Disagreement catches 16-bit integer overflow bugs in the tool&rsquo;s own timing code &mdash; the runtime backstop against a recurring bug class.</li>
+        <li>8086-class CPUs must be on an ISA-8 bus. PCI on a 4.77 MHz 8088 is not a thing.</li>
+        <li>Mann-Kendall rank trend test on per-pass benchmark timings. Monotonic upward drift at &alpha;=0.05 flags thermal throttling &mdash; dusty heatsink, dying voltage regulator, failing capacitor.</li>
+    </ul>
+
+    <p>Every rule documents what it catches AND what it structurally cannot. A rule that only catches asymmetric failures says so explicitly. Opacity is the anti-pattern.</p>
+
+    <h2>Output</h2>
+
+    <p>CERBERUS writes a machine-parseable INI file with every detected property, diagnostic verdict, benchmark result, and consistency-rule outcome. Each row carries a confidence indicator &mdash; <strong>HIGH</strong> when the probe is authoritative, <strong>MEDIUM</strong> when inferred, <strong>LOW</strong> when emulated or guessed. Running inside DOSBox-X automatically caps all confidence at MEDIUM because emulated hardware isn&rsquo;t ground truth.</p>
+
+    <p>Two signatures land in every INI:</p>
+
+    <ul>
+        <li><strong><code>signature</code></strong> &mdash; SHA-1 over the seven canonical hardware-identity keys (CPU, FPU, memory, video, bus). Stable across tool versions on the same machine. Same hardware, different run &rarr; same signature.</li>
+        <li><strong><code>run_signature</code></strong> &mdash; SHA-1 over the full INI. Differs between runs even on the same machine. Two runs of the same machine with divergent run_signatures under the same signature is the project&rsquo;s planned counterfeit-CPU detection mechanism.</li>
+    </ul>
+
+    <h2>Target hardware</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Floor</span>
+            <span class="spec-value">8088 + 256KB + MDA</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Common</span>
+            <span class="spec-value">286 / 386 + CGA/EGA</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Ceiling</span>
+            <span class="spec-value">486 + VGA + VLB/PCI</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">RAM</span>
+            <span class="spec-value">256KB min</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">OS</span>
+            <span class="spec-value">MS-DOS 3.3+</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">License</span>
+            <span class="spec-value">MIT</span>
+        </div>
+    </div>
+
+    <p>8088 support is a hard requirement, not an aspiration. Anything that breaks it is out.</p>
+
+    <h2>Technical</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Platform</span>
+            <span class="spec-value">MS-DOS (real mode)</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Model</span>
+            <span class="spec-value">Medium (far code, near data)</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">EXE</span>
+            <span class="spec-value">74,948 bytes</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">DGROUP</span>
+            <span class="spec-value">45.6 / 64 KB</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Toolchain</span>
+            <span class="spec-value">OpenWatcom 2.0 + NASM</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Host tests</span>
+            <span class="spec-value">98 assertions</span>
+        </div>
+    </div>
+
+    <p>121 seed entries across five identification databases (CPU 34, FPU 14, video 28, audio 24, BIOS 21). Every DB is a human-editable CSV with a Python build script that generates the C lookup tables. If CERBERUS can&rsquo;t identify your chip, the raw probe data gets captured to <code>CERBERUS.UNK</code> and the summary tells you how to submit a GitHub issue that grows the database.</p>
+
+    <h2>Hardware-identity hash vs counterfeit detection</h2>
+
+    <p>The dual-signature scheme is designed so that when two runs of the same machine produce different <code>run_signature</code> values under the <em>same</em> <code>signature</code>, CERBERUS has evidence that the hardware&rsquo;s behavior changed even though its claimed identity didn&rsquo;t. That&rsquo;s the fingerprint of a remarked CPU, a thermal fault, a BIOS setting change, or some other shift in actual behavior without a corresponding change in reported identity.</p>
+
+    <p>During the 7-round adversarial quality gate, a systemic bug was caught across twelve files: stack-local <code>sprintf</code> buffers were passed to the result-table builder, which stores the pointer without copying. After each function returned, the hash was being computed over dangling stack bytes. Hardware signatures varied run-to-run on the same machine &mdash; exactly the opposite of the design contract. Fix was a cross-codebase sweep promoting every site to file-scope static storage with documented lifetime contracts. The bug had been invisible to CI because host tests only checked <code>verdict</code>, never <code>display</code>. Test suite now includes coverage for the display-string-readback case too.</p>
+
+    <h2>Download</h2>
+
+    <p>There is no public release yet. The <code>v0.2.0</code> tag ships after Task 1.10 &mdash; real-hardware validation on 486 / 386 / 8088 class machines &mdash; completes. Watch the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases" rel="noopener">releases page</a> or the <a href="/log.html">build log</a>.</p>
+
+    <h2>Links</h2>
+    <ul class="link-list">
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS" rel="noopener">GitHub: tonyuatkins-afk/CERBERUS</a> (source, hardware databases, consistency rule docs)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/consistency-rules.md" rel="noopener">Consistency engine methodology</a> (what each rule catches and what it structurally cannot)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/CERBERUS.md" rel="noopener">Design document</a> (the full architecture write-up)</li>
+        <li><a href="/netisa.html">NetISA project page</a> (the hardware side &mdash; CERBERUS uses <code>/U</code> to upload INIs over NetISA when that ships)</li>
+        <li><a href="/log.html">Build log</a> (milestones and progress)</li>
+    </ul>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="copyright">&copy; 2026 Tony Atkins // Barely Booting</div>
+        <div class="footer-links">
+            <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a>
+            <a href="https://github.com/tonyuatkins-afk" rel="noopener">GitHub</a>
+            <a href="/feed.xml">RSS</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
