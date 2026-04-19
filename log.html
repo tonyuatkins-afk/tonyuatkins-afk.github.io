@@ -109,6 +109,16 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-19-cerberus-v040">
+            <div class="log-date">
+                <time datetime="2026-04-19">2026-04-19</time>
+            </div>
+            <h2>CERBERUS v0.4.0 shipped. Three-release-candidate weekend closed.</h2>
+            <p>Four tags landed across a 48-hour arc: <code>v0.2-rc1</code> (first real-hardware-validated RC after five bugs were found and fixed on contact with the BEK-V409 bench box), <code>v0.3-rc1</code> (diagnostics complete at 6 of 6 subsystems, per-line cache-ratio reformulation), <code>v0.4-rc1</code> (bench_cache, bench_video, Rule 4b cache-aware narration, Rule 11 DMA-class coherence, DGROUP ceiling lift 52K to 56K), and <code>v0.4.0</code> (final release, closing three UI defects the rc1 screenshot surfaced).</p>
+            <p>The rc1-to-final pass was surgical. Three fixes: UTF-8 em-dash and multiplication-sign bytes in <code>diag_cache</code>'s status format string were rendering as CP437 garbage between the ratio value and the status tag; audit found three more latent em-dash paths in the consistency engine and fixed them preemptively. The UI's <code>value_str</code> returned empty for V_U32 benchmark rows emitted with a NULL display string, so five BENCHMARKS rows (fpu ops/s, mem write/read/copy, k-whet) rendered labels but no values; fix mirrored the INI emit path's type-aware formatter. The <code>bench_dhrystone.c</code> reference-point comment was updated per Phase 2 Homage research: CheckIt's &ldquo;Dhrystones&rdquo; is a custom synthetic using the familiar label, not a Dhrystone 1.1 or 2.1 port, so the 33,609 BEK-V409 anchor is an empirical agreement point, not an algorithmic equivalence. Validated on real iron with a clean INI capture and four photographs. Eight consecutive clean real-iron runs through the v0.4.0 capture.</p>
+            <p>In parallel, seven Phase 2 Homage research lessons shipped at <code>docs/research/homage/</code> covering CheckIt 3.0 FPU detection (IIT undefined-opcode probe), CheckIt's &ldquo;Dhrystone&rdquo; nature (custom synthetic), CheckIt's PC-XT baseline anchor, CACHECHK cache-threshold calibration (PKLITE-unpacked via UNP 4.11), FASTVID tool-identification correction (Pentium Pro 82450 MTRR, not the VLB TSR the Phase 1 brief misidentified), CHKCPU CPU identification reference, and TOPBENCH's community database model. 144,166-byte EXE, 163 host-test assertions green (except 4 pre-existing <code>test_timing</code> failures gated behind the UMC491 8254 phantom-wrap deep-dive). <a href="/cerberus.html">Project page</a>. <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.4.0" rel="noopener">v0.4.0 release</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-14b">
             <div class="log-date">
                 <time datetime="2026-04-14">2026-04-14</time>

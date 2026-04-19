@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool</title>
-<meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does. Single EXE. Open source.">
+<meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does. Single EXE. Open source. v0.4.0 shipped 2026-04-19 with real-hardware validation on a 486 DX-2.">
 <meta name="author" content="Tony Atkins">
 <meta name="keywords" content="CERBERUS, DOS diagnostic, DOS benchmark, retro PC hardware detection, vintage computing, counterfeit CPU detection, Mann-Kendall thermal, PIT timing, 8088, 286, 386, 486, DOSBox-X, OpenWatcom, open source">
 <meta name="robots" content="index, follow">
@@ -15,19 +15,19 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
-<meta property="og:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks the three heads against each other. Catches counterfeit CPUs, thermal throttling, and broken timing code. Open source.">
+<meta property="og:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks the three heads against each other. Catches counterfeit CPUs, thermal throttling, and broken timing code. Open source. v0.4.0 real-hardware-validated.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/cerberus.html">
-<meta property="og:image" content="https://barelybooting.com/img/og-image.png">
-<meta property="og:image:alt" content="CERBERUS. A DOS hardware detection, diagnostic, and benchmark tool.">
+<meta property="og:image" content="https://barelybooting.com/img/cerberus-ui.jpg">
+<meta property="og:image:alt" content="CERBERUS v0.4.0 three-pane UI running on a 486 DX-2 showing detection, benchmarks, and system verdicts.">
 <meta property="og:site_name" content="Barely Booting">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
-<meta name="twitter:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks all three against each other. Open source.">
-<meta name="twitter:image" content="https://barelybooting.com/img/og-image.png">
+<meta name="twitter:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks all three against each other. v0.4.0 shipped. Open source.">
+<meta name="twitter:image" content="https://barelybooting.com/img/cerberus-ui.jpg">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,9 +43,10 @@
       "@type": "SoftwareApplication",
       "@id": "https://barelybooting.com/cerberus.html#app",
       "name": "CERBERUS",
-      "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine that flags disagreements between what hardware claims to be and how it actually behaves. Mann-Kendall thermal stability tracker. Dual-channel PIT timing cross-check.",
+      "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine that flags disagreements between what hardware claims to be and how it actually behaves. Mann-Kendall thermal stability tracker. Dual-channel PIT timing cross-check. v0.4.0 real-hardware-validated on a 486 DX-2.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "MS-DOS",
+      "softwareVersion": "0.4.0",
       "author": {
         "@type": "Person",
         "name": "Tony Atkins",
@@ -55,7 +56,9 @@
       "url": "https://barelybooting.com/cerberus.html",
       "softwareRequirements": "IBM PC/XT/AT or compatible, 8088 or later, 256KB RAM minimum, MDA or better, MS-DOS 3.3+",
       "programmingLanguage": "C",
-      "codeRepository": "https://github.com/tonyuatkins-afk/CERBERUS"
+      "codeRepository": "https://github.com/tonyuatkins-afk/CERBERUS",
+      "downloadUrl": "https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.4.0",
+      "screenshot": "https://barelybooting.com/img/cerberus-ui.jpg"
     },
     {
       "@type": "BreadcrumbList",
@@ -107,51 +110,73 @@
 <main>
     <h1>CERBERUS</h1>
     <p class="tagline">&gt; Three heads. One machine. Zero pretending.</p>
-    <p class="subtitle">A DOS-native tool that detects, diagnoses, and benchmarks vintage PC hardware &mdash; and then cross-checks the three heads against each other.</p>
+    <p class="subtitle">A DOS-native tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks the three heads against each other.</p>
+
+    <figure>
+        <img src="/img/cerberus-ui.jpg" alt="CERBERUS v0.4.0 three-pane UI on a 486 DX-2. Left pane DETECTION lists CPU as Intel i486DX2, FPU as Integrated i486DX FPU, 63,076 KB extended memory, S3 Trio64 video, AMI BIOS. Right pane BENCHMARKS shows 1.96M integer iterations per second, 31,862 Dhrystones, 1.12M FPU ops per second, memory throughput 15 MB per second. Bottom pane SYSTEM VERDICTS lists seven PASS rows and two WARN rows in green and yellow." width="1280" height="960">
+        <figcaption>CERBERUS v0.4.0 on the BEK-V409 bench box. 486 DX-2-66, S3 Trio64, AMI BIOS 11/11/92, 63 MB extended. All diagnostics PASS. Two consistency WARNs on expected paths: the timing cross-check (issue #1) and the bench_cpu WARN correctly exonerated by the cache-diagnostic-aware Rule 4b narration.</figcaption>
+    </figure>
 
     <div class="status">
-        <strong>Where things stand:</strong> All five subsystems (detect, diagnose, benchmark, consistency engine, thermal stability tracker) are code-complete and have passed a 7-round adversarial quality gate. Awaiting real-hardware validation on a 486 / 386 / 8088 matrix before the <code>v0.2.0</code> tag ships. 98 host-side unit tests green. Binary is 74,948 bytes.
+        <strong>Where things stand:</strong> <code>v0.4.0</code> shipped 2026-04-19 after a weekend arc of four release candidates (<code>v0.2-rc1</code>, <code>v0.3-rc1</code>, <code>v0.4-rc1</code>, <code>v0.4.0</code>). All six subsystems (detect, diagnose, benchmark, consistency engine, thermal tracker, UI) are real-hardware-validated on the bench 486 DX-2. 163 host-side assertions green. Binary is 144,166 bytes. 386 and 8088 validation are the next-platforms work.
     </div>
 
     <p>CERBERUS is named after the three-headed dog of Greek myth that guarded the gates of the underworld. Each head is one of the three analysis domains:</p>
 
     <ul>
-        <li><strong>Detect</strong> &mdash; identifies CPU, FPU, memory, cache, bus, video, audio, and BIOS using layered probes and a community-editable hardware database</li>
-        <li><strong>Diagnose</strong> &mdash; walks memory with test patterns, validates ALU correctness, runs bit-exact FPU ops, probes VRAM</li>
-        <li><strong>Benchmark</strong> &mdash; integer / FPU / memory-bandwidth passes, calibrated multi-pass mode for thermal analysis</li>
+        <li><strong>Detect</strong>. Identifies CPU, FPU, memory, cache, bus, video, audio, and BIOS using layered probes and a community-editable hardware database.</li>
+        <li><strong>Diagnose</strong>. Walks memory with test patterns, validates ALU correctness, runs bit-exact FPU ops, probes VRAM, checks cache stride, pings every DMA channel.</li>
+        <li><strong>Benchmark</strong>. Integer (Dhrystone 2.1), FPU (Whetstone), memory bandwidth, cache throughput, and video throughput passes with calibrated multi-pass mode for thermal analysis.</li>
     </ul>
 
-    <p>The three heads share a common body of timing, display, and reporting infrastructure. Their results feed a consistency engine that flags disagreements &mdash; this is the project&rsquo;s reason to exist.</p>
+    <p>The three heads share a common body of timing, display, and reporting infrastructure. Their results feed a consistency engine that flags disagreements. This is the project's reason to exist.</p>
 
     <h2>The consistency engine</h2>
 
     <p>Most DOS diagnostic tools tell you what your hardware says it is. CERBERUS tells you when what your hardware <em>says</em> it is disagrees with how it <em>behaves</em>.</p>
 
-    <p>Seven rules in force today:</p>
+    <p>Eleven rules in force today, each emitting a <code>consistency.*</code> row in the INI with PASS, WARN, or FAIL:</p>
 
     <ul>
-        <li>A 486DX must report an integrated FPU. If it doesn&rsquo;t, that&rsquo;s a counterfeit 486SX with a faked silkscreen &mdash; a real thing, documented in the VOGONS archives.</li>
+        <li>A 486DX must report an integrated FPU. If it doesn&rsquo;t, that&rsquo;s a counterfeit 486SX with a faked silkscreen, a real thing documented in the VOGONS archives.</li>
         <li>A 486SX must NOT report an integrated FPU. If it does, your detection is confused or someone sold you a remarked chip.</li>
         <li>A 386SX cannot be on an ISA-8 bus. It has a 16-bit external bus by design; the combination is electrically impossible.</li>
         <li>FPU diagnostic PASS and FPU benchmark result must agree. One head saying &ldquo;it works&rdquo; while the other couldn&rsquo;t exercise it means something is wrong.</li>
         <li>Extended memory reported on an 8088 is physically impossible. 8088-class CPUs cannot address memory above 1MB.</li>
-        <li><strong>PIT Channel 2 timing must agree with BIOS-tick timing within 15% over a fixed interval.</strong> The two PIT channels share the 1.193182 MHz crystal but run independently. Disagreement catches 16-bit integer overflow bugs in the tool&rsquo;s own timing code &mdash; the runtime backstop against a recurring bug class.</li>
+        <li><strong>PIT Channel 2 timing must agree with BIOS-tick timing within 15% over a fixed interval.</strong> The two PIT channels share the 1.193182 MHz crystal but run independently. Disagreement catches 16-bit integer overflow bugs in the tool&rsquo;s own timing code, the runtime backstop against a recurring bug class.</li>
+        <li><strong>Integer benchmark iterations per second must fall inside the CPU database's empirical range for the detected family and model.</strong> A 486 DX-2 reporting 2.2M iters/sec when the DB floor is 4.7M is evidence of thermal throttle, TSR storms, cache-disabled-in-BIOS, or a counterfeit remark. The narration consults the cache diagnostic: if cache is healthy, cache is exonerated and the WARN points at TSR or thermal. If cache is failing, that is the implicated cause. If cache status is missing or ambiguous, all three stay in play.</li>
         <li>8086-class CPUs must be on an ISA-8 bus. PCI on a 4.77 MHz 8088 is not a thing.</li>
-        <li>Mann-Kendall rank trend test on per-pass benchmark timings. Monotonic upward drift at &alpha;=0.05 flags thermal throttling &mdash; dusty heatsink, dying voltage regulator, failing capacitor.</li>
+        <li>Whetstone benchmark completion must agree with the FPU detection report. If Whetstone produced a number, x87 executed, and a &ldquo;no FPU&rdquo; detection claim is wrong.</li>
+        <li>XT-class CPUs (8086, 8088, NEC V20, V30) shipped only the master 8237 DMA controller. An XT-class CPU plus a responsive slave DMA channel is a detection contradiction.</li>
+        <li>Mann-Kendall rank trend test on per-pass benchmark timings. Monotonic upward drift at &alpha;=0.05 flags thermal throttling: dusty heatsink, dying voltage regulator, failing capacitor.</li>
     </ul>
 
     <p>Every rule documents what it catches AND what it structurally cannot. A rule that only catches asymmetric failures says so explicitly. Opacity is the anti-pattern.</p>
 
     <h2>Output</h2>
 
-    <p>CERBERUS writes a machine-parseable INI file with every detected property, diagnostic verdict, benchmark result, and consistency-rule outcome. Each row carries a confidence indicator &mdash; <strong>HIGH</strong> when the probe is authoritative, <strong>MEDIUM</strong> when inferred, <strong>LOW</strong> when emulated or guessed. Running inside DOSBox-X automatically caps all confidence at MEDIUM because emulated hardware isn&rsquo;t ground truth.</p>
+    <p>CERBERUS writes a machine-parseable INI file with every detected property, diagnostic verdict, benchmark result, and consistency-rule outcome. Each row carries a confidence indicator: <strong>HIGH</strong> when the probe is authoritative, <strong>MEDIUM</strong> when inferred, <strong>LOW</strong> when emulated or guessed. Running inside DOSBox-X automatically caps all confidence at MEDIUM because emulated hardware isn&rsquo;t ground truth.</p>
 
     <p>Two signatures land in every INI:</p>
 
     <ul>
-        <li><strong><code>signature</code></strong> &mdash; SHA-1 over the seven canonical hardware-identity keys (CPU, FPU, memory, video, bus). Stable across tool versions on the same machine. Same hardware, different run &rarr; same signature.</li>
-        <li><strong><code>run_signature</code></strong> &mdash; SHA-1 over the full INI. Differs between runs even on the same machine. Two runs of the same machine with divergent run_signatures under the same signature is the project&rsquo;s planned counterfeit-CPU detection mechanism.</li>
+        <li><strong><code>signature</code></strong>. SHA-1 over the seven canonical hardware-identity keys (CPU, FPU, memory, video, bus). Stable across tool versions on the same machine. Same hardware, different run &rarr; same signature.</li>
+        <li><strong><code>run_signature</code></strong>. SHA-1 over the full INI. Differs between runs even on the same machine. Two runs of the same machine with divergent run_signatures under the same signature is the counterfeit-CPU detection mechanism: behavior changed while claimed identity did not.</li>
     </ul>
+
+    <h2>The benchmark as art</h2>
+
+    <p>When <code>bench_video</code> runs, what you see on screen <em>is</em> the benchmark. The text-mode pass writes every CP437 glyph in every color-attribute combination to the 80&times;25 VRAM segment. The mode 13h pass writes horizontal stripes of palette data across the 320&times;200&times;256 framebuffer. Both passes are timed write-loops against memory-mapped hardware, and both are rendered live by the monitor that the memory is mapped to.</p>
+
+    <figure>
+        <img src="/img/cerberus-bench-video-textmode.jpg" alt="Photograph: 486 CRT monitor showing colorful chaotic patterns of CP437 characters during bench_video text-mode measurement. Open 486 case visible to the right." width="1280" height="960">
+        <figcaption>bench_video text-mode, caught mid-run. Every cell gets a CP437 glyph and a color attribute in sequence, timed against a BIOS tick.</figcaption>
+    </figure>
+
+    <figure>
+        <img src="/img/cerberus-bench-video-mode13h.jpg" alt="Photograph: 486 CRT monitor showing horizontal bands of blue, green, and red pixels during the bench_video mode 13h measurement." width="1280" height="960">
+        <figcaption>bench_video mode 13h. 320&times;200&times;256 palette stripes rendered as the write loop walks VRAM. Mode exits cleanly back to mode 3 after measurement.</figcaption>
+    </figure>
 
     <h2>Target hardware</h2>
 
@@ -197,11 +222,11 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">EXE</span>
-            <span class="spec-value">74,948 bytes</span>
+            <span class="spec-value">144,166 bytes</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">DGROUP</span>
-            <span class="spec-value">45.6 / 64 KB</span>
+            <span class="spec-value">53.2 / 56 KB</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">Toolchain</span>
@@ -209,28 +234,35 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">Host tests</span>
-            <span class="spec-value">98 assertions</span>
+            <span class="spec-value">163 assertions</span>
         </div>
     </div>
 
-    <p>121 seed entries across five identification databases (CPU 34, FPU 14, video 28, audio 24, BIOS 21). Every DB is a human-editable CSV with a Python build script that generates the C lookup tables. If CERBERUS can&rsquo;t identify your chip, the raw probe data gets captured to <code>CERBERUS.UNK</code> and the summary tells you how to submit a GitHub issue that grows the database.</p>
+    <p>128 seed entries across five identification databases (CPU 34, FPU 14, video 28, audio 31, BIOS 21). Every DB is a human-editable CSV with a Python build script that generates the C lookup tables. If CERBERUS can&rsquo;t identify your chip, the raw probe data gets captured to <code>CERBERUS.UNK</code> and the summary tells you how to submit a GitHub issue that grows the database.</p>
 
-    <h2>Hardware-identity hash vs counterfeit detection</h2>
+    <h2>Real-hardware validation</h2>
 
-    <p>The dual-signature scheme is designed so that when two runs of the same machine produce different <code>run_signature</code> values under the <em>same</em> <code>signature</code>, CERBERUS has evidence that the hardware&rsquo;s behavior changed even though its claimed identity didn&rsquo;t. That&rsquo;s the fingerprint of a remarked CPU, a thermal fault, a BIOS setting change, or some other shift in actual behavior without a corresponding change in reported identity.</p>
+    <figure>
+        <img src="/img/cerberus-486-benchbox.jpg" alt="Photograph: CERBERUS v0.4.0 three-pane UI on a ViewSonic CRT monitor, with the open BEK-V409 486 case visible to the right. Red LED glows inside the case." width="1280" height="960">
+        <figcaption>The BEK-V409 bench box. Intel i486DX-2-66, S3 Trio64 VLB, AMI BIOS 11/11/92, 64 MB RAM. Eight consecutive clean real-iron runs through the v0.4.0 capture.</figcaption>
+    </figure>
 
-    <p>During the 7-round adversarial quality gate, a systemic bug was caught across twelve files: stack-local <code>sprintf</code> buffers were passed to the result-table builder, which stores the pointer without copying. After each function returned, the hash was being computed over dangling stack bytes. Hardware signatures varied run-to-run on the same machine &mdash; exactly the opposite of the design contract. Fix was a cross-codebase sweep promoting every site to file-scope static storage with documented lifetime contracts. The bug had been invisible to CI because host tests only checked <code>verdict</code>, never <code>display</code>. Test suite now includes coverage for the display-string-readback case too.</p>
+    <p>The v0.4.0 validation capture archived at <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/486-real-2026-04-19-v0.4.0" rel="noopener">tests/captures/486-real-2026-04-19-v0.4.0</a> is a full CERBERUS.INI from one bench-box run. Every diagnostic PASS. Two consistency WARNs on expected paths. <code>cpu.dhrystones = 31,862</code> lands within 5% of CheckIt 3.0's reported number on the same hardware (33,609), which is the empirical agreement target for 486-class boxes. Not an algorithmic equivalence: <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/research/homage/checkit-dhrystone-version.md" rel="noopener">Phase 2 Homage research</a> confirmed CheckIt's &ldquo;Dhrystones&rdquo; is a custom synthetic, not a Dhrystone port.</p>
 
     <h2>Download</h2>
 
-    <p>There is no public release yet. The <code>v0.2.0</code> tag ships after Task 1.10 &mdash; real-hardware validation on 486 / 386 / 8088 class machines &mdash; completes. Watch the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases" rel="noopener">releases page</a> or the <a href="/log.html">build log</a>.</p>
+    <p><code>CERBERUS.EXE</code> is attached to the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.4.0" rel="noopener">v0.4.0 release</a> on GitHub. Single-file DOS real-mode executable. Drop it on a FAT16 volume, run from the DOS prompt, read the resulting <code>CERBERUS.INI</code>. Full release notes at the release page.</p>
+
+    <p>Known issues and their reopen criteria are tracked in the <a href="https://github.com/tonyuatkins-afk/CERBERUS/issues" rel="noopener">GitHub issues</a>.</p>
 
     <h2>Links</h2>
     <ul class="link-list">
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS" rel="noopener">GitHub: tonyuatkins-afk/CERBERUS</a> (source, hardware databases, consistency rule docs)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.4.0" rel="noopener">v0.4.0 release page</a> (EXE, INI capture, screenshots, release notes)</li>
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/consistency-rules.md" rel="noopener">Consistency engine methodology</a> (what each rule catches and what it structurally cannot)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/docs/research/homage" rel="noopener">Homage Phase 2 research</a> (decompilation-led lessons from CheckIt, CACHECHK, FASTVID, CHKCPU, TOPBENCH)</li>
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/CERBERUS.md" rel="noopener">Design document</a> (the full architecture write-up)</li>
-        <li><a href="/netisa.html">NetISA project page</a> (the hardware side &mdash; CERBERUS uses <code>/U</code> to upload INIs over NetISA when that ships)</li>
+        <li><a href="/netisa.html">NetISA project page</a> (the hardware side; CERBERUS uses <code>/U</code> to upload INIs over NetISA when that ships)</li>
         <li><a href="/log.html">Build log</a> (milestones and progress)</li>
     </ul>
 </main>

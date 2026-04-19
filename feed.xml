@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Apr 2026 18:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 Apr 2026 22:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CERBERUS v0.4.0 shipped. Three-release-candidate weekend closed.</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-19-cerberus-v040</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-19-cerberus-v040</guid>
+      <pubDate>Sun, 19 Apr 2026 22:00:00 +0000</pubDate>
+      <description>CERBERUS v0.4.0 tagged after a weekend arc of four release candidates on the BEK-V409 486 DX-2 bench box. Surgical rc1-to-final pass closed three UI defects (CP437 corruption, blank V_U32 rows, Dhrystone anchor framing). Seven Phase 2 Homage research docs shipped in parallel. 144,166-byte EXE, 163 host-test assertions, 8 consecutive clean real-iron runs.</description>
+    </item>
 
     <item>
       <title>DOSBox-X automation quality gate: 9 Fatal + 31 Significant fixed</title>
