@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Apr 2026 22:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2026 04:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CERBERUS: ANSI three-head boot intro, issue sweep, Homage Phase 3</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-20-cerberus-intro-phase3</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-20-cerberus-intro-phase3</guid>
+      <pubDate>Mon, 20 Apr 2026 04:00:00 +0000</pubDate>
+      <description>Five commits past the v0.4.0 tag. Headline: adapter-aware three-headed-dog ANSI boot splash with OPL2 stinger, full classical iconography (Pseudo-Apollodorus, Virgil, Dante, Hercules). Issue sweep: #1 and #3 closed, #2 instrumented, #6 two test binaries built. Homage Phase 3: seven new lesson docs plus three attribution corrections (SPEEDSYS, PCPBENCH, 3DBENCH).</description>
+    </item>
 
     <item>
       <title>CERBERUS v0.4.0 shipped. Three-release-candidate weekend closed.</title>
