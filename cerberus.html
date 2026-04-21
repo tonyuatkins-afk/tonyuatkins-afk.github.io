@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool</title>
-<meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does. Single EXE. Open source. v0.4.0 shipped 2026-04-19 with real-hardware validation on a 486 DX-2.">
+<meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does, shows it working through a visual journey of six demonstrations, and uploads results to the community results browser. Single EXE. Open source. v0.7.0-rc1 shipped 2026-04-20.">
 <meta name="author" content="Tony Atkins">
-<meta name="keywords" content="CERBERUS, DOS diagnostic, DOS benchmark, retro PC hardware detection, vintage computing, counterfeit CPU detection, Mann-Kendall thermal, PIT timing, 8088, 286, 386, 486, DOSBox-X, OpenWatcom, open source">
+<meta name="keywords" content="CERBERUS, DOS diagnostic, DOS benchmark, retro PC hardware detection, vintage computing, counterfeit CPU detection, Mann-Kendall thermal, PIT timing, 8088, 286, 386, 486, DOSBox-X, OpenWatcom, open source, visual diagnostics, Mandelbrot FPU">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://barelybooting.com/cerberus.html">
@@ -15,7 +15,7 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
-<meta property="og:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks the three heads against each other. Catches counterfeit CPUs, thermal throttling, and broken timing code. Open source. v0.4.0 real-hardware-validated.">
+<meta property="og:description" content="A three-headed DOS tool that detects, diagnoses, benchmarks, and uploads vintage PC hardware results. Six visual demonstrations show the hardware actually working. Tough Times Demand Tough Tests. Open source. v0.7.0-rc1.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/cerberus.html">
 <meta property="og:image" content="https://barelybooting.com/img/cerberus-ui.jpg">
@@ -26,7 +26,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
-<meta name="twitter:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks all three against each other. v0.4.0 shipped. Open source.">
+<meta name="twitter:description" content="A three-headed DOS tool for vintage PC hardware: detect, diagnose, benchmark, upload, visualize. v0.7.0-rc1 shipped. Open source.">
 <meta name="twitter:image" content="https://barelybooting.com/img/cerberus-ui.jpg">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -43,10 +43,10 @@
       "@type": "SoftwareApplication",
       "@id": "https://barelybooting.com/cerberus.html#app",
       "name": "CERBERUS",
-      "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine that flags disagreements between what hardware claims to be and how it actually behaves. Mann-Kendall thermal stability tracker. Dual-channel PIT timing cross-check. v0.4.0 real-hardware-validated on a 486 DX-2.",
+      "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine. Visual Diagnostics Journey with six demonstrations that show the hardware computing live: CPU bit parade, FPU Lissajous, Mandelbrot, cache waterfall, latency heat map, PIT metronome, audio scale. Community upload to barelybooting.com. v0.7.0-rc1 released 2026-04-20.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "MS-DOS",
-      "softwareVersion": "0.4.0",
+      "softwareVersion": "0.7.0-rc1",
       "author": {
         "@type": "Person",
         "name": "Tony Atkins",
@@ -57,7 +57,7 @@
       "softwareRequirements": "IBM PC/XT/AT or compatible, 8088 or later, 256KB RAM minimum, MDA or better, MS-DOS 3.3+",
       "programmingLanguage": "C",
       "codeRepository": "https://github.com/tonyuatkins-afk/CERBERUS",
-      "downloadUrl": "https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.4.0",
+      "downloadUrl": "https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.7.0-rc1",
       "screenshot": "https://barelybooting.com/img/cerberus-ui.jpg"
     },
     {
@@ -109,8 +109,8 @@
 
 <main>
     <h1>CERBERUS</h1>
-    <p class="tagline">&gt; Three heads. One machine. Zero pretending.</p>
-    <p class="subtitle">A DOS-native tool that detects, diagnoses, and benchmarks vintage PC hardware, then cross-checks the three heads against each other.</p>
+    <p class="tagline">&gt; Tough Times Demand Tough Tests.</p>
+    <p class="subtitle">A DOS-native tool that detects, diagnoses, and benchmarks vintage PC hardware, then shows it working through a visual journey of six hardware demonstrations before cross-checking the results.</p>
 
     <figure>
         <img src="/img/cerberus-ui.jpg" alt="CERBERUS v0.4.0 three-pane UI on a 486 DX-2. Left pane DETECTION lists CPU as Intel i486DX2, FPU as Integrated i486DX FPU, 63,076 KB extended memory, S3 Trio64 video, AMI BIOS. Right pane BENCHMARKS shows 1.96M integer iterations per second, 31,862 Dhrystones, 1.12M FPU ops per second, memory throughput 15 MB per second. Bottom pane SYSTEM VERDICTS lists seven PASS rows and two WARN rows in green and yellow." width="1280" height="960">
@@ -118,8 +118,31 @@
     </figure>
 
     <div class="status">
-        <strong>Where things stand:</strong> <code>v0.4.0</code> shipped 2026-04-19 after a weekend arc of four release candidates (<code>v0.2-rc1</code>, <code>v0.3-rc1</code>, <code>v0.4-rc1</code>, <code>v0.4.0</code>). All six subsystems (detect, diagnose, benchmark, consistency engine, thermal tracker, UI) are real-hardware-validated on the bench 486 DX-2. 163 host-side assertions green. Binary is 144,166 bytes. 386 and 8088 validation are the next-platforms work.
+        <strong>Where things stand:</strong> <code>v0.7.0-rc1</code> shipped 2026-04-20 after an arc of ten tagged milestones. All six core subsystems (detect, diagnose, benchmark, consistency engine, thermal tracker, UI) are real-hardware-validated on the bench 486 DX-2. <strong>201 host-side assertions green.</strong> Binary is 163,922 bytes. The full <code>v0.7.0</code> tag is held until the <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> companion web app is deployed and an end-to-end upload round-trip validates. 386 and 8088 validation are the next-platforms work.
     </div>
+
+    <h2>The visual journey (v0.6.0)</h2>
+
+    <p>v0.6.0 turned CERBERUS from a tool that produces numbers into an experience that shows the hardware working. Eight title cards introduce eight demonstrations, each one genuine hardware computation made visible:</p>
+
+    <ul>
+        <li><strong>CPU ALU Bit Parade</strong>. A 16-bit register displayed as a row of CP437 blocks. Real ROL / ROR / SHL / SHR / AND / OR / XOR / NOT / ADD / SUB instructions execute in sequence. Wall-clock bounded at ~3 seconds. On an 8088 you see individual ops tick past. On a 486 DX-2 the pattern blurs. The speed difference IS the performance.</li>
+        <li><strong>FPU Lissajous</strong>. VGA mode 13h. 1800 parametric points <code>x = sin(3t + π/4), y = sin(2t)</code> drawn one by one via native x87 FSIN. Amber oscilloscope aesthetic. A broken FPU produces visible distortion.</li>
+        <li><strong>FPU Mandelbrot</strong>. After the Whetstone measurement, the FPU renders a Mandelbrot set in real time as a visual coda. Pixel by pixel, row by row. Genuine x87 iteration, not a lookup table.</li>
+        <li><strong>Memory Cache Waterfall</strong>. Nine horizontal bars, one per block size from 1 byte to 64 KB. Each bar fills at a rate proportional to its measured write bandwidth. The cache boundary shows as a speed transition.</li>
+        <li><strong>Cache Latency Heat Map</strong>. A 64-cell horizontal heat strip across 32 KB of address space. Green = L1 speed, yellow = intermediate, red = main-memory speed. On a 486 with 8 KB L1 the boundary is a sharp color transition.</li>
+        <li><strong>PIT Metronome</strong>. A dot bounces at 18.2 Hz, with a PC-speaker click per tick. Steady rhythm means the timer is healthy. Stutter means a TSR is stealing ticks.</li>
+        <li><strong>Video Bandwidth</strong>. The pattern fill IS the measurement. What you see on the CRT is the CPU&rsquo;s write loop against VRAM.</li>
+        <li><strong>Audio Hardware Scale</strong>. Eight-note C major scale with rising frequency bars. Probes three paths in order: SB DSP direct PCM &rarr; OPL2 FM synthesis &rarr; PC speaker. The on-screen heading tells you which path won.</li>
+    </ul>
+
+    <p>The journey ends with the scrollable summary: three directional Cerberus heads (facing left for Detection, forward for Benchmarks, right for Verdicts) guarding their domains. Every detected value, every benchmark number, every consistency verdict rendered in 80 columns of CP437 block art. No information truncated, no row budget cap.</p>
+
+    <h2>Community upload (v0.7.0-rc1)</h2>
+
+    <p>If a network transport is detected (packet driver, mTCP, WATTCP), CERBERUS prompts at end of run: <em>"Upload results to barelybooting.com?"</em> On yes, it POSTs <code>CERBERUS.INI</code> through mTCP&rsquo;s HTGET to the <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">companion server</a>, which parses the file, stores it, and returns a public URL you can visit from a modern browser to see your results.</p>
+
+    <p><code>/NOUPLOAD</code> suppresses the prompt entirely; <code>/UPLOAD</code> auto-yes for scripted runs; <code>/NICK:&lt;name&gt;</code> and <code>/NOTE:&quot;text&quot;</code> add metadata to the submission. The INI format is frozen at <code>ini_format=1</code> with a documented backward-compatibility commitment — see <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-upload-contract.md" rel="noopener">the server API contract</a>.</p>
 
     <p>CERBERUS is named after the three-headed dog of Greek myth that guarded the gates of the underworld. Each head is one of the three analysis domains:</p>
 
@@ -222,11 +245,11 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">EXE</span>
-            <span class="spec-value">144,166 bytes</span>
+            <span class="spec-value">163,922 bytes</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">DGROUP</span>
-            <span class="spec-value">53.2 / 56 KB</span>
+            <span class="spec-value">59 / 64 KB</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">Toolchain</span>
@@ -234,7 +257,7 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">Host tests</span>
-            <span class="spec-value">163 assertions</span>
+            <span class="spec-value">201 assertions</span>
         </div>
     </div>
 
@@ -251,18 +274,22 @@
 
     <h2>Download</h2>
 
-    <p><code>CERBERUS.EXE</code> is attached to the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.4.0" rel="noopener">v0.4.0 release</a> on GitHub. Single-file DOS real-mode executable. Drop it on a FAT16 volume, run from the DOS prompt, read the resulting <code>CERBERUS.INI</code>. Full release notes at the release page.</p>
+    <p><code>CERBERUS.EXE</code> is attached to the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.7.0-rc1" rel="noopener">v0.7.0-rc1 release</a> on GitHub. Single-file DOS real-mode executable, 163,922 bytes. Drop it on a FAT16 volume, run from the DOS prompt, read the resulting <code>CERBERUS.INI</code>. Full release notes at the release page.</p>
 
     <p>Known issues and their reopen criteria are tracked in the <a href="https://github.com/tonyuatkins-afk/CERBERUS/issues" rel="noopener">GitHub issues</a>.</p>
 
     <h2>Links</h2>
     <ul class="link-list">
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS" rel="noopener">GitHub: tonyuatkins-afk/CERBERUS</a> (source, hardware databases, consistency rule docs)</li>
-        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.4.0" rel="noopener">v0.4.0 release page</a> (EXE, INI capture, screenshots, release notes)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.7.0-rc1" rel="noopener">v0.7.0-rc1 release page</a> (CERBERUS.EXE, release notes)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases" rel="noopener">All releases</a> (v0.4.0 through v0.7.0-rc1, release notes per milestone)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> (companion web app that ingests uploaded CERBERUS.INI runs)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-upload-contract.md" rel="noopener">INI upload contract</a> (API spec between the DOS client and the server)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-format.md" rel="noopener">INI format reference</a> (every section, key, value type emitted by CERBERUS)</li>
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/consistency-rules.md" rel="noopener">Consistency engine methodology</a> (what each rule catches and what it structurally cannot)</li>
-        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/docs/research/homage" rel="noopener">Homage Phase 2 research</a> (decompilation-led lessons from CheckIt, CACHECHK, FASTVID, CHKCPU, TOPBENCH)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/docs/research/homage" rel="noopener">Homage research</a> (decompilation-led lessons from CheckIt, CACHECHK, QA-Plus, and others)</li>
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/CERBERUS.md" rel="noopener">Design document</a> (the full architecture write-up)</li>
-        <li><a href="/netisa.html">NetISA project page</a> (the hardware side; CERBERUS uses <code>/U</code> to upload INIs over NetISA when that ships)</li>
+        <li><a href="/netisa.html">NetISA project page</a> (the hardware side; NetISA's TLS path is reserved for v0.8.0+)</li>
         <li><a href="/log.html">Build log</a> (milestones and progress)</li>
     </ul>
 </main>
