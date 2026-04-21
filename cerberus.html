@@ -7,7 +7,7 @@
 <title>CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool</title>
 <meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does, shows it working through a visual journey of six demonstrations, and uploads results to the community results browser. Single EXE. Open source. v0.7.0-rc1 shipped 2026-04-20.">
 <meta name="author" content="Tony Atkins">
-<meta name="keywords" content="CERBERUS, DOS diagnostic, DOS benchmark, retro PC hardware detection, vintage computing, counterfeit CPU detection, Mann-Kendall thermal, PIT timing, 8088, 286, 386, 486, DOSBox-X, OpenWatcom, open source, visual diagnostics, Mandelbrot FPU">
+<meta name="keywords" content="CERBERUS, DOS diagnostic tool, DOS benchmark, retro PC hardware detection, vintage computing, VOGONS, retrobattlestations, CheckIt alternative, SpeedSys replacement, QA-Plus, SYSINFO, Norton Utilities, counterfeit CPU detection, remarked 486, Mann-Kendall thermal throttling, PIT timing test, 8088, 8086, 286, 386SX, 386DX, 486SX, 486DX, 486DX2, 486DX4, Am486, Cyrix 5x86, Cyrix 6x86, Pentium, NEC V20, NEC V30, Intel 80287, Intel 80387, IIT 3C87, Weitek, FPU detection, Sound Blaster 16, AdLib, OPL2, OPL3, Vibra 16, Gravis Ultrasound, VGA, SVGA, EGA, CGA, MDA, Hercules, Trio64, Cirrus Logic, Tseng Labs ET4000, Paradise, ATI, VLB, ISA, PCI, MCA, Dhrystone, Whetstone, DOSBox-X, 86Box, PCem, OpenWatcom, NASM, open source, visual diagnostics, Mandelbrot FPU, cache waterfall, latency heat map, PIT metronome, Lissajous curve, bit parade, BEK-V409, IBM PC XT AT, MS-DOS, FreeDOS">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://barelybooting.com/cerberus.html">
@@ -74,6 +74,59 @@
           "position": 2,
           "name": "CERBERUS",
           "item": "https://barelybooting.com/cerberus.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Will CERBERUS run on my 8088?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. 8088 with 256 KB and MDA is the hard floor. VGA-only visuals (Mandelbrot, Lissajous) skip gracefully on lower adapters. Text-mode visuals (bit parade, PIT metronome, cache waterfall, latency heat map, audio scale) run on every adapter including Hercules and MDA. No 386+ instructions leak into the 8088 code path."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does CERBERUS work in DOSBox-X, 86Box, or PCem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. CERBERUS detects the emulator and automatically caps all confidence values at MEDIUM because emulated hardware is not ground truth. Benchmarks still run and produce reproducible same-machine numbers, but cross-tool comparisons against real-iron numbers should be flagged."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is CERBERUS different from CheckIt 3.0?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CheckIt tells you what your hardware says it is. CERBERUS additionally tells you when what your hardware says disagrees with how it behaves. Eleven consistency rules catch counterfeit CPUs, remarked chips, thermal throttling, cache disabled in BIOS, TSRs stealing cycles, timing bugs, and frankenboard builds where detection claims something the hardware physically cannot do."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the community upload do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If mTCP or a packet driver is installed, CERBERUS offers to POST the CERBERUS.INI to barelybooting.com/cerberus/ where you can browse submissions, filter by CPU class, compare runs from the same machine over time, and see how your hardware performs next to other submitted machines. Anonymous by default. Nickname and note can be added via /NICK: and /NOTE: flags. Opt out with /NOUPLOAD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can CERBERUS damage my vintage PC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. CERBERUS performs no destructive operations: no low-level format, no disk writes outside the working directory, and no port writes outside documented probe targets. DMA probing explicitly skips the refresh and cascade channels. This is a deliberate design choice: QA-Plus and similar tools bundled low-level format utilities which CERBERUS specifically rejects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a Windows version of CERBERUS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. CERBERUS is DOS real-mode only. The scrollable UI uses direct VRAM writes at B800:0000 for color adapters or B000:0000 for monochrome, which only works under DOS. Run it under DOSBox-X if you do not have real vintage hardware."
+          }
         }
       ]
     }
@@ -271,6 +324,57 @@
     </figure>
 
     <p>The v0.4.0 validation capture archived at <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/486-real-2026-04-19-v0.4.0" rel="noopener">tests/captures/486-real-2026-04-19-v0.4.0</a> is a full CERBERUS.INI from one bench-box run. Every diagnostic PASS. Two consistency WARNs on expected paths. <code>cpu.dhrystones = 31,862</code> lands within 5% of CheckIt 3.0's reported number on the same hardware (33,609), which is the empirical agreement target for 486-class boxes. Not an algorithmic equivalence: <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/research/homage/checkit-dhrystone-version.md" rel="noopener">Phase 2 Homage research</a> confirmed CheckIt's &ldquo;Dhrystones&rdquo; is a custom synthetic, not a Dhrystone port.</p>
+
+    <h2>Compared to other DOS diagnostic tools</h2>
+
+    <p>If you&rsquo;ve run retro PCs for a while you&rsquo;ve used <strong>CheckIt 3.0</strong>, <strong>SpeedSys</strong>, <strong>Norton SYSINFO</strong>, <strong>QA-Plus</strong>, <strong>CHKCPU</strong>, <strong>TOPBENCH</strong>, <strong>PCPBENCH</strong>, or <strong>3DBENCH</strong>. They&rsquo;re all still useful. CERBERUS is not a replacement for any of them; it focuses on a different question.</p>
+
+    <p>The <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/docs/research/homage" rel="noopener">Homage research directory</a> documents what CERBERUS learned from each one, with honest credit and no code copying. Short version:</p>
+
+    <ul>
+        <li><strong>CheckIt 3.0</strong> (TouchStone, 1988&ndash;1990). The reference point for the UI layout and the &ldquo;Dhrystones&rdquo; column. CheckIt&rsquo;s Dhrystones is a custom synthetic, not a real Dhrystone 2.1 port; CERBERUS ships the actual Weicker reference code plus the synthetic for cross-calibration.</li>
+        <li><strong>SpeedSys</strong> (Vladimir Afanasiev). Memory bandwidth measurement methodology validated against SpeedSys&rsquo;s cache-stride approach. CERBERUS&rsquo;s <code>bench_cache</code> uses the same stride-doubling pattern.</li>
+        <li><strong>Norton SYSINFO</strong> (Peter Norton, Symantec). The original &ldquo;what IS this machine&rdquo; tool. CERBERUS inherits its confidence-indicator approach (HIGH / MEDIUM / LOW per field) from SYSINFO&rsquo;s asterisk-marks-inferred convention.</li>
+        <li><strong>QA-Plus v3.12</strong> (DiagSoft). Professional service-technician tool; shipped as four cooperating binaries (control panel + destructive diag + RAM-locator + low-level format) because the RAM test needs to relocate DOS. CERBERUS learned the four-binary split pattern from QA-Plus and applies a simpler version for the scrollable summary.</li>
+        <li><strong>CHKCPU</strong> (Jan Steunebrink). Best-of-breed CPU identification across the full x86 lineage including Cyrix DIR-based pre-CPUID discrimination. CERBERUS&rsquo;s CPU detection covers a smaller slice but with published empirical bench ranges used by consistency Rule 4b.</li>
+        <li><strong>TOPBENCH</strong> (Jim &ldquo;Trixter&rdquo; Leonard). Community-submitted machine fingerprint database keyed on BIOS CRC16. The inspiration for CERBERUS&rsquo;s community-upload feature and dual-signature scheme.</li>
+        <li><strong>PCPBENCH, 3DBENCH, Chris&rsquo;s 3d Benchmark</strong>. The Mode 13h pixel throughput references that CERBERUS&rsquo;s <code>bench_video.mode13h_kbps</code> wants to land near. Real-hardware anchor work is ongoing for issue #6.</li>
+    </ul>
+
+    <p><strong>What CERBERUS adds:</strong> consistency cross-checking between what hardware claims and what it actually does (eleven rules today), dual signatures for counterfeit-CPU and remarked-chip detection, Mann-Kendall thermal trend analysis over calibrated-mode multi-pass runs, a visual journey of eight hardware demonstrations that make the tool&rsquo;s work legible instead of just numeric, and community upload to a browsable results database at <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting.com/cerberus/</a>. None of the other tools do all of that.</p>
+
+    <p><strong>When to reach for each:</strong> if you need exhaustive peripheral diagnostics, QA-Plus or CheckIt. If you need authoritative CPU ID across the Cyrix / NEC / IIT landscape, CHKCPU. If you need community-reference benchmark numbers, TOPBENCH. If you need to know whether a dodgy eBay 486DX is actually a 486SX with a remark job, CERBERUS&rsquo;s consistency engine + signature pair is what the other tools don&rsquo;t have.</p>
+
+    <h2>FAQ</h2>
+
+    <dl class="faq">
+        <dt>Will it run on my 8088?</dt>
+        <dd>Yes. 8088 + 256 KB + MDA is the hard floor. VGA-only visuals (Mandelbrot, Lissajous) skip gracefully on lower adapters; text-mode visuals (bit parade, PIT metronome, cache waterfall, latency heat map, audio scale) run on every adapter including Hercules. No 386+ instructions leak into the 8088 code path.</dd>
+
+        <dt>Does it work in DOSBox-X, 86Box, PCem?</dt>
+        <dd>Yes. CERBERUS detects the emulator and automatically caps all confidence values at MEDIUM — emulated hardware isn&rsquo;t ground truth. Benchmarks still run; results are still reproducible same-machine; but cross-tool comparisons against real-iron numbers should be flagged.</dd>
+
+        <dt>My CPU / video card / sound card isn&rsquo;t identified correctly.</dt>
+        <dd>The identification databases live as human-editable CSVs in <code>hw_db/</code>. 128 seed entries today across five databases (CPU, FPU, video chipset, audio chipset, BIOS family). When CERBERUS can&rsquo;t identify your hardware, the raw probe data is captured to <code>CERBERUS.UNK</code>. Submit a GitHub issue with that file attached and it grows the database.</dd>
+
+        <dt>How is this different from CheckIt?</dt>
+        <dd>CheckIt tells you what your hardware says it is. CERBERUS also tells you when what your hardware says disagrees with how it behaves. The consistency engine (eleven rules) catches counterfeit CPUs, remarked chips, thermal throttling, cache disabled in BIOS, TSRs stealing cycles, timing-code bugs, and frankenboard builds where detection claims something the hardware physically cannot do.</dd>
+
+        <dt>What&rsquo;s the community upload do?</dt>
+        <dd>If you have mTCP or a packet driver installed, CERBERUS offers to POST your <code>CERBERUS.INI</code> to <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting.com/cerberus/</a> where you can browse all submissions, filter by CPU class, compare runs from the same machine over time, and see how your hardware performs next to other submitted machines. Anonymous by default; add a nickname and note with <code>/NICK:</code> and <code>/NOTE:</code>. Skip with <code>/NOUPLOAD</code>.</dd>
+
+        <dt>What&rsquo;s in a CERBERUS.INI?</dt>
+        <dd>Plain ASCII INI with every detected property, diagnostic verdict, benchmark number, and consistency-rule outcome. Two SHA-1 signatures (hardware identity + per-run). Full format spec at <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-format.md" rel="noopener">docs/ini-format.md</a>. The format is frozen at <code>ini_format=1</code> with a documented backward-compatibility commitment.</dd>
+
+        <dt>Will it damage my machine?</dt>
+        <dd>No destructive operations. No low-level format, no disk writes outside the user&rsquo;s working directory (<code>CERBERUS.INI</code> and sometimes <code>CERBERUS.UNK</code>), no port writes outside documented probe targets with safety gates on the DMA refresh / cascade channels. This is a deliberate design choice; QA-Plus and similar tools bundled low-level format utilities which CERBERUS specifically rejects.</dd>
+
+        <dt>Is there a Windows version?</dt>
+        <dd>No. CERBERUS is DOS real-mode only. The scrollable UI uses direct VRAM writes at B800:0000 (color) or B000:0000 (mono), which is not a thing on Windows. Run it under DOSBox-X if you don&rsquo;t have real iron.</dd>
+
+        <dt>License?</dt>
+        <dd>MIT. Hardware databases are CC0. Contributions welcome.</dd>
+    </dl>
 
     <h2>Download</h2>
 

@@ -831,6 +831,31 @@ footer.site-footer .footer-links {
     border-color: var(--accent);
 }
 
+/* === FAQ (dl.faq) === */
+
+dl.faq {
+    margin: 1.5rem 0;
+    padding: 0;
+}
+dl.faq dt {
+    margin: 1.25rem 0 0.35rem 0;
+    color: var(--accent);
+    font-weight: normal;
+    font-size: 1.02rem;
+    letter-spacing: 0.01em;
+}
+dl.faq dt::before {
+    content: "? ";
+    color: var(--fg-2);
+    font-family: var(--font-mono, "Courier New", monospace);
+}
+dl.faq dd {
+    margin: 0 0 0 1.1rem;
+    padding-left: 0.7rem;
+    border-left: 1px solid var(--border, var(--fg-3));
+    color: var(--fg-1);
+}
+
 /* === Motion preferences === */
 
 @media (prefers-reduced-motion: reduce) {
