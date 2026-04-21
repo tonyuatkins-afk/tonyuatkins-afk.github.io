@@ -109,6 +109,16 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-21-barelybooting-server">
+            <div class="log-date">
+                <time datetime="2026-04-21">2026-04-21</time>
+            </div>
+            <h2>CERBERUS Part B: barelybooting-server v0.1.0 shipped, production-ready</h2>
+            <p>The companion server for CERBERUS upload ingest hit its first tagged release. Flask + SQLite + Jinja, about 700 lines of Python, strictly implementing the <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-upload-contract.md" rel="noopener">frozen upload contract</a> from CERBERUS v0.7.0. Six GET routes (list, per-CPU-class, per-machine, unknown, detail, stubbed CSV export) and one POST (<code>/api/v1/submit</code>). 24 host-side tests green. MVP parser, DB schema, and browse UI landed first, then a full red-team pass before first public traffic.</p>
+            <p>Deploy stack: Dockerfile (Python 3.12-slim-bookworm, non-root UID, waitress production WSGI, healthcheck), <code>docker-compose.yml</code> pairing the app with a <code>cloudflared</code> sidecar that waits on the app's healthcheck before opening the tunnel. Cloudflare Tunnel is outbound-only: no port forward, no DDNS, no public IP exposed. Target is a Home Assistant OS mini PC running Docker. Full DEPLOY.md walks add-on install, Cloudflare Zero Trust tunnel creation, edge WAF + bot + rate-limit setup, backup automation, secret rotation.</p>
+            <p>Red-team found and fixed: no rate limit on intake (added Flask-Limiter, 5/min + 30/hour per <code>CF-Connecting-IP</code>); no server-side length enforcement on nickname/notes (spam vector closed); potential <code>submission_id</code> birthday collision at 65k rows (retry-on-PK-collision preserves the 8-char contract); no CSP / frame-deny response headers (added); non-ASCII body bytes silently replaced (now strict-decode 400); unbounded Content-Type acceptance (now text/* only). Container itself runs read-only with tmpfs /tmp, <code>cap_drop: ALL</code>, and <code>no-new-privileges</code>. <a href="https://github.com/tonyuatkins-afk/barelybooting-server/releases/tag/v0.1.0" rel="noopener">v0.1.0 release</a>. Next: push to the HA box, end-to-end validate on BEK-V409, promote CERBERUS v0.7.0-rc2 to final. <a href="/cerberus.html">Project page</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-20-cerberus-intro-phase3">
             <div class="log-date">
                 <time datetime="2026-04-20">2026-04-20</time>
