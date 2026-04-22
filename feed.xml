@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Apr 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2026 18:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CERBERUS v0.8.1: same-day completion release</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-22-cerberus-v081</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-22-cerberus-v081</guid>
+      <pubDate>Wed, 22 Apr 2026 18:00:00 +0000</pubDate>
+      <description>CERBERUS v0.8.1 tagged same day as v0.8.0. Closes items deferred from v0.8.0. M1: IEEE-754 edge-case diagnostic (14 cases across 5 ops) + /CSV output with RFC 4180 minimal quoting. M2: L1 pointer-chase latency probe, 64 KB L2 reach via _fmalloc, DRAM ns derivation (128/256 KB deferred to 0.9.0). M3: IIT 3C87 DB row + routing, Genoa ET4000 3CDh probe, Hercules variant discrimination. Hotfix: /CSV was silently consumed by /C calibrated-mode prefix. Caught by DOSBox Staging end-to-end smoketest, not by host tests + wmake. New durable instruction: smoketest after every build.</description>
+    </item>
 
     <item>
       <title>CERBERUS v0.8.0: trust-first release, four milestones in 36 hours</title>

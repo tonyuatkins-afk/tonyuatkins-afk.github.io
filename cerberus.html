@@ -46,7 +46,7 @@
       "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine. Visual Diagnostics Journey with eight demonstrations that show the hardware computing live: CPU bit parade, FPU Lissajous, Mandelbrot, cache waterfall, latency heat map, PIT metronome, video bandwidth, audio scale. CUA-lite interaction (F1 help overlay, F3 exit, Norton-style F-key legend, /MONO forced-monochrome). v0.8.0 trust-first release 2026-04-22, real-iron validated on BEK-V409 (486 DX-2-66) and a 386 DX-40 + IIT 3C87.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "MS-DOS",
-      "softwareVersion": "0.8.0",
+      "softwareVersion": "0.8.1",
       "author": {
         "@type": "Person",
         "name": "Tony Atkins",
@@ -57,7 +57,7 @@
       "softwareRequirements": "IBM PC/XT/AT or compatible, 8088 or later, 256KB RAM minimum, MDA or better, MS-DOS 3.3+",
       "programmingLanguage": "C",
       "codeRepository": "https://github.com/tonyuatkins-afk/CERBERUS",
-      "downloadUrl": "https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.0",
+      "downloadUrl": "https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.1",
       "screenshot": "https://barelybooting.com/img/cerberus-ui.jpg"
     },
     {
@@ -179,7 +179,7 @@
     </figure>
 
     <div class="status">
-        <strong>Where things stand:</strong> <code>v0.8.0</code> tagged 2026-04-22. The trust-first release: every shipped number has been verified on real iron, captured from a <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/486-BEK-V409-2026-04-21-m1-exit" rel="noopener">BEK-V409 486 DX-2-66</a> and a <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/386-real-2026-04-21-m1" rel="noopener">386 DX-40 + IIT 3C87</a>. The release is deliberately smaller than the v0.7.1 envelope: Whetstone emit is suppressed in stock builds (kernel was 10-30x below the published reference band on real silicon), the runtime upload to barelybooting.com is compiled out of stock binaries (returning in 0.9.0 with a stack-safe offline fallback). What shipped is production-quality: CUA-lite UI (F1 help overlay, F3 exit, Norton-style F-key legend, <code>/MONO</code> flag, CGA snow-safety gate), 5-axis FPU behavioral fingerprint, 6-stride cache characterization including line=32/64 plateau detection for Pentium+, possible-causes narration on every FAIL/WARN consistency rule. <strong>320 host-side assertions green across 9 test suites. Binary ~167 KB, DGROUP 59.5 KB / 64 KB.</strong> Four milestone commits on main (<code>0.8.0-M1</code> through <code>0.8.0-M4</code>) document the arc. Companion <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> still at <code>v0.1.0</code>: production-ready, awaiting the 0.9.0 CERBERUS upload-path revival to go live.
+        <strong>Where things stand:</strong> <code>v0.8.1</code> tagged 2026-04-22, same-day completion release on top of <code>v0.8.0</code>. Closes the IEEE-754 edge-case diagnostic, <code>/CSV</code> output mode, L1 pointer-chase latency probe, L2 reach via a 64 KB FAR buffer, DRAM ns derivation, Hercules variant discrimination (HGC/HGC+/InColor), IIT 3C87 DB row + routing, and Genoa ET4000 chip-level probe. 376 host-test assertions green. <code>v0.8.0</code> tagged earlier the same day. The trust-first release: every shipped number has been verified on real iron, captured from a <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/486-BEK-V409-2026-04-21-m1-exit" rel="noopener">BEK-V409 486 DX-2-66</a> and a <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/386-real-2026-04-21-m1" rel="noopener">386 DX-40 + IIT 3C87</a>. The release is deliberately smaller than the v0.7.1 envelope: Whetstone emit is suppressed in stock builds (kernel was 10-30x below the published reference band on real silicon), the runtime upload to barelybooting.com is compiled out of stock binaries (returning in 0.9.0 with a stack-safe offline fallback). What shipped is production-quality: CUA-lite UI (F1 help overlay, F3 exit, Norton-style F-key legend, <code>/MONO</code> flag, CGA snow-safety gate), 5-axis FPU behavioral fingerprint, 6-stride cache characterization including line=32/64 plateau detection for Pentium+, possible-causes narration on every FAIL/WARN consistency rule. <strong>320 host-side assertions green across 9 test suites. Binary ~167 KB, DGROUP 59.5 KB / 64 KB.</strong> Four milestone commits on main (<code>0.8.0-M1</code> through <code>0.8.0-M4</code>) document the arc. Companion <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> still at <code>v0.1.0</code>: production-ready, awaiting the 0.9.0 CERBERUS upload-path revival to go live.
     </div>
 
     <h2>The visual journey (v0.6.0)</h2>
@@ -404,16 +404,17 @@
 
     <h2>Download</h2>
 
-    <p><code>CERBERUS.EXE</code> is attached to the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.0" rel="noopener">v0.8.0 release</a> on GitHub. Single-file DOS real-mode executable, ~167 KB. Drop it on a FAT16 volume, run from the DOS prompt, read the resulting <code>CERBERUS.INI</code>. Full release notes at the release page.</p>
+    <p><code>CERBERUS.EXE</code> is attached to the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.1" rel="noopener">v0.8.1 release</a> on GitHub. Single-file DOS real-mode executable, ~171 KB. Drop it on a FAT16 volume, run from the DOS prompt, read the resulting <code>CERBERUS.INI</code>. Full release notes at the release page.</p>
 
     <p>Known issues and their reopen criteria are tracked in the <a href="https://github.com/tonyuatkins-afk/CERBERUS/issues" rel="noopener">GitHub issues</a>.</p>
 
     <h2>Links</h2>
     <ul class="link-list">
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS" rel="noopener">GitHub: tonyuatkins-afk/CERBERUS</a> (source, hardware databases, consistency rule docs)</li>
-        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.0" rel="noopener">v0.8.0 release page</a> (CERBERUS.EXE, release notes)</li>
-        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/releases/v0.8.0.md" rel="noopener">v0.8.0 release notes</a> (full milestone writeup)</li>
-        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases" rel="noopener">All releases</a> (v0.4.0 through v0.8.0, release notes per milestone)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.1" rel="noopener">v0.8.1 release page</a> (CERBERUS.EXE, release notes)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/releases/v0.8.1.md" rel="noopener">v0.8.1 release notes</a></li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/releases/v0.8.0.md" rel="noopener">v0.8.0 release notes</a></li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases" rel="noopener">All releases</a> (v0.4.0 through v0.8.1, release notes per milestone)</li>
         <li><a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> (companion web app that ingests uploaded CERBERUS.INI runs)</li>
         <li><a href="https://github.com/tonyuatkins-afk/barelybooting-server/releases/tag/v0.1.0" rel="noopener">barelybooting-server v0.1.0 release</a> (production-ready: Docker image, Cloudflare Tunnel deploy guide, red-team hardening)</li>
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-upload-contract.md" rel="noopener">INI upload contract</a> (API spec between the DOS client and the server)</li>
