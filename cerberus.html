@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool</title>
-<meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does, shows it working through a visual journey of eight demonstrations, and uploads results to the community results browser. Single EXE. Open source. v0.7.0-rc2 shipped 2026-04-20; companion server v0.1.0 shipped 2026-04-21.">
+<meta name="description" content="CERBERUS is a DOS-native detection, diagnostic, and benchmark tool for real-mode PCs from the 8088 up through the 486. It cross-checks what your hardware claims to be against what it actually does, shows it working through a visual journey of eight demonstrations, and produces a machine-parseable INI capture. Single EXE. Open source. v0.8.0 trust-first release shipped 2026-04-22 after real-iron validation on BEK-V409 and a 386 DX-40; companion server v0.1.0 shipped 2026-04-21.">
 <meta name="author" content="Tony Atkins">
 <meta name="keywords" content="CERBERUS, DOS diagnostic tool, DOS benchmark, retro PC hardware detection, vintage computing, VOGONS, retrobattlestations, CheckIt alternative, SpeedSys replacement, QA-Plus, SYSINFO, Norton Utilities, counterfeit CPU detection, remarked 486, Mann-Kendall thermal throttling, PIT timing test, 8088, 8086, 286, 386SX, 386DX, 486SX, 486DX, 486DX2, 486DX4, Am486, Cyrix 5x86, Cyrix 6x86, Pentium, NEC V20, NEC V30, Intel 80287, Intel 80387, IIT 3C87, Weitek, FPU detection, Sound Blaster 16, AdLib, OPL2, OPL3, Vibra 16, Gravis Ultrasound, VGA, SVGA, EGA, CGA, MDA, Hercules, Trio64, Cirrus Logic, Tseng Labs ET4000, Paradise, ATI, VLB, ISA, PCI, MCA, Dhrystone, Whetstone, DOSBox-X, 86Box, PCem, OpenWatcom, NASM, open source, visual diagnostics, Mandelbrot FPU, cache waterfall, latency heat map, PIT metronome, Lissajous curve, bit parade, BEK-V409, IBM PC XT AT, MS-DOS, FreeDOS, mTCP, WATTCP, packet driver, HTGET, community upload, barelybooting.com, Cloudflare Tunnel, Home Assistant Docker, Flask SQLite, retro computing results browser, hardware fingerprinting, vintage hardware database, DOS netutils, CRT diagnostic">
 <meta name="robots" content="index, follow">
@@ -15,7 +15,7 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
-<meta property="og:description" content="A three-headed DOS tool that detects, diagnoses, benchmarks, and uploads vintage PC hardware results. Eight visual demonstrations show the hardware actually working. Tough Times Demand Tough Tests. Open source. v0.7.0-rc2.">
+<meta property="og:description" content="A three-headed DOS tool that detects, diagnoses, and benchmarks vintage PC hardware. Eight visual demonstrations show the hardware actually working. CUA-lite UI with F1 help, F3 exit. Tough Times Demand Tough Tests. Open source. v0.8.0.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/cerberus.html">
 <meta property="og:image" content="https://barelybooting.com/img/cerberus-ui.jpg">
@@ -26,7 +26,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CERBERUS | DOS Hardware Detection, Diagnostic, and Benchmark Tool">
-<meta name="twitter:description" content="A three-headed DOS tool for vintage PC hardware: detect, diagnose, benchmark, upload, visualize. v0.7.0-rc2 shipped. Open source.">
+<meta name="twitter:description" content="A three-headed DOS tool for vintage PC hardware: detect, diagnose, benchmark, visualize. v0.8.0 shipped with CUA-lite UI + real-iron validation. Open source.">
 <meta name="twitter:image" content="https://barelybooting.com/img/cerberus-ui.jpg">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -43,10 +43,10 @@
       "@type": "SoftwareApplication",
       "@id": "https://barelybooting.com/cerberus.html#app",
       "name": "CERBERUS",
-      "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine. Visual Diagnostics Journey with eight demonstrations that show the hardware computing live: CPU bit parade, FPU Lissajous, Mandelbrot, cache waterfall, latency heat map, PIT metronome, video bandwidth, audio scale. Community upload to barelybooting.com via the companion Flask/SQLite server (v0.1.0, Docker + Cloudflare Tunnel). v0.7.0-rc2 released 2026-04-20.",
+      "description": "A DOS-native hardware detection, diagnostic, and benchmark tool for real-mode IBM PCs. Three analysis heads (detect, diagnose, benchmark) cross-checked by a consistency engine. Visual Diagnostics Journey with eight demonstrations that show the hardware computing live: CPU bit parade, FPU Lissajous, Mandelbrot, cache waterfall, latency heat map, PIT metronome, video bandwidth, audio scale. CUA-lite interaction (F1 help overlay, F3 exit, Norton-style F-key legend, /MONO forced-monochrome). v0.8.0 trust-first release 2026-04-22, real-iron validated on BEK-V409 (486 DX-2-66) and a 386 DX-40 + IIT 3C87.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "MS-DOS",
-      "softwareVersion": "0.7.0-rc2",
+      "softwareVersion": "0.8.0",
       "author": {
         "@type": "Person",
         "name": "Tony Atkins",
@@ -57,7 +57,7 @@
       "softwareRequirements": "IBM PC/XT/AT or compatible, 8088 or later, 256KB RAM minimum, MDA or better, MS-DOS 3.3+",
       "programmingLanguage": "C",
       "codeRepository": "https://github.com/tonyuatkins-afk/CERBERUS",
-      "downloadUrl": "https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.7.0-rc2",
+      "downloadUrl": "https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.0",
       "screenshot": "https://barelybooting.com/img/cerberus-ui.jpg"
     },
     {
@@ -109,7 +109,7 @@
           "name": "What does the community upload do?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "If mTCP or a packet driver is installed, CERBERUS offers to POST the CERBERUS.INI to barelybooting.com/cerberus/ where you can browse submissions, filter by CPU class, compare runs from the same machine over time, and see how your hardware performs next to other submitted machines. Anonymous by default. Nickname and note can be added via /NICK: and /NOTE: flags. Opt out with /NOUPLOAD."
+            "text": "The upload path shipped in v0.7.x but is compiled out of v0.8.0 stock builds after v0.7.1 surfaced a stack overflow when the server was unreachable. Rebuild with 'wmake UPLOAD=1' to re-enable for research use. Full revival is the 0.9.0 work, with a stack-safe offline fallback. The barelybooting.com server side (v0.1.0, Flask + SQLite, Docker + Cloudflare Tunnel) is ready and waiting."
           }
         },
         {
@@ -179,7 +179,7 @@
     </figure>
 
     <div class="status">
-        <strong>Where things stand:</strong> <code>v0.7.0-rc2</code> shipped 2026-04-20 after an arc of twelve tagged milestones. All six core subsystems (detect, diagnose, benchmark, consistency engine, thermal tracker, UI) are real-hardware-validated on the bench 486 DX-2. <strong>201 host-side assertions green on CERBERUS; 24 green on the server.</strong> Binary is 164,050 bytes. The companion <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> shipped <code>v0.1.0</code> on 2026-04-21: Flask + SQLite, Docker image, Cloudflare Tunnel deploy, red-teamed (rate limit, CSP, input validation, hardened container). The full <code>v0.7.0</code> CERBERUS tag is held until the server goes live and an end-to-end upload round-trip validates. 386 and 8088 validation are the next-platforms work.
+        <strong>Where things stand:</strong> <code>v0.8.0</code> tagged 2026-04-22. The trust-first release: every shipped number has been verified on real iron, captured from a <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/486-BEK-V409-2026-04-21-m1-exit" rel="noopener">BEK-V409 486 DX-2-66</a> and a <a href="https://github.com/tonyuatkins-afk/CERBERUS/tree/main/tests/captures/386-real-2026-04-21-m1" rel="noopener">386 DX-40 + IIT 3C87</a>. The release is deliberately smaller than the v0.7.1 envelope: Whetstone emit is suppressed in stock builds (kernel was 10-30x below the published reference band on real silicon), the runtime upload to barelybooting.com is compiled out of stock binaries (returning in 0.9.0 with a stack-safe offline fallback). What shipped is production-quality: CUA-lite UI (F1 help overlay, F3 exit, Norton-style F-key legend, <code>/MONO</code> flag, CGA snow-safety gate), 5-axis FPU behavioral fingerprint, 6-stride cache characterization including line=32/64 plateau detection for Pentium+, possible-causes narration on every FAIL/WARN consistency rule. <strong>320 host-side assertions green across 9 test suites. Binary ~167 KB, DGROUP 59.5 KB / 64 KB.</strong> Four milestone commits on main (<code>0.8.0-M1</code> through <code>0.8.0-M4</code>) document the arc. Companion <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> still at <code>v0.1.0</code>: production-ready, awaiting the 0.9.0 CERBERUS upload-path revival to go live.
     </div>
 
     <h2>The visual journey (v0.6.0)</h2>
@@ -199,13 +199,26 @@
 
     <p>The journey ends with the scrollable summary: three directional Cerberus heads (facing left for Detection, forward for Benchmarks, right for Verdicts) guarding their domains. Every detected value, every benchmark number, every consistency verdict rendered in 80 columns of CP437 block art. No information truncated, no row budget cap.</p>
 
-    <h2>Community upload (v0.7.0)</h2>
+    <h2>Community upload (deferred to 0.9.0)</h2>
 
-    <p>If a network transport is detected (packet driver, mTCP, WATTCP), CERBERUS prompts at end of run: <em>"Upload results to barelybooting.com?"</em> On yes, it POSTs <code>CERBERUS.INI</code> through mTCP&rsquo;s HTGET to the <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">companion server</a>, which parses the file, stores it, and returns a public URL you can visit from a modern browser to see your results.</p>
+    <p>The upload path (POST <code>CERBERUS.INI</code> to barelybooting.com via mTCP HTGET) shipped in v0.7.x but is <strong>compiled out of stock v0.8.0 builds</strong>. The v0.7.1 real-iron validation surfaced a stack overflow when barelybooting.com was unreachable, and the trust-first cut for v0.8.0 was to remove the surface entirely rather than ship a partially-working feature. Rebuild with <code>wmake UPLOAD=1</code> for research use; the full revival with a stack-safe offline fallback is the 0.9.0 work.</p>
 
-    <p><code>/NOUPLOAD</code> suppresses the prompt entirely; <code>/UPLOAD</code> auto-yes for scripted runs; <code>/NICK:&lt;name&gt;</code> and <code>/NOTE:&quot;text&quot;</code> add metadata to the submission. The INI format is frozen at <code>ini_format=1</code> with a documented backward-compatibility commitment, see <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-upload-contract.md" rel="noopener">the server API contract</a>.</p>
+    <p>The server side is still there waiting: <a href="https://github.com/tonyuatkins-afk/barelybooting-server/releases/tag/v0.1.0" rel="noopener"><code>v0.1.0</code></a> shipped 2026-04-21 as a small Flask + SQLite app, deployable as a Docker image behind a Cloudflare Tunnel, red-teamed before first traffic. It enforces the upload contract strictly (ASCII only, 64 KB ceiling, 32/128 char caps on nickname/notes), rate-limits submissions by true client IP (<code>CF-Connecting-IP</code>, not edge IP), and ships with a CSP + frame-deny response header so a future markup slip cannot escalate to stored XSS. The container runs read-only, drops all Linux capabilities, and has no-new-privileges set. When the client path returns in 0.9.0 the server is ready.</p>
 
-    <p>The server side hit <a href="https://github.com/tonyuatkins-afk/barelybooting-server/releases/tag/v0.1.0" rel="noopener"><code>v0.1.0</code></a> on 2026-04-21: a small Flask + SQLite app, deployable as a Docker image behind a Cloudflare Tunnel, red-teamed before first traffic. It enforces the upload contract strictly (ASCII only, 64 KB ceiling, 32/128 char caps on nickname/notes), rate-limits submissions by true client IP (<code>CF-Connecting-IP</code>, not edge IP), and ships with a CSP + frame-deny response header so a future markup slip cannot escalate to stored XSS. The container runs read-only, drops all Linux capabilities, and has no-new-privileges set.</p>
+    <p>The INI format stays frozen at <code>ini_format=1</code> with a documented backward-compatibility commitment, see <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-upload-contract.md" rel="noopener">the server API contract</a>. v0.8.0 captures are already format-compatible with the future upload endpoint; no data migration will be needed when the path re-opens.</p>
+
+    <h2>What&rsquo;s new in v0.8.0</h2>
+
+    <p>Four milestones in a 36-hour arc:</p>
+
+    <ul>
+        <li><strong>M1 (trust-first foundation).</strong> Whetstone emit suppressed in stock builds (Curnow-Wichmann kernel reads 10-30x low on real 486 silicon vs the published reference band; shipping an honest &ldquo;not in stock&rdquo; beats a misleading number). Upload path compiled out (see above). End-of-run <code>_exit()</code> bypass fixes a Watcom libc teardown hang on BEK-V409 that locked the machine after Q-exit. Nickname buffer leak fixed (issue #9). <code>cpu.class</code> now emits a normalized family token (486, pentium, pentium_pro) instead of the vendor string. <code>bench_cpu</code> DB anchor widened after BEK-V409 real-iron measurement came in outside the original DOSBox-X-seeded band.</li>
+        <li><strong>M2 (precision expansion).</strong> FPU behavioral fingerprint grows from 4 axes to 5: added FPTAN-pushes-1.0 probe (387+ vs 8087/287). New rounding-control cross-check (4 modes against canonical FISTP(±1.5) results). New precision-control cross-check (3 significand widths, bytewise comparison). New exception-flag roundtrip (all 6 x87 exceptions deliberately triggered and cleared). Cache stride sweep extended to 6 points with stride=128 enabling line=32 vs line=64 inference on Pentium-era parts. Memory diagnostic gains checkerboard (0x55/0xAA) + inverse checkerboard for adjacent-cell coupling faults.</li>
+        <li><strong>M3 (CUA-lite interaction).</strong> Replaces the row-24 status bar with a Norton-style F-key legend (Borland 0x30/0x3F on color, ATTR_INVERSE on mono). F1 opens a help overlay with static nav reference; F3 exits; Esc cancels modal views; arrow keys and PgUp/PgDn navigate the scrollable summary. New <code>/MONO</code> flag forces monochrome rendering (semantic palette: 0x07/0x0F/0x01/0x70/0xF0 for NORMAL/EMPHASIS/DIM/HIGHLIGHT/WARNING) regardless of detected adapter, for users with amber or green phosphor monitors on color cards. EGA/VGA gets <code>AX=1003h BL=00h</code> at startup for 16 background colors. All VRAM writes on CGA gate on a 3DAh retrace-edge poll to eliminate snow.</li>
+        <li><strong>M4 (documentation parity).</strong> Every FAIL/WARN consistency-rule verdict now carries a second clause with possible causes: <em>FAIL: 486DX but FPU not integrated (counterfeit SX relabel?)</em>. <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/CERBERUS.md" rel="noopener">CERBERUS.md</a>, <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/README.md" rel="noopener">README.md</a>, <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/methodology.md" rel="noopener">methodology.md</a>, and <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/consistency-rules.md" rel="noopener">consistency-rules.md</a> all refreshed against shipped state.</li>
+    </ul>
+
+    <p>Deferred to 0.8.1: IEEE-754 edge-case diagnostic (9 operand classes x 5 ops), <code>/CSV</code> output mode, L1 pointer-chase latency probe, L2 detection via larger sweeps, DRAM latency derivation, IIT 3C87 discrimination. Full list in the <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/releases/v0.8.0.md" rel="noopener">v0.8.0 release notes</a>.</p>
 
     <p>CERBERUS is named after the three-headed dog of Greek myth that guarded the gates of the underworld. Each head is one of the three analysis domains:</p>
 
@@ -308,11 +321,11 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">EXE</span>
-            <span class="spec-value">163,922 bytes</span>
+            <span class="spec-value">~167 KB (v0.8.0)</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">DGROUP</span>
-            <span class="spec-value">59 / 64 KB</span>
+            <span class="spec-value">59.5 / 64 KB</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">Toolchain</span>
@@ -320,7 +333,7 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">Host tests</span>
-            <span class="spec-value">201 assertions</span>
+            <span class="spec-value">320 assertions</span>
         </div>
     </div>
 
@@ -371,7 +384,7 @@
         <dd>CheckIt tells you what your hardware says it is. CERBERUS also tells you when what your hardware says disagrees with how it behaves. The consistency engine (eleven rules) catches counterfeit CPUs, remarked chips, thermal throttling, cache disabled in BIOS, TSRs stealing cycles, timing-code bugs, and frankenboard builds where detection claims something the hardware physically cannot do.</dd>
 
         <dt>What&rsquo;s the community upload do?</dt>
-        <dd>If you have mTCP or a packet driver installed, CERBERUS offers to POST your <code>CERBERUS.INI</code> to <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting.com/cerberus/</a> where you can browse all submissions, filter by CPU class, compare runs from the same machine over time, and see how your hardware performs next to other submitted machines. Anonymous by default; add a nickname and note with <code>/NICK:</code> and <code>/NOTE:</code>. Skip with <code>/NOUPLOAD</code>.</dd>
+        <dd>It shipped in v0.7.x and is compiled out of v0.8.0 stock builds pending revival in 0.9.0 with a stack-safe offline fallback. Rebuild with <code>wmake UPLOAD=1</code> for research use. The <a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">server side</a> is production-ready and waiting. When the path returns, <code>CERBERUS.INI</code> posts via mTCP HTGET; you browse submissions, filter by CPU class, and compare runs from the same machine over time. Anonymous by default; nickname + note via <code>/NICK:</code> and <code>/NOTE:</code>.</dd>
 
         <dt>What&rsquo;s in a CERBERUS.INI?</dt>
         <dd>Plain ASCII INI with every detected property, diagnostic verdict, benchmark number, and consistency-rule outcome. Two SHA-1 signatures (hardware identity + per-run). Full format spec at <a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-format.md" rel="noopener">docs/ini-format.md</a>. The format is frozen at <code>ini_format=1</code> with a documented backward-compatibility commitment.</dd>
@@ -391,15 +404,16 @@
 
     <h2>Download</h2>
 
-    <p><code>CERBERUS.EXE</code> is attached to the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.7.0-rc2" rel="noopener">v0.7.0-rc2 release</a> on GitHub. Single-file DOS real-mode executable, 164,050 bytes. Drop it on a FAT16 volume, run from the DOS prompt, read the resulting <code>CERBERUS.INI</code>. Full release notes at the release page.</p>
+    <p><code>CERBERUS.EXE</code> is attached to the <a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.0" rel="noopener">v0.8.0 release</a> on GitHub. Single-file DOS real-mode executable, ~167 KB. Drop it on a FAT16 volume, run from the DOS prompt, read the resulting <code>CERBERUS.INI</code>. Full release notes at the release page.</p>
 
     <p>Known issues and their reopen criteria are tracked in the <a href="https://github.com/tonyuatkins-afk/CERBERUS/issues" rel="noopener">GitHub issues</a>.</p>
 
     <h2>Links</h2>
     <ul class="link-list">
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS" rel="noopener">GitHub: tonyuatkins-afk/CERBERUS</a> (source, hardware databases, consistency rule docs)</li>
-        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.7.0-rc2" rel="noopener">v0.7.0-rc2 release page</a> (CERBERUS.EXE, release notes)</li>
-        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases" rel="noopener">All releases</a> (v0.4.0 through v0.7.0-rc2, release notes per milestone)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases/tag/v0.8.0" rel="noopener">v0.8.0 release page</a> (CERBERUS.EXE, release notes)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/releases/v0.8.0.md" rel="noopener">v0.8.0 release notes</a> (full milestone writeup)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/releases" rel="noopener">All releases</a> (v0.4.0 through v0.8.0, release notes per milestone)</li>
         <li><a href="https://github.com/tonyuatkins-afk/barelybooting-server" rel="noopener">barelybooting-server</a> (companion web app that ingests uploaded CERBERUS.INI runs)</li>
         <li><a href="https://github.com/tonyuatkins-afk/barelybooting-server/releases/tag/v0.1.0" rel="noopener">barelybooting-server v0.1.0 release</a> (production-ready: Docker image, Cloudflare Tunnel deploy guide, red-team hardening)</li>
         <li><a href="https://github.com/tonyuatkins-afk/CERBERUS/blob/main/docs/ini-upload-contract.md" rel="noopener">INI upload contract</a> (API spec between the DOS client and the server)</li>

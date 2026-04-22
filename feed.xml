@@ -5,8 +5,24 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Apr 2026 04:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2026 12:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CERBERUS v0.8.0: trust-first release, four milestones in 36 hours</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-22-cerberus-v080</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-22-cerberus-v080</guid>
+      <pubDate>Wed, 22 Apr 2026 12:00:00 +0000</pubDate>
+      <description>CERBERUS v0.8.0 tagged. First release where every shipped result is real-iron verified. M1 trust-first foundation (Whetstone gated, upload compiled out, Watcom libc teardown hang fixed via _exit bypass, DGROUP audit tool). M2 FPU behavioral fingerprint expanded to 5 axes (FPTAN, rounding-control, precision-control, exception roundtrip) + cache stride=128. M3 CUA-lite interaction (F1 help, F3 exit, Norton legend, /MONO, CGA snow gate, 16-bg color). M4 docs parity + consistency-rule narration. Real-iron captures on BEK-V409 486 DX-2-66 and 386 DX-40 + IIT 3C87. 320 host-test assertions green, ~167 KB binary, DGROUP 59.5/64 KB.</description>
+    </item>
+
+    <item>
+      <title>CERBERUS Part B: barelybooting-server v0.1.0 shipped, production-ready</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-21-barelybooting-server</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-21-barelybooting-server</guid>
+      <pubDate>Tue, 21 Apr 2026 12:00:00 +0000</pubDate>
+      <description>Companion server for CERBERUS upload ingest hit v0.1.0. Flask + SQLite + Jinja, ~700 lines of Python, strict upload contract enforcement. Docker + cloudflared sidecar deploy. Red-teamed: rate limit added, CSP + frame-deny, ASCII-strict, Content-Type whitelist, read-only container with cap_drop ALL and no-new-privileges. 24 host tests green.</description>
+    </item>
 
     <item>
       <title>CERBERUS: ANSI three-head boot intro, issue sweep, Homage Phase 3</title>
