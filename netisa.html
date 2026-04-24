@@ -67,7 +67,7 @@
         }
       },
       "datePublished": "2026-04-11",
-      "dateModified": "2026-04-15",
+      "dateModified": "2026-04-23",
       "image": "https://barelybooting.com/img/og-image.png",
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -135,8 +135,13 @@
     <p class="subtitle">An ISA coprocessor that tries to give old PCs a way to talk to the modern internet.</p>
 
     <div class="status">
-        <strong>Where things stand:</strong> Hardware isn&rsquo;t built yet. Parts are on the way (DigiKey, Amazon, TexElec&hellip; this escalated a bit). The DOS software stack and firmware are working in DOSBox-X. CPLD logic passes its testbench. Real hardware bring-up is next, and I&rsquo;m fully expecting at least one thing to go wrong immediately.
+        <strong>Where things stand:</strong> Parts landed 2026-04-23. Every line of the BOM is now on the bench: the TexElec 8-bit ISA prototype card, ESP32-S3 modules, ATF1508AS CPLDs, passives, connectors, programmer, anti-static everything. The DOS software stack and firmware are working in DOSBox-X. CPLD logic passes its testbench. Bench assembly starts next, and I&rsquo;m fully expecting at least one thing to go wrong immediately.
     </div>
+
+    <figure class="photo">
+        <img src="/img/netisa-parts-arrival.jpg" alt="Photo: NetISA parts arrival on a workbench. A TexElec 8 Bit ISA Prototype Card v1.0 (yellow PCB) sits in the center surrounded by EcoSonic VpCI-125 HP anti-static bags containing electrolytic capacitors, ceramic capacitors, resistors, and diodes, along with DigiKey SCS static shielding bags and a ribbon cable." width="1600" height="1204" loading="lazy">
+        <figcaption>Parts landed. TexElec 8-bit ISA prototype card in the middle, Digikey passives and ESP32-S3 / CPLD modules around it.</figcaption>
+    </figure>
 
     <p>Trying to do modern TLS on an 8088 (or even a 386) is just not going to work well. You either get something painfully slow or something that barely holds together. So instead of forcing the host CPU to do that work, NetISA moves it somewhere else.</p>
 
@@ -192,7 +197,7 @@
 
     <h2>What does not work yet</h2>
     <ul>
-        <li>No physical card assembled</li>
+        <li>No physical card assembled (parts are on the bench; soldering iron is next)</li>
         <li>No validation on real ISA machines</li>
         <li>No real bus timing verification</li>
         <li>No actual TLS session from DOS over the card</li>

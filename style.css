@@ -570,6 +570,31 @@ hr {
     }
 }
 
+/* === Real-world photo (no pixelated rendering) === */
+
+figure.photo {
+    margin: 1.5rem auto 2rem;
+    max-width: 960px;
+}
+
+figure.photo img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    display: block;
+    image-rendering: auto;
+}
+
+figure.photo figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--fg-2);
+    margin-top: 0.4rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
 /* === Navigation === */
 
 nav.site-nav {

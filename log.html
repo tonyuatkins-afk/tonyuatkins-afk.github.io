@@ -109,6 +109,19 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-23-netisa-parts-landed">
+            <div class="log-date">
+                <time datetime="2026-04-23">2026-04-23</time>
+            </div>
+            <h2>NetISA parts landed. Every line of the BOM is on the bench.</h2>
+            <p>The last Digikey box arrived. Every part I told myself to order, DigiKey, Amazon, TexElec, the whole list, is now sitting on the bench. Headline item: the TexElec 8 Bit ISA Prototype Card v1.0 (the yellow through-hole prototyping board with the 62-pin ISA edge connector already routed). Around it: ESP32-S3-WROOM-1U-N8R8 modules, ATF1508AS TQFP-100 CPLDs, the passive set (electrolytic caps, ceramic caps, 1% resistors, Schottky and signal diodes), IC sockets, pin headers, a ribbon cable, anti-static bags and foam for everything, and the programmer kit. Enough redundancy that I can burn one or two parts during bring-up without halting.</p>
+            <figure class="photo">
+                <img src="/img/netisa-parts-arrival.jpg" alt="Photo: NetISA parts arrival on a workbench. A TexElec 8 Bit ISA Prototype Card v1.0 (yellow PCB with ISA edge connector) surrounded by EcoSonic VpCI-125 HP anti-static bags containing electrolytic capacitors, ceramic capacitors, resistors, and diodes, along with DigiKey SCS static shielding bags and a ribbon cable." width="1600" height="1204" loading="lazy">
+                <figcaption>Bench photo: TexElec prototype card in the center, passives and ESP32-S3 / CPLD modules in the surrounding anti-static bags.</figcaption>
+            </figure>
+            <p>The software side has been parked here for a while: DOS TSR running, launcher and config UI working, Cathode browsing real pages against a stub backend, Discord v2 running on simulated channels, Claude client talking to the Anthropic API, ESP32 firmware complete, CPLD logic 160 of 160 testbench tests green. All of that was gated on actually having parts. That gate is now open. Real hardware bring-up is finally unblocked and I am fully expecting at least one thing to go wrong immediately. Bench assembly plan: socket the CPLD, wire the ISA edge to the register file, bring up power rails, flash a first firmware image, then attempt a loopback test from DOSBox-X-parity DOS. After that, iterate until it stops breaking (or at least breaks less). <a href="/netisa.html">Project page</a>, <a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">GitHub repo</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-22-cerberus-v081">
             <div class="log-date">
                 <time datetime="2026-04-22">2026-04-22</time>
