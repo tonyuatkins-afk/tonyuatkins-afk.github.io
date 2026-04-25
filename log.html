@@ -114,6 +114,16 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-25-prior-art">
+            <div class="log-date">
+                <time datetime="2026-04-25">2026-04-25</time>
+            </div>
+            <h2>Prior-art writeup: where NetISA fits in the TLS-on-vintage landscape</h2>
+            <p>Spent some time reading what other people have built before deciding the coprocessor design was the right call. The result is a new "Why a coprocessor" section on this site (the NetISA page above), a matching "Why a Coprocessor?" + "Related Projects" section in the <a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/README.md" rel="noopener">README</a>, and a longer §1.3 "Prior Art and the TLS Floor" subsection in the <a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/netisa-architecture-spec.md#13-prior-art-and-the-tls-floor" rel="noopener">architecture spec</a> with the technical detail.</p>
+            <p>The argument is essentially: the modern internet requires TLS, software TLS on vintage hardware bottoms out somewhere around a 486 (and ships with disabled cert verification and fake entropy to make it fit), Layer-2 WiFi cards like PicoMEM still need TLS to run on the host, and proxies like FrogFind require a second modern machine. NetISA puts an ESP32-S3 with hardware AES/SHA/RSA/ECC, a real TRNG, and 8 MB of PSRAM on the bus and terminates TLS there. An 8088 talks to HTTPS endpoints because it never touches the cryptography.</p>
+            <p>The architecture-spec Appendix A project index gained PicoMEM, PicoPCMCIA, WinGPT, Crypto Ancienne, AmiSSL, Secure Oldies, SEthernet/30, DOStodon, FrogFind, Browservice, WebOne, and Protoweb. While I was at it, swept the rest of the spec for em-dashes (now zero).</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-25-takeover-v1-2-1">
             <div class="log-date">
                 <time datetime="2026-04-25">2026-04-25</time>
