@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>HEARO | Music Player for DOS</title>
-<meta name="description" content="HEARO is a music player for vintage IBM PC compatibles (286+, DOS 3.3+), part of the NetISA suite. Plays MOD/S3M/XM/IT/MIDI/WAV plus streaming via the NetISA card. Supports 24 audio devices from PC Speaker through Gravis UltraSound MAX. Foundation phase complete; compilation pending.">
+<meta name="description" content="HEARO is a music player for vintage IBM PC compatibles (286+, DOS 3.3+), part of the NetISA suite. Plays MOD/S3M/XM/IT/MIDI/WAV plus streaming via the NetISA card. Supports 24 audio devices from PC Speaker through Gravis UltraSound MAX. v1.0 foundation compiles clean under Open Watcom V2.">
 <meta name="author" content="Tony Atkins">
 <meta name="keywords" content="HEARO, DOS music player, vintage PC audio, MOD player, S3M, XM, IT, MIDI player DOS, MT-32, SC-55, Sound Blaster 16, AWE32, Gravis Ultrasound, GUS MAX, AdLib, OPL2, OPL3, Tandy PSG, Covox, Disney Sound Source, Pro Audio Spectrum, Ensoniq SoundScape, ESS AudioDrive, Turtle Beach, hardware detection, FPU detection, NetISA, ESP32 streaming, Bandcamp DOS, SomaFM DOS, ModArchive, OpenWatcom, retro computing, MDA Hercules CGA EGA VGA SVGA, S3 Trio64, Cirrus Logic, Tseng ET4000, Trident, VESA 2.0, 286 386 486 Pentium, MS-DOS, FreeDOS, DOSBox-X, MIT license, open source, barelybooting.com">
 <meta name="robots" content="index, follow">
@@ -94,33 +94,28 @@
 <main>
     <h1>HEARO</h1>
     <p class="tagline">&gt; Music player for vintage DOS PCs.</p>
-    <p class="subtitle">NetISA suite app. 286 minimum. 24 audio devices, MDA through SVGA. Trackers, MIDI, WAV, and chiptunes play on the host. Compressed formats and streaming go through the NetISA card&rsquo;s ESP32 in v1.1. Foundation phase done; nothing built yet because Watcom is not installed on this machine.</p>
+    <p class="subtitle">NetISA suite app. 286 minimum. 24 audio devices, MDA through SVGA. Trackers, MIDI, WAV, and chiptunes play on the host. Compressed formats and streaming go through the NetISA card&rsquo;s ESP32 in v1.1.</p>
 
-    <pre class="ascii-art" aria-hidden="true">
- ██╗  ██╗███████╗ █████╗ ██████╗  ██████╗
- ██║  ██║██╔════╝██╔══██╗██╔══██╗██╔═══██╗
- ███████║█████╗  ███████║██████╔╝██║   ██║
- ██╔══██║██╔══╝  ██╔══██║██╔══██╗██║   ██║
- ██║  ██║███████╗██║  ██║██║  ██║╚██████╔╝
- ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
- NetISA Music Player v1.0            MIT License
-    </pre>
+    <figure>
+        <img src="/img/hearo-boot.png" alt="HEARO boot screen running in DOSBox-X. Big CP437 box-drawing HEARO logo at top in white. Below it the hardware report: CPU Intel 80486DX @ 100 MHz detected; integrated x87 (Intel) ENABLED with unlocks 256-bin FFT, sinc resampling, exact mixing, plasma, tunnel, particle system, fire, wireframe 3D, karaoke vocal removal, parametric EQ, stereo widening, gamma-correct dither, adaptive CORDIC, log-domain effects, 16+ channel mixing, all listed in green. Memory 640K conventional plus 16384K extended detected with library index and visualizer preload unlocked. Video VESA generic 2048KB VRAM detected and ENABLED. Bottom line: Your machine has unlocked 24 features. Press any key to begin." width="720" height="540">
+        <figcaption>HEARO boot screen, 486DX / SVGA configuration in DOSBox-X. 24 of 67 features unlocked.</figcaption>
+    </figure>
 
     <h2>Status</h2>
 
-    <p>2026-04-24. Source tree complete in <code>hearo/</code>. Not compiled. Open Watcom V2 install is the next step.</p>
+    <p>2026-04-25. Compiles clean under Open Watcom V2. <code>HEARO.EXE</code> is 73 KB; the six test programs all build alongside it. Boot screen renders, tests pass.</p>
 
     <p>What is in the tree:</p>
     <ul>
         <li>Eight detection modules: CPU, FPU, video, audio, memory, NetISA, input, orchestrator.</li>
         <li>Unlock matrix, around 70 rules, data driven.</li>
-        <li>Boot screen with the layout below.</li>
+        <li>Boot screen, layout above.</li>
         <li>Four-pane text-mode UI: file browser, playlist, now playing, ASCII spectrum. Pull-down menus, settings panel, Hall viewer.</li>
         <li>Math: 24-iteration adaptive CORDIC, 4 KB bipartite sin/cos/log/exp tables, 256-bit fixed-point accumulator.</li>
         <li><code>HEARO.CFG</code> reader/writer, <code>HEARO.HAL</code> persistent log.</li>
-        <li>Six test programs.</li>
+        <li>Six test programs. <code>TESTBIP</code> reports 13.4 bits sin precision against 1024 reference samples. <code>TESTCORD</code> shows monotonic precision improvement from 8 to 24 iterations. <code>TESTQUIR</code> shows the quire holding overflow that the naive 32-bit sum drops.</li>
         <li>Watcom <code>wmake</code> Makefile.</li>
-        <li>Real-iron probes staged in <code>src/platform/probes.c</code> (Watcom inline asm + INT 86h calls). Gated behind <code>-dHEARO_NOASM</code>; default build leaves the gate on.</li>
+        <li>Real-iron probes staged in <code>src/platform/probes.c</code> (Watcom inline asm + <code>int86()</code> calls). Gated behind <code>-dHEARO_NOASM</code>; the synthetic-stub build is the current default. v1.0.1 drops the gate.</li>
         <li>DOSBox-X screenshot script in <code>hearo/scripts/</code>.</li>
     </ul>
 
@@ -247,7 +242,7 @@ hardware_events=8
     <h2>Roadmap</h2>
 
     <ul>
-        <li><strong>v1.0:</strong> Foundation. Native formats, unlock matrix, boot screen, Hall, text UI. Compilation pending Watcom install.</li>
+        <li><strong>v1.0 (current):</strong> Foundation. Native formats, unlock matrix, boot screen, Hall, text UI. Builds clean.</li>
         <li><strong>v1.1:</strong> Streaming. ESP32 path live, internet radio, Bandcamp, ModArchive.</li>
         <li><strong>v1.2:</strong> Library. MusicBrainz tags, scrobbling, cover art, lyrics, ReplayGain, smart playlists.</li>
         <li><strong>v1.3:</strong> Visuals. Demoscene visualizers, skins, karaoke, EQ, graphical tiers (320, 640, 800, 1024).</li>

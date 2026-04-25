@@ -94,7 +94,12 @@
 <main>
     <h1>CHIME</h1>
     <p class="tagline">&gt; Network time sync for DOS.</p>
-    <p class="subtitle">NetISA suite app. Asks the network for the current time, sets the DOS clock. v1.0 uses HTTPS <code>HEAD</code> and parses the response <code>Date:</code> header. SNTP and NTS over UDP land in v1.1/v1.2 once NetISA exposes UDP. Foundation phase done; not compiled yet.</p>
+    <p class="subtitle">NetISA suite app. Asks the network for the current time, sets the DOS clock. v1.0 uses HTTPS <code>HEAD</code> and parses the response <code>Date:</code> header. SNTP and NTS over UDP land in v1.1/v1.2 once NetISA exposes UDP.</p>
+
+    <figure>
+        <img src="/img/chime-prompt.png" alt="CHIME 1.0 running in DOSBox-X with the /STUBNET flag. White-on-black terminal output reads: CHIME 1.0.0; NetISA: stub mode; Server: time.cloudflare.com (HTTPS HEAD); Time: 2026-04-25 14:30:42 UTC; Now: 2026-04-25 08:06:28 (DOS clock); Delta: +23054 seconds; Write to DOS clock? [Y/n]." width="720" height="540">
+        <figcaption>CHIME report and confirmation prompt. /STUBNET activates the synthetic backend so the captured frame is reproducible.</figcaption>
+    </figure>
 
     <pre class="ascii-art" aria-hidden="true">
 CHIME 1.0
@@ -108,7 +113,7 @@ Write to DOS clock? [Y/n]
 
     <h2>Status</h2>
 
-    <p>2026-04-24. Source tree complete in <code>chime/</code>, 18 files. Not compiled. Open Watcom V2 install is the next step.</p>
+    <p>2026-04-25. Compiles clean under Open Watcom V2. <code>CHIME.EXE</code> is 28 KB. <code>TESTTIME</code> reports 21 of 21 parser and stub-query assertions green.</p>
 
     <p>What is in the tree:</p>
     <ul>

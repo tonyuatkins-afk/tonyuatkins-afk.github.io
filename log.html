@@ -111,6 +111,34 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-25-hearo-chime-first-compile">
+            <div class="log-date">
+                <time datetime="2026-04-25">2026-04-25</time>
+            </div>
+            <h2>HEARO and CHIME compile clean. First screenshots.</h2>
+            <p>Open Watcom V2 installed. First <code>wmake</code> on HEARO surfaced the expected handful of issues, all fixed in one sweep. Same for CHIME. Both binaries now build clean and run under DOSBox-X.</p>
+
+            <figure>
+                <img src="/img/hearo-boot.png" alt="HEARO boot screen captured in DOSBox-X. CP437 box-drawing HEARO logo at top, hardware report below with right-justified ENABLED in green for the 80486DX FPU and SVGA, indented unlock list of 16 FPU-gated visualizers and DSP features, plus a memory and library line. Bottom: Your machine has unlocked 24 features. Press any key to begin." width="720" height="540">
+                <figcaption>HEARO boot screen, first capture. 486DX / SVGA / synthetic-stub detection. 24 of 67 features unlocked.</figcaption>
+            </figure>
+
+            <p><strong>Build fixes.</strong> DGROUP overflowed 64 K by ~10 KB because of all the unlock-rule strings, menu definitions, and status-output format strings; <code>-zc</code> in the Makefile pushes const data into the code segment and DGROUP fits. <code>bipartite_sin</code> had a sign-flip overflow when both A and B table entries were near the s16 max, plus a residual-table design that was wrong; replaced with linear interpolation between adjacent coarse entries plus a clamp. Test results are now ~13 bits sin precision against 1024 reference samples. Removed a duplicate <code>dos_get_date</code> stub from <code>detect.c</code>, fixed a nested-comment in <code>probes.c</code> (<code>*.c</code> patterns inside a <code>/* ... */</code> block confused the lexer), trimmed a couple of unused statics. Test programs were pulling in <code>hearo.obj</code>'s <code>main()</code>; split the Makefile into <code>LIB_OBJS</code> + the main-bearing object so test programs link only the library half.</p>
+
+            <p><strong>HEARO_NOASM scope narrowed.</strong> The flag was originally a single gate covering every Watcom-specific facility (display VRAM writes, INT 21h calls, BIOS tick, file system probes, inline asm). When <code>-dHEARO_NOASM</code> was on, the boot screen wrote to an in-memory <code>emu_buffer</code> instead of real B800:0000 video memory, so the first capture attempt showed only the autoexec output. Display, DOS calls, and file-system access now always use the real Watcom path. <code>HEARO_NOASM</code> only gates the inline-asm probes in <code>src/platform/probes.c</code>. v1.0.1 will drop that gate too.</p>
+
+            <p><strong>Test results from the headless DOSBox-X 386 conf.</strong> <code>TESTCORD</code>: precision climbs monotonically with iteration count from 8 to 24 as expected; max-err-sin goes from 475 at 8 iters down to 5 at 16 iters which is the Q16.16 fixed-point precision floor. <code>TESTBIP</code>: max err 3 across 1024 sample points (~13 bits accuracy). <code>TESTQUIR</code>: naive 32-bit sum overflows to -462758661, the quire low word matches naive but the high word holds the overflow carry across the full 256-bit state. <code>TESTDET</code>: correctly identifies a Workstation-tier profile (486DX + integrated FPU + VESA SVGA + 16 MB XMS) and produces a stable FNV-1a fingerprint. <code>HEARO /VERSION</code> and <code>HEARO /UNLOCKS</code> print the expected matrix. <code>CHIME TESTTIME</code>: 21 of 21 parser and stub-query assertions green.</p>
+
+            <figure>
+                <img src="/img/chime-prompt.png" alt="CHIME 1.0 running in DOSBox-X with the /STUBNET flag. White-on-black terminal output: CHIME 1.0.0; NetISA: stub mode; Server: time.cloudflare.com (HTTPS HEAD); Time: 2026-04-25 14:30:42 UTC; Now: 2026-04-25 08:06:28 (DOS clock); Delta: +23054 seconds; Write to DOS clock? [Y/n]." width="720" height="540">
+                <figcaption>CHIME report + confirmation prompt. /STUBNET returns a canned timestamp so the captured frame is deterministic.</figcaption>
+            </figure>
+
+            <p><strong>Screenshot toolkit.</strong> <code>hearo/scripts/screenshot.ps1</code> drives DOSBox-X to the boot screen and saves a PNG via the existing <code>capture.ps1</code> WinAPI tool. Same toolkit shipped in <code>chime/scripts/</code>. The <code>-fastlaunch</code> flag skips the BIOS logo and welcome banner that otherwise overlay the captured frame. Both screenshots reproduce deterministically against the synthetic-stub backends regardless of host time or hardware.</p>
+
+            <p>What is next: drop <code>-dHEARO_NOASM</code> from the Makefile and exercise the Watcom inline-asm probes in <code>src/platform/probes.c</code> under DOSBox-X. After that, run on the bench iron. <a href="/hearo.html">HEARO project page</a>, <a href="/chime.html">CHIME project page</a>, <a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">source on GitHub</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-24-chime-foundation">
             <div class="log-date">
                 <time datetime="2026-04-24">2026-04-24</time>
