@@ -120,7 +120,7 @@
         </figure>
     </div>
 
-    <p>Two known v1.0 detection bugs visible in these captures. The Maximum tier reports 80386DX instead of Pentium because <code>cpu_eflags_can_toggle</code> (the EFLAGS bit-21 toggle test that distinguishes 486+ from Pentium+) is stubbed in v1.0; the FLAGS bit walk in <code>cpu_flag_test</code> can only climb past Stage 2 with that probe live. The Standard tier reports only PC Speaker even with Sound Blaster Pro 2 emulated, because the BLASTER environment variable parser plus the DSP probe sequence misses one of the SB Pro 2 paths under DOSBox-X's emulation. Both are tracked for v1.0.1.</p>
+    <p>One detection bug still visible: the Standard tier shows only PC Speaker even with Sound Blaster Pro 2 emulated and BLASTER set, because the SB DSP-3.x probe sequence misses one path under DOSBox-X. Tracked for v1.0.1.</p>
 
     <h2>Status</h2>
 
@@ -136,7 +136,7 @@
         <li><code>HEARO.CFG</code> reader/writer, <code>HEARO.HAL</code> persistent log.</li>
         <li>Six test programs. <code>TESTBIP</code> reports 13.4 bits sin precision against 1024 reference samples. <code>TESTCORD</code> shows monotonic precision improvement from 8 to 24 iterations. <code>TESTQUIR</code> shows the quire holding overflow that the naive 32-bit sum drops.</li>
         <li>Watcom <code>wmake</code> Makefile.</li>
-        <li>Real-iron probes staged in <code>src/platform/probes.c</code> (Watcom inline asm + <code>int86()</code> calls). Gated behind <code>-dHEARO_NOASM</code>; the synthetic-stub build is the current default. v1.0.1 drops the gate.</li>
+        <li>Real probes in <code>src/platform/probes.c</code>: Watcom <code>#pragma aux</code> with <code>.286</code> / <code>.386</code> / <code>.586</code> directives for FPU presence and EFLAGS toggle and CPUID, plus <code>int86()</code> calls for INT 10h/12h/2Fh/33h/67h. Default build now compiles them in. <code>HEARO_NOASM</code> gate stays for users who want synthetic stubs.</li>
         <li>DOSBox-X screenshot script in <code>hearo/scripts/</code>.</li>
     </ul>
 
