@@ -9,19 +9,19 @@
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
-      <title>CHIME: foundation phase complete</title>
+      <title>CHIME: foundation phase done</title>
       <link>https://barelybooting.com/log.html#entry-2026-04-24-chime-foundation</link>
       <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-24-chime-foundation</guid>
       <pubDate>Fri, 24 Apr 2026 23:00:00 +0000</pubDate>
-      <description>CHIME is the second NetISA suite app to leave the design phase, landing the same day as HEARO's foundation. Same template, much smaller scope. One job: ask the network what time it is, tell DOS. v1.0 uses HTTPS HEAD against time-anchor URLs (Cloudflare, Google, worldtimeapi), parses the RFC 7231 Date header, sets DOS via INT 21h with CMOS RTC write-through. SNTP/NTS over UDP arrive in v1.1/v1.2 once NetISA exposes UDP datagrams. 18 source files in chime/ following the same template HEARO ships. Compilation pending Open Watcom V2 install.</description>
+      <description>Second NetISA suite app out of design phase, landed the same day as HEARO. Asks the network for the current time, sets the DOS clock. v1.0 uses HTTPS HEAD and parses the RFC 7231 Date header. Sets DOS via INT 21h with a direct CMOS RTC write-through. SNTP and NTS over UDP land in v1.1/v1.2 once NetISA exposes UDP. 18 source files in chime/. Not compiled yet; Open Watcom V2 not installed.</description>
     </item>
 
     <item>
-      <title>HEARO: foundation phase complete</title>
+      <title>HEARO: foundation phase done</title>
       <link>https://barelybooting.com/log.html#entry-2026-04-24-hearo-foundation</link>
       <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-24-hearo-foundation</guid>
       <pubDate>Fri, 24 Apr 2026 22:00:00 +0000</pubDate>
-      <description>HEARO is the next NetISA suite app: a music player for IBM PC compatibles (286+, DOS 3.3+) built around recognition density. Foundation phase complete in one session. All eleven spec phases plus three polish items: 313-line design + 681-line soundcard reference, eight-module detection engine covering 24 audio devices (PC Speaker through GUS MAX, AdLib through AWE64, MT-32 through SC-88 Pro), data-driven unlock matrix with 70+ features, boot screen with CP437 logo and ENABLED report and unlock count and anniversary line, four-pane interactive UI (file browser + playlist + now-playing + ASCII spectrum) with menus + Settings panel + Hall viewer, novel arithmetic library (24-iter adaptive CORDIC, bipartite tables, 256-bit software quire), INI config + persistent Hall + dormant-feature whisper. v1.0.1 work staged in src/platform/probes.c with Watcom #pragma aux + int86 bodies for every probe extern, gated behind -dHEARO_NOASM. DOSBox-X screenshot toolkit ready. Compilation pending Open Watcom V2 install.</description>
+      <description>Music player for IBM PC compatibles (286+, DOS 3.3+). Next NetISA suite app out of design phase. All eleven spec phases plus three polish items in hearo/: eight-module detection engine covering 24 audio devices, data-driven unlock matrix with around 70 rules, boot screen with CP437 logo and ENABLED report, four-pane text-mode UI (file browser + playlist + now-playing + ASCII spectrum), math library (24-iter adaptive CORDIC + bipartite tables + 256-bit accumulator), INI config + persistent Hall, six test programs, Watcom wmake Makefile. v1.0.1 work staged in src/platform/probes.c with Watcom #pragma aux + int86 bodies for every probe extern, gated behind -dHEARO_NOASM. Not compiled yet; Open Watcom V2 not installed.</description>
     </item>
 
     <item>
