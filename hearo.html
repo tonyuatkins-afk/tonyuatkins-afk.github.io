@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12181a">
+<title>HEARO | DOS Music Player That Notices Your Hardware</title>
+<meta name="description" content="HEARO is a music player for vintage IBM PC compatibles (286+, DOS 3.3+) built around recognition density: every detected expansion unlocks specific features the user can see. 24+ audio devices supported, from PC Speaker to GUS MAX. Six video tiers from MDA text to 1024x768 SVGA. A Hall of Recognition that records your machine's hardware journey. Foundation in progress as part of the NetISA suite.">
+<meta name="author" content="Tony Atkins">
+<meta name="keywords" content="HEARO, DOS music player, vintage PC audio, retro music player, MOD player DOS, S3M player, XM player, MIDI player DOS, MT-32, SC-55, Sound Blaster 16, AWE32, Gravis Ultrasound, GUS MAX, AdLib, OPL2, OPL3, Tandy PSG, Covox, Disney Sound Source, Pro Audio Spectrum, Ensoniq SoundScape, ESS AudioDrive, Turtle Beach, hardware detection, FPU recognition, IIT 2C87, Cyrix FasMath, ULSI 387, NetISA, ESP32 streaming, Bandcamp DOS, SomaFM DOS, Internet Archive, ModArchive, OpenWatcom, retro computing, vintage computing, recognition density, Hall of Recognition, unlock system, software quire, adaptive CORDIC, bipartite tables, stochastic computing, demoscene visualizer, plasma tunnel particle fire, MDA Hercules CGA EGA VGA SVGA, S3 Trio64, Cirrus Logic, Tseng ET4000, Trident, Paradise, ATI, Oak, Chips and Tech, VESA 2.0, 286 286 386 486 Pentium, MS-DOS, FreeDOS, DOSBox-X, 86Box, PCem, MIT license, open source, barelybooting.com">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://barelybooting.com/hearo.html">
+<link rel="alternate" type="application/rss+xml" title="Barely Booting Build Log" href="/feed.xml">
+
+<!-- Open Graph -->
+<meta property="og:title" content="HEARO | DOS Music Player That Notices Your Hardware">
+<meta property="og:description" content="A DOS music player whose north star is recognition density: every detected expansion in your vintage PC unlocks specific features you can see. 24+ audio devices, 6 video tiers, FPU brand recognition, Hall of Recognition timeline. Foundation phase complete.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://barelybooting.com/hearo.html">
+<meta property="og:image" content="https://barelybooting.com/img/og-image.png">
+<meta property="og:image:alt" content="HEARO music player for vintage DOS PCs.">
+<meta property="og:site_name" content="Barely Booting">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HEARO | DOS Music Player That Notices Your Hardware">
+<meta name="twitter:description" content="A DOS music player whose north star is recognition density. 24+ audio devices, 6 video tiers, FPU brand recognition, Hall of Recognition. Open source.">
+<meta name="twitter:image" content="https://barelybooting.com/img/og-image.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://barelybooting.com/hearo.html#app",
+      "name": "HEARO",
+      "description": "A DOS-native music player for vintage IBM PC compatibles built around recognition density: every detected hardware expansion unlocks specific features the user can see. Supports 24+ audio devices from PC Speaker through Gravis Ultrasound MAX, six video tiers from MDA text to SVGA 1024x768x256, and a Hall of Recognition that records the machine's hardware journey across boots. Native decoders for MOD/S3M/XM/IT/MIDI/WAV/SID/AY/NSF/GBS/SPC; compressed formats (MP3/FLAC/Opus/Vorbis/AAC) via the NetISA card's ESP32-S3 coprocessor. Foundation phase complete (Phase 1-11 + polish), compilation pending bench iron.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "MS-DOS",
+      "softwareVersion": "1.0.0-foundation",
+      "author": {
+        "@type": "Person",
+        "name": "Tony Atkins",
+        "url": "https://barelybooting.com/about.html"
+      },
+      "license": "https://opensource.org/licenses/MIT",
+      "url": "https://barelybooting.com/hearo.html",
+      "softwareRequirements": "IBM PC/AT or compatible, 80286 or later, 1MB RAM minimum, MDA or better, MS-DOS 3.3+",
+      "programmingLanguage": "C",
+      "codeRepository": "https://github.com/tonyuatkins-afk/NetISA",
+      "isPartOf": {
+        "@type": "SoftwareApplication",
+        "name": "NetISA suite"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://barelybooting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "HEARO",
+          "item": "https://barelybooting.com/hearo.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Will HEARO run on my 286?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. 80286 with 1 MB RAM, MDA video, and a PC Speaker is the hard floor. The text-mode UI works on every adapter from MDA through SVGA. Real-mode HEARO.EXE ships alongside a 32-bit HEAROXM.EXE for 386+ machines that prefer the protected-mode build. No 386+ instructions leak into the 286 code path."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What audio devices does HEARO support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Twenty-four devices and counting: PC Speaker (with RealSound PWM), Tandy and PCjr PSG, Covox, Disney Sound Source, AdLib (OPL2), AdLib Gold (OPL3 + 12-bit DAC), Sound Blaster 1.x through SB16/AWE32/AWE64, Gravis UltraSound Classic/MAX/ACE/PnP, MPU-401 with SysEx-identified MT-32, CM-32L, SC-55, SC-55mkII, SC-88, SC-88 Pro, DB50XG, SCB-55, plus Ensoniq SoundScape, Pro Audio Spectrum 16, ESS AudioDrive, and Turtle Beach MultiSound. PC Speaker is listed deadpan in the same column as GUS MAX. All probe protocols are documented in the soundcard reference doc."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is recognition density?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The single design principle behind HEARO. Every interaction should give the user new information about how HEARO sees their specific hardware. The boot screen names every detected component. The settings panel lists every locked feature next to the requirement that would unlock it. The Hall of Recognition records first-detection dates so the machine accumulates a timeline. When you install an FPU from eBay, the next boot screen leads with 'New since last boot: IIT 2C87-12 detected. 6 features unlocked.' Most software treats vintage PCs as generic. HEARO does not."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the Unlock System work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every recognized expansion unlocks specific features that are visible in the UI. An FPU unlocks the 256-bin FFT spectrum, sinc resampling, plasma and tunnel and fire visualizers, parametric EQ, software quire (256-bit accumulator) for bit-exact mixing, adaptive-precision CORDIC, log-domain effects, and FPU brand recognition for IIT, Cyrix FasMath, ULSI, and AMD parts. A Gravis Ultrasound unlocks 32-voice hardware mixing. GUS MAX adds line-in and 16-bit codec features. AWE32/64 unlocks SoundFont loading. MT-32 detection unlocks LA synthesis mode. SC-55 unlocks SoundCanvas mode. The unlock matrix is data-driven: each rule is one row in a table with a name, description, requirement string, and a pure-function check against the master hardware profile."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Hall of Recognition?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A persistent text file (HEARO.HAL) that records the user's hardware journey. Each boot, HEARO compares detected hardware against the previous fingerprint. New components get appended with their first-seen date. Lifetime statistics accumulate: hours played, tracks played, unique tracks, boot count, peak features unlocked, hardware events. The Hall reads like a logbook of your retro computing journey. On the anniversary of the first detection, the boot screen shows a celebratory line. The file is plain text so the user can grep, edit, and back it up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does HEARO play modern compressed formats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Native formats (MOD, S3M, XM, IT, MIDI, WAV, SID, AY, NSF, GBS, SPC) decode on the host CPU. Compressed formats (MP3, FLAC, Opus, Vorbis, AAC, WMA, ALAC) and streaming protocols are offloaded to the ESP32-S3 on the NetISA card, which delivers raw PCM back to the host over the ISA bus. The format honesty principle: HEARO does not ship an MP3 decoder that 'technically runs on a 286' at 1 fps. If the host cannot do it well, the ESP32 does it; if the ESP32 is not present, the format is greyed out in the file browser. Streaming features are v1.1+ and require the NetISA hardware path to be live."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a Windows version?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. HEARO is DOS real-mode only (HEARO.EXE) plus a 32-bit DPMI variant for 386+ machines (HEAROXM.EXE). The text-mode UI uses direct VRAM writes at B800:0000 (color) or B000:0000 (monochrome). Run it under DOSBox-X or 86Box if you do not have real vintage hardware."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does HEARO need a NetISA card?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It does not, for v1.0 native playback. HEARO runs entirely on the host CPU for MOD, S3M, XM, IT, MIDI, WAV, SID, AY, NSF, GBS, and SPC. The NetISA card is required for streaming features (Internet radio, Bandcamp, SomaFM, Internet Archive, ModArchive) and compressed formats decoded on the ESP32. v1.1 adds the streaming path; v1.0 ships native-only. A /STUBNET command-line flag synthesises a present card so streaming code paths can be exercised on a workstation without the hardware."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Barely Booting home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="26" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/>
+                <circle cx="7" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="7" cy="25" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="25" r="1.1" fill="currentColor"/>
+                <text x="16" y="21" font-family="'Courier New', ui-monospace, monospace" font-size="12" font-weight="bold" fill="currentColor" text-anchor="middle" letter-spacing="-0.5">BB</text>
+            </svg>
+            <span>BARELY BOOTING<span class="cursor">_</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/netisa.html">NetISA</a>
+            <a href="/cerberus.html">CERBERUS</a>
+            <a href="/hearo.html" class="active">HEARO</a>
+            <a href="/takeover.html">TAKEOVER</a>
+            <a href="/log.html">Log</a>
+            <a href="/about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <h1>HEARO</h1>
+    <p class="tagline">&gt; Your machine is the protagonist.</p>
+    <p class="subtitle">A DOS-native music player whose north star is recognition density. Every expansion in your specific PC, every chip you remember installing, gets noticed and celebrated. Twenty-four audio devices supported, six video tiers, FPU brand recognition, a persistent Hall of Recognition that records your machine&rsquo;s hardware journey across boots. Most software treats vintage PCs as generic. HEARO does not.</p>
+
+    <pre class="ascii-art" aria-hidden="true">
+ ██╗  ██╗███████╗ █████╗ ██████╗  ██████╗
+ ██║  ██║██╔════╝██╔══██╗██╔══██╗██╔═══██╗
+ ███████║█████╗  ███████║██████╔╝██║   ██║
+ ██╔══██║██╔══╝  ██╔══██║██╔══██╗██║   ██║
+ ██║  ██║███████╗██║  ██║██║  ██║╚██████╔╝
+ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
+ NetISA Music Player v1.0            MIT License
+    </pre>
+
+    <div class="status">
+        <strong>Where things stand:</strong> Foundation phase complete as of 2026-04-24. All 11 spec phases landed plus three polish items: Phase 1 (repository scaffold + 994-line design + soundcard reference docs), Phase 2 (<code>src/hearo.h</code> verbatim), Phase 3 (eight-module detection engine covering CPU class + clock + nominal, FPU type + brand probe, video adapter + chipset fingerprint + VESA, all 24 audio devices with full BLASTER/ULTRASND parsing, conventional/XMS/EMS memory, NetISA card, mouse/joystick), Phase 4 (data-driven unlock matrix with every <code>UL_*</code> ID), Phase 5 (boot screen with the celebration logo, ENABLED report, unlock count, anniversary line), Phase 6 (interactive UI: four-pane layout with file browser, playlist, now-playing, ASCII spectrum, plus pull-down menus and Settings panel and Hall viewer), Phase 7 (novel arithmetic: 24-iteration adaptive CORDIC, 4 KB bipartite sin/cos/log/exp tables, 256-bit software quire accumulator), Phase 8 (INI config + persistent Hall + dormant-feature whisper system), Phase 9 (six test programs), Phase 10 (Watcom <code>wmake</code> Makefile), Phase 11 (<code>main()</code> entry with /VERSION, /UNLOCKS, /HALL, /SAFE, /STUBNET, /REDETECT, /BENCHMARK, /VIDEO=xxx flags). Three polish items shipped on top: real CP437 box-drawing logo, real DOS <code>_dos_findfirst</code> file browser with music-extension filter, anniversary date-diff message. v1.0.1 work staged: <code>src/platform/probes.c</code> with Watcom <code>#pragma aux</code> + <code>int86()</code> bodies for every probe extern (gated behind <code>-dHEARO_NOASM</code>; remove that flag to wire real iron). Spectrum visualizer has a <code>spectrum_feed()</code> hook ready for the eventual decoder. DOSBox-X screenshot driver in <code>hearo/scripts/</code> ready to capture the first PNG once <code>wmake</code> runs. <strong>Compilation pending bench iron with Open Watcom V2.</strong>
+    </div>
+
+    <h2>The unlock system</h2>
+
+    <p>The structural heart of HEARO. Every recognized expansion unlocks specific features that are visible in the UI. The matrix is data-driven: each rule is one row in a table with a name, a description, a requirement string for the locked state, and a pure-function check against the master <code>hw_profile_t</code>. Adding a feature is one line.</p>
+
+    <p>Sixty-plus features today across six categories:</p>
+
+    <ul>
+        <li><strong>FPU unlocks (16):</strong> 256-bin FFT spectrum analyzer, sinc resampling for streaming, 16+ channel tracker mixing with ramping, plasma + tunnel + particle + fire + wireframe visualizers, karaoke vocal removal, 10-band parametric EQ, convolution reverb (Pentium-class), stereo widening, gamma-correct album art dithering, software quire for bit-exact mixing, adaptive-precision CORDIC, log-domain effects, FPU brand recognition for Intel, IIT 2C87, Cyrix FasMath, ULSI, and AMD parts.</li>
+
+        <li><strong>Audio unlocks (33):</strong> RealSound PWM (PC Speaker), Tandy/PCjr PSG, Covox 8-bit DAC, Disney Sound Source FIFO, OPL2 and OPL3 MIDI, AWE64 CQM FM emulation, Sound Blaster PCM tiers (1.x mono, 2.0 auto-init, Pro/Pro 2 stereo, SB16 16-bit, SB16 ASP for QSound, full duplex on DSP 4.13+), Gravis UltraSound 32-voice hardware mixing + DRAM tier + GUS MAX line-in + CS4231 codec, Ensoniq wavetable + DAC + filters, AWE32/64 SoundFont loading + EMU8000 DSP + 32 voices + SIMM RAM, MT-32 LA mode, SoundCanvas mode (SC-55+), Yamaha XG mode, AdLib Gold 12-bit DAC and surround, MPU-401 + WaveBlaster daughterboard, Pro Audio Spectrum 16, ESS AudioDrive ESFM, Turtle Beach 56001 DSP.</li>
+
+        <li><strong>Video unlocks (6):</strong> SVGA 1024x768x256 album-art panel, 800x600 and 640x480 SVGA tiers, 256-color cover art, high-resolution art on 1MB+ VRAM, chipset-specific accelerated blits when the SVGA chip is recognized.</li>
+
+        <li><strong>Memory unlocks (2):</strong> Full library indexing for 100K+ tracks at 4MB+ XMS; all visualizers preloaded at 8MB+ XMS.</li>
+
+        <li><strong>Network unlocks (5, NetISA-gated):</strong> Streaming via the ESP32 path, scrobbling, cloud library, Bluetooth output, AirPlay target.</li>
+
+        <li><strong>FPU-less exclusives (2):</strong> Stochastic-computing particle visualizer (probability-based, no multiplications), 64-bin bipartite-table FFT spectrum. These are not consolation prizes. They run faster on a 386SX without an FPU than the FPU path runs on a 287. They are first class.</li>
+    </ul>
+
+    <h2>The boot screen</h2>
+
+    <p>Every boot shows hardware detection with ENABLED highlights and unlock counts. The last line: <em>&ldquo;Your machine has unlocked NN features.&rdquo;</em> On the second and later boots, the screen leads with any new hardware detected since the previous boot. On the anniversary of the first detection of the machine fingerprint, the boot screen shows a celebratory line. The full layout is right-justified status words, indented unlock comma-lists, and a thin rule above the closing prompt.</p>
+
+    <pre class="ascii-art" aria-hidden="true">
+ CPU      Intel 80486DX2 @ 66 MHz                  detected
+          Math coprocessor integrated               ENABLED
+            Unlocked: 256-bin FFT, sinc resampling,
+                      exact mixing, plasma, tunnel
+
+ Memory   640K conventional + 15360K extended       detected
+            Unlocked: full library index, preload
+
+ Video    S3 Trio64, 2MB VRAM                       detected
+          VESA 2.0 @ 1024x768x256                   ENABLED
+
+ Audio    Gravis UltraSound MAX (GF1, CS4231)       detected
+            at 240h, IRQ 11, DMA 1, 1024KB DRAM
+            32-voice hardware mixing                ENABLED
+          Roland MT-32 via MPU-401 at 330h          detected
+            LA synthesis, 32 partials               ENABLED
+          PC Speaker (PIT ch2)                       detected
+
+ NetISA   not found
+
+ ───────────────────────────────────────────────────────────
+ Your machine has unlocked 31 features. Press any key to begin.
+    </pre>
+
+    <p>PC Speaker is listed deadpan in the same column as GUS MAX. RealSound PWM is a feature, not a fallback.</p>
+
+    <h2>Hardware detection</h2>
+
+    <p>The detection engine is eight modules, each a small self-contained probe so a misbehaving one can be disabled with a single line change. Detection runs in dependency order at startup and produces the master <code>hw_profile_t</code> that every other subsystem reads.</p>
+
+    <ul>
+        <li><strong>CPU.</strong> FLAGS bit walk to classify 8086/186/286/386+, then <code>CPUID</code> when available for family/model/stepping. PIT-channel-2 timing measures actual core clock; we match against the period-nominal list (4.77, 8, 10, 12, 16, 20, 25, 33, 40, 50, 66, 75, 90, 100, 120, 133 MHz) and flag overclocked when the measurement runs more than 10% above the nearest nominal.</li>
+
+        <li><strong>FPU.</strong> <code>FNINIT</code>/<code>FNSTSW</code> for presence, control-word width to distinguish 287-class from 387+, then brand-specific probes: IIT 2C87 mirrors a register at port 0E0Ch; Cyrix FasMath responds to a CCR3 read at port 22h/23h; integrated FPUs follow the CPU vendor.</li>
+
+        <li><strong>Video.</strong> MDA at 3B4h vs CGA at 3D4h selects the base class. Hercules detection by 3BAh status-port toggle. EGA via INT 10h AH=12h BL=10h, VGA via INT 10h AX=1A00h, VESA via INT 10h AX=4F00h (with VBE2 prestamp for 2.0+ extras). Chipset fingerprint walks vendor-specific magic-register reads in turn: S3 (CR30 after 38h/39h unlock), Cirrus Logic (3C4h:06 = 12h unlock then 1Fh ID), Trident (3C4h:0Bh), Tseng ET4000 (3CDh write/readback), Paradise (3CEh:0Fh = 05h unlock then 0Bh ID), Oak (3DEh sentinel), Chips &amp; Tech (3D6h sentinel).</li>
+
+        <li><strong>Audio.</strong> The heaviest module. Always sets PC Speaker. Probes Tandy via BIOS signature at F000:FFFEh + port C0h. Walks LPT1 for Disney FIFO behavior, then Covox loopback. AdLib timer test at port 388h, with OPL3 mirror probe at base+02h/03h to distinguish OPL2 from OPL3 from AdLib Gold (OPL3 + CT1703 mixer at 38Ch). Sound Blaster family parses BLASTER environment, resets DSP, reads version: <code>1.x</code> &rarr; SB 1.x, <code>2.x</code> &rarr; SB 2.0, <code>3.x</code> &rarr; SB Pro or Pro 2 by OPL3 presence, <code>4.x</code> &rarr; SB16, plus EMU8000 probe at base+400h to identify AWE32, plus OPL3-timer-failure to identify AWE64 with CQM, plus mixer-index 83h for SB16 ASP. GUS family parses ULTRASND, resets GF1 register 4Ch at base+103h, walks DRAM, probes CS4231 codec at base+10Ch for GUS MAX. MPU-401 reset/UART-mode handshake at 330h/300h/320h/340h. Ensoniq SoundScape via OTTO chip ID. Pro Audio Spectrum 16 via mixer signature 0x50. ESS AudioDrive via SB DSP command E7h returning ESS chip ID. Turtle Beach via 56001 host port at 250h/260h/290h/320h.</li>
+
+        <li><strong>Memory.</strong> Conventional via INT 12h. XMS via INT 2Fh AX=4300h test, then 4310h for entry point, then AH=08h call gate. EMS via INT 67h AH=42h.</li>
+
+        <li><strong>NetISA.</strong> Card signature read at base ports 300h/320h/340h/280h, looking for <code>NI</code> as the first two bytes of the read-only ID register. <code>/STUBNET</code> command-line flag synthesises a present card.</li>
+
+        <li><strong>Input.</strong> Mouse via INT 33h AX=0000h. Joystick via port 0x201 high-nibble pattern.</li>
+
+        <li><strong>Orchestrator.</strong> Calls subsystems in dependency order, computes a 32-bit FNV-1a fingerprint over the stable parts of the profile, stamps the detection date.</li>
+    </ul>
+
+    <p>Full probe protocols, port addresses, capability tables, and pitfalls for every device live in <a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/hearo-soundcard-reference.md" rel="noopener">the soundcard reference doc</a>.</p>
+
+    <h2>Six video tiers</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Workstation</span>
+            <span class="spec-value">SVGA 1024x768x256</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Enhanced</span>
+            <span class="spec-value">SVGA 800x600x256</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Standard</span>
+            <span class="spec-value">SVGA 640x480x256</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Classic</span>
+            <span class="spec-value">VGA 320x200x256</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Legacy</span>
+            <span class="spec-value">EGA 640x350x16</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Minimal</span>
+            <span class="spec-value">MDA / Hercules text</span>
+        </div>
+    </div>
+
+    <p>Every tier from MDA text to 1024x768x256 SVGA gets a real, deliberately designed UI. No tier is a scaled-down version of another. The MDA UI is a good MDA UI, not a bad VGA UI. The text-mode interactive UI (Minimal) is the v1.0 deliverable; graphical tiers are scaffolded but rendered placeholder until v1.3.</p>
+
+    <h2>The Hall of Recognition</h2>
+
+    <p>Persistent text file (<code>HEARO.HAL</code>). One event per line: <code>YYYY-MM-DD CATEGORY: text</code>. A small <code>[stats]</code> section accumulates lifetime tallies. Plain text so the user can grep, edit, back up. Each boot, HEARO loads the file, snapshots the previous fingerprint, runs detection, compares, and appends new events.</p>
+
+    <pre class="ascii-art" aria-hidden="true">
+[header]
+first=2026-04-24
+fingerprint=A7C3B291
+
+[events]
+2026-04-24 CPU:    Intel 80486DX2 @ 66 MHz
+2026-04-24 FPU:    Integrated x87 (Intel)
+2026-04-24 VIDEO:  S3 Trio64, 2MB VRAM
+2026-04-24 AUDIO:  Gravis UltraSound MAX (GF1, 1MB DRAM)
+2026-04-24 AUDIO:  Roland MT-32 via MPU-401
+2026-04-24 AUDIO:  PC Speaker (PIT ch2)
+2026-04-24 INPUT:  Mouse
+2026-04-24 NETISA: not found
+
+[stats]
+boot_count=1
+tracks_played=0
+unique_tracks=0
+hours_played_x10=0
+features_unlocked=31
+hardware_events=8
+    </pre>
+
+    <p>When you install an FPU from eBay, the next boot screen leads with <em>&ldquo;New since last boot: IIT 2C87-12 detected. 6 features unlocked.&rdquo;</em> The Hall accumulates a new <code>FPU: IIT 2C87-12</code> row dated that day. A year later, on the anniversary of that detection, the boot screen reads <em>&ldquo;One year ago today, you ran HEARO on this machine for the first time.&rdquo;</em></p>
+
+    <p>Anti-gamification is explicit. No achievements. No streaks. No daily nudges. Recognition, not gamification. Records, not scores.</p>
+
+    <h2>The dormant-feature whisper</h2>
+
+    <p>When an unlocked feature has not been used in 60+ days, HEARO may produce a single, status-bar-level whisper: <em>&ldquo;You have an MT-32. There is a Roland synth bank loaded with two unused patches.&rdquo;</em> Whispers are rate-limited: one per session, globally. They never block, never modal, never animate. They never repeat the same message twice in 90 days. The whole subsystem is ~50 lines of code; its scope is by design tiny.</p>
+
+    <h2>Format support</h2>
+
+    <p><strong>Host-decoded:</strong> MIDI (SMF), WAV (PCM 8/16/24), MOD/S3M/XM/IT trackers, SID, AY, NSF, GBS, SPC.</p>
+
+    <p><strong>ESP32-offloaded (NetISA path, v1.1+):</strong> MP3, FLAC, Opus, Vorbis, AAC, WMA, ALAC.</p>
+
+    <p><strong>Streaming (v1.1+):</strong> Icecast/SHOUTcast, Bandcamp, SomaFM, Internet Archive, Nectarine Demoscene Radio, ModArchive.</p>
+
+    <p>Format honesty: HEARO does not ship an MP3 decoder that &ldquo;technically runs on a 286&rdquo; at 1 fps. If the host cannot do it well, the ESP32 does it; if the ESP32 is not present, the format is greyed out in the file browser.</p>
+
+    <h2>Novel arithmetic</h2>
+
+    <p>Six experimental techniques used in service of recognition density and graceful degradation across the CPU spectrum from 286 through Pentium:</p>
+
+    <ul>
+        <li><strong>Adaptive precision CORDIC.</strong> Visualizers vary CORDIC iteration count based on screen size and frame budget. A 320x200 plasma at 30 fps on a 386SX runs at 8 iterations. The same plasma at 1024x768 on a 486DX2 runs at 24 iterations.</li>
+        <li><strong>Software quire.</strong> 256-bit accumulator (Posit Standard 2022 technique adapted to fixed-point). Eight 32-bit words, two&rsquo;s-complement, with full carry propagation. Used when <code>UL_EXACT_MIX</code> is unlocked: bit-exact arbitrary-mixer pipelines.</li>
+        <li><strong>Stochastic computing particles.</strong> For FPU-less systems, particle physics is approximated with biased random bits and counters. No multiplications. The FPU-less path is faster than the FPU path on slower hardware.</li>
+        <li><strong>Bipartite tables.</strong> Sin/cos/log/exp at 8+ bits accuracy from two table lookups and an add. ~99% of full precision in 0.3% of the time. Total memory ~4 KB.</li>
+        <li><strong>Log-domain effects.</strong> Compressor / limiter / EQ implemented in log domain (Takum 2024 technique) avoids many multiplications.</li>
+        <li><strong>8087 silicon fingerprint.</strong> The exact bit pattern of <code>FPATAN</code> and <code>FYL2X</code> differs across IIT, Cyrix, ULSI, AMD, Intel implementations. We use this to brand the FPU when CPUID is unavailable.</li>
+    </ul>
+
+    <h2>Phased roadmap</h2>
+
+    <ul>
+        <li><strong>v1.0 Foundation + Recognition (current).</strong> Native formats, full unlock system, boot celebration, Hall, text-mode UI. Foundation phase complete; compilation pending bench iron.</li>
+        <li><strong>v1.1 Streaming.</strong> ESP32 path goes live, internet radio, Bandcamp, ModArchive.</li>
+        <li><strong>v1.2 Smart Library.</strong> MusicBrainz tagging, scrobbling, cover art, lyrics, ReplayGain, smart playlists.</li>
+        <li><strong>v1.3 Demoscene Polish.</strong> Advanced visualizers, skins, karaoke, EQ, graphical tiers (320, 640, 800, 1024).</li>
+        <li><strong>v1.4 Network Audio.</strong> Bluetooth out, AirPlay target, Chromecast target, DLNA renderer, multi-room.</li>
+        <li><strong>v1.5 Services.</strong> Spotify Connect target, YouTube Music, podcasts, audiobooks.</li>
+    </ul>
+
+    <p>Recognition density carries through every phase. Even in v1.5, the boot screen is still the first thing you see.</p>
+
+    <h2>Suite context</h2>
+
+    <p>HEARO is one of nine NetISA suite applications. The suite shares a config grammar (<code>HEARO.CFG</code> uses the same INI shape as <code>NETISA.CFG</code>), the Hall of Recognition file format, the boot-screen visual language, and the command-line conventions (<code>/SAFE</code> skips probes, <code>/REDETECT</code> forces a full rescan, <code>/STUBNET</code> provides a fake card for development).</p>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">CATHODE</span>
+            <span class="spec-value">Web browser</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">DISCORD</span>
+            <span class="spec-value">Chat client</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">CLAUDE</span>
+            <span class="spec-value">LLM client</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">COURIER</span>
+            <span class="spec-value">Email (OAuth2)</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">CRATE</span>
+            <span class="spec-value">Cloud filesystem</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">KIOSK</span>
+            <span class="spec-value">Package manager</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">CHIME</span>
+            <span class="spec-value">Time sync</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">HEARO</span>
+            <span class="spec-value">Music player</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">RADIO</span>
+            <span class="spec-value">XT streaming</span>
+        </div>
+    </div>
+
+    <h2>Target hardware</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Floor</span>
+            <span class="spec-value">286 + 1MB + MDA</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Standard</span>
+            <span class="spec-value">386 + 4MB + VGA + AdLib</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Workstation</span>
+            <span class="spec-value">486 + 8MB + SVGA + SB16</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Maximum</span>
+            <span class="spec-value">486DX2+ 16MB + 1024 + GUS</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">DOS</span>
+            <span class="spec-value">3.3+</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">License</span>
+            <span class="spec-value">MIT</span>
+        </div>
+    </div>
+
+    <p>286 support is a hard requirement, not an aspiration. Anything that breaks it is out. The community-tier <code>XT-FPU</code> configuration (V20 + 8087 + 640K + CGA/EGA + AdLib/SB) gets a degraded-but-functional path. RADIO is the lighter-weight sibling for true XT-class machines without the resources to run HEARO.</p>
+
+    <h2>Technical</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Platform</span>
+            <span class="spec-value">MS-DOS (real mode + DPMI)</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Binaries</span>
+            <span class="spec-value">HEARO.EXE + HEAROXM.EXE</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Toolchain</span>
+            <span class="spec-value">OpenWatcom V2</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Standard</span>
+            <span class="spec-value">C89/C90</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Source</span>
+            <span class="spec-value">~10K lines, 35 modules</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">License</span>
+            <span class="spec-value">MIT</span>
+        </div>
+    </div>
+
+    <p>Real-mode <code>HEARO.EXE</code> targets 286+ in large model. 32-bit <code>HEAROXM.EXE</code> targets 386+ in flat model under DOS/4GW. Both binaries ship in every release. The 32-bit binary is preferred when available; the 16-bit binary is the universal fallback. C89 strict; no C99 features; no compiler-specific extensions outside the documented Watcom <code>__far</code> + <code>#pragma aux</code> bridge in <code>src/platform/probes.c</code>.</p>
+
+    <p>The repository structure: <code>docs/hearo-design.md</code> (full design, 313 lines) and <code>docs/hearo-soundcard-reference.md</code> (probe protocols for all 24 devices, 681 lines). The <code>hearo/</code> directory contains <code>src/</code> (35 modules across detect, unlock, ui, math, config, platform, stub), <code>test/</code> (six test executables), <code>data/unlocks.def</code> (manifest mirror of the unlock matrix), <code>scripts/</code> (DOSBox-X screenshot toolkit), and the Watcom <code>Makefile</code>.</p>
+
+    <h2>Anti-features</h2>
+
+    <p>Not a tracker. Not a DAW. Not a podcast manager pretending to be a music player. Not gamified. Not generic. Not &ldquo;minimal&rdquo; in the sense of absent features; minimal in the sense of no ornamentation that distracts from the music or the machine.</p>
+
+    <h2>FAQ</h2>
+
+    <dl class="faq">
+        <dt>Will it run on my 286?</dt>
+        <dd>Yes. 80286 + 1 MB + MDA + PC Speaker is the hard floor. The text-mode UI works on every adapter from MDA through SVGA. <code>HEARO.EXE</code> is real-mode large-model; a 32-bit <code>HEAROXM.EXE</code> ships alongside for 386+ machines. No 386+ instructions leak into the 286 code path.</dd>
+
+        <dt>What audio devices are supported?</dt>
+        <dd>Twenty-four: PC Speaker, Tandy/PCjr PSG, Covox, Disney Sound Source, AdLib (OPL2), AdLib Gold (OPL3 + 12-bit DAC), Sound Blaster 1.x / 2.0 / Pro / Pro 2 / 16 / 16 ASP / AWE32 / AWE64, Gravis UltraSound Classic / MAX / ACE / PnP, MPU-401 plus SysEx-identified MT-32 / CM-32L / SC-55 / SC-55mkII / SC-88 / SC-88 Pro / DB50XG / SCB-55, Ensoniq SoundScape, Pro Audio Spectrum 16, ESS AudioDrive, Turtle Beach MultiSound. Probe protocols for every device live in <a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/hearo-soundcard-reference.md" rel="noopener">the soundcard reference doc</a>.</dd>
+
+        <dt>What is recognition density?</dt>
+        <dd>The single design principle behind HEARO. Every interaction should give the user new information about how HEARO sees their specific hardware. Boot screen, settings panel, Hall of Recognition: each one shows, in different ways, what HEARO has noticed about your machine. Most software treats vintage PCs as generic. HEARO does not.</dd>
+
+        <dt>Does HEARO play MP3 / FLAC / Opus?</dt>
+        <dd>Yes, but not on the host CPU. Compressed formats decode on the ESP32-S3 on the NetISA card, which delivers raw PCM back to the host over the ISA bus. Native formats (MOD, S3M, XM, IT, MIDI, WAV, SID, AY, NSF, GBS, SPC) decode on the host. Without the NetISA card, compressed formats are greyed out in the file browser. v1.0 ships native-only; v1.1 adds the ESP32 path.</dd>
+
+        <dt>How does the Hall of Recognition work?</dt>
+        <dd>Plain text file (<code>HEARO.HAL</code>). One event per line. Each boot, HEARO compares detected hardware against the previous fingerprint. New components get appended with their first-seen date. Lifetime statistics accumulate (hours played, tracks, boot count, peak features unlocked). The Hall reads like a logbook of your retro computing journey. The file is plain text so you can grep, edit, back up.</dd>
+
+        <dt>What unlocks the FFT spectrum analyzer?</dt>
+        <dd>Any FPU. The 256-bin FFT is one of sixteen FPU-gated features. FPU-less systems get a 64-bin bipartite-table FFT instead, which runs faster than the FPU path runs on a 287. The bipartite version is a first-class feature, not a fallback.</dd>
+
+        <dt>Is HEARO gamified?</dt>
+        <dd>No. The Hall of Recognition is a record, not a scoreboard. There are no achievements, streaks, or daily nudges. The dormant-feature whisper system (rate-limited to one per session) is the closest thing, and it is deliberately quiet: status-bar level, never modal, never repeating. Recognition, not gamification.</dd>
+
+        <dt>What does the NetISA card do for HEARO?</dt>
+        <dd>Streaming and compressed-format decode. Native HEARO runs entirely on the host CPU for tracker formats, MIDI, WAV, and chiptunes. The NetISA card adds: Internet radio (Icecast/SHOUTcast), Bandcamp, SomaFM, Internet Archive, ModArchive, plus host-side delivery of MP3/FLAC/Opus/Vorbis/AAC after decode on the ESP32. v1.0 ships without these; v1.1 turns them on.</dd>
+
+        <dt>Does it work in DOSBox-X, 86Box, PCem?</dt>
+        <dd>Yes. The text-mode UI uses standard BIOS calls and direct VRAM writes, both of which all three emulators support. Audio detection probes work in DOSBox-X with the standard Sound Blaster + Gravis UltraSound emulation. The screenshot toolkit at <code>hearo/scripts/screenshot.ps1</code> drives DOSBox-X to the boot screen and captures it as a PNG via the existing <code>capture.ps1</code> WinAPI tool.</dd>
+
+        <dt>License?</dt>
+        <dd>MIT. Same as the rest of the NetISA suite.</dd>
+
+        <dt>Where is the source?</dt>
+        <dd>In the NetISA repository under <code>hearo/</code>. Design docs at <code>docs/hearo-design.md</code> and <code>docs/hearo-soundcard-reference.md</code>. <a href="https://github.com/tonyuatkins-afk/NetISA/tree/main/hearo" rel="noopener">tonyuatkins-afk/NetISA/hearo</a>.</dd>
+    </dl>
+
+    <h2>Status</h2>
+
+    <p>Foundation phase complete as of 2026-04-24. The boot screen, the unlock matrix, the Hall of Recognition, the four-pane interactive UI, the math library, the config + persistence layer, and the test programs are all in the tree. Real-iron probes for the v1.0.1 path are staged in <code>src/platform/probes.c</code> and gated behind <code>-dHEARO_NOASM</code> until validated on the bench. The DOSBox-X screenshot toolkit is ready to capture the first PNG once <code>wmake</code> runs cleanly.</p>
+
+    <p>What is missing is verification. <code>wmake</code> has not yet produced a clean build. Open Watcom V2 needs to be installed and the toolchain environment loaded; the first compile will surface issues, those will be fixed, and a screenshot will follow. Hardware bring-up on the NetISA bench is the parallel workstream; the two converge when HEARO runs on real iron with a real card detecting real sound cards and celebrating real FPUs.</p>
+
+    <h2>Links</h2>
+    <ul class="link-list">
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">GitHub: tonyuatkins-afk/NetISA</a> (HEARO ships in the <code>hearo/</code> subdirectory)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/hearo-design.md" rel="noopener">HEARO design document</a></li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/hearo-soundcard-reference.md" rel="noopener">HEARO soundcard reference</a> (probe protocols for all 24 devices)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/hearo/README.md" rel="noopener">hearo/README.md</a></li>
+        <li><a href="/netisa.html">NetISA project page</a> (the hardware side; HEARO&rsquo;s streaming features depend on it)</li>
+        <li><a href="/cerberus.html">CERBERUS project page</a> (the diagnostic tool; HEARO&rsquo;s detection engine borrows lessons from CERBERUS&rsquo;s consistency rules)</li>
+        <li><a href="/log.html">Build log</a> (HEARO foundation entry plus the rest of the build)</li>
+    </ul>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="copyright">&copy; 2026 Tony Atkins // Barely Booting</div>
+        <div class="footer-links">
+            <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a>
+            <a href="https://github.com/tonyuatkins-afk" rel="noopener">GitHub</a>
+            <a href="/feed.xml">RSS</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

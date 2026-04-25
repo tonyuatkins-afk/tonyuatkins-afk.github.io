@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Apr 2026 22:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2026 22:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>HEARO: foundation phase complete</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-24-hearo-foundation</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-24-hearo-foundation</guid>
+      <pubDate>Fri, 24 Apr 2026 22:00:00 +0000</pubDate>
+      <description>HEARO is the next NetISA suite app: a music player for IBM PC compatibles (286+, DOS 3.3+) built around recognition density. Foundation phase complete in one session. All eleven spec phases plus three polish items: 313-line design + 681-line soundcard reference, eight-module detection engine covering 24 audio devices (PC Speaker through GUS MAX, AdLib through AWE64, MT-32 through SC-88 Pro), data-driven unlock matrix with 70+ features, boot screen with CP437 logo and ENABLED report and unlock count and anniversary line, four-pane interactive UI (file browser + playlist + now-playing + ASCII spectrum) with menus + Settings panel + Hall viewer, novel arithmetic library (24-iter adaptive CORDIC, bipartite tables, 256-bit software quire), INI config + persistent Hall + dormant-feature whisper. v1.0.1 work staged in src/platform/probes.c with Watcom #pragma aux + int86 bodies for every probe extern, gated behind -dHEARO_NOASM. DOSBox-X screenshot toolkit ready. Compilation pending Open Watcom V2 install.</description>
+    </item>
 
     <item>
       <title>NetISA parts landed. Every line of the BOM is on the bench.</title>
