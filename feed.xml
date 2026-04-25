@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Apr 2026 22:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2026 23:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CHIME: foundation phase complete</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-24-chime-foundation</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-24-chime-foundation</guid>
+      <pubDate>Fri, 24 Apr 2026 23:00:00 +0000</pubDate>
+      <description>CHIME is the second NetISA suite app to leave the design phase, landing the same day as HEARO's foundation. Same template, much smaller scope. One job: ask the network what time it is, tell DOS. v1.0 uses HTTPS HEAD against time-anchor URLs (Cloudflare, Google, worldtimeapi), parses the RFC 7231 Date header, sets DOS via INT 21h with CMOS RTC write-through. SNTP/NTS over UDP arrive in v1.1/v1.2 once NetISA exposes UDP datagrams. 18 source files in chime/ following the same template HEARO ships. Compilation pending Open Watcom V2 install.</description>
+    </item>
 
     <item>
       <title>HEARO: foundation phase complete</title>

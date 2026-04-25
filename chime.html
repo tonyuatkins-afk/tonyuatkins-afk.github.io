@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12181a">
+<title>CHIME | DOS Network Time Sync for Vintage PCs</title>
+<meta name="description" content="CHIME is a network time synchronization tool for vintage IBM PC compatibles (286+, DOS 3.3+), part of the NetISA suite. One job done correctly: ask the network what time it is, tell DOS. v1.0 uses HTTPS HEAD with RFC 7231 Date header parsing over the NetISA card's TLS session API; SNTP and NTS over UDP arrive in v1.1 once NetISA exposes UDP datagrams. INT 21h date+time set with CMOS RTC write-through. Foundation phase complete.">
+<meta name="author" content="Tony Atkins">
+<meta name="keywords" content="CHIME, DOS time sync, NTP DOS, SNTP DOS, NTS, network time, vintage PC, retro computing, DOS clock drift, CMOS RTC, NetISA, HTTPS HEAD, RFC 7231, INT 21h, INT 63h, OpenWatcom, MS-DOS, FreeDOS, DOSBox-X, ntpdate, MIT license, open source, barelybooting.com">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://barelybooting.com/chime.html">
+<link rel="alternate" type="application/rss+xml" title="Barely Booting Build Log" href="/feed.xml">
+
+<meta property="og:title" content="CHIME | DOS Network Time Sync for Vintage PCs">
+<meta property="og:description" content="One job done correctly: ask the network what time it is, tell DOS. HTTPS HEAD time source over the NetISA card. Foundation phase complete.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://barelybooting.com/chime.html">
+<meta property="og:image" content="https://barelybooting.com/img/og-image.png">
+<meta property="og:image:alt" content="CHIME network time sync for DOS.">
+<meta property="og:site_name" content="Barely Booting">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CHIME | DOS Network Time Sync for Vintage PCs">
+<meta name="twitter:description" content="One job done correctly: ask the network what time it is, tell DOS. NetISA suite app. Foundation phase complete.">
+<meta name="twitter:image" content="https://barelybooting.com/img/og-image.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://barelybooting.com/chime.html#app",
+      "name": "CHIME",
+      "description": "A DOS-native network time synchronization tool for vintage IBM PC compatibles (286+, DOS 3.3+), part of the NetISA suite. v1.0 uses HTTPS HEAD with RFC 7231 Date header parsing over the NetISA card's TLS session API. INT 21h date+time set with CMOS RTC write-through.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "MS-DOS",
+      "softwareVersion": "1.0.0-foundation",
+      "author": {
+        "@type": "Person",
+        "name": "Tony Atkins",
+        "url": "https://barelybooting.com/about.html"
+      },
+      "license": "https://opensource.org/licenses/MIT",
+      "url": "https://barelybooting.com/chime.html",
+      "softwareRequirements": "IBM PC/AT or compatible, 80286 or later, 256KB RAM, MS-DOS 3.3+, NetISA card with TLS path",
+      "programmingLanguage": "C",
+      "codeRepository": "https://github.com/tonyuatkins-afk/NetISA",
+      "isPartOf": {
+        "@type": "SoftwareApplication",
+        "name": "NetISA suite"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://barelybooting.com/" },
+        { "@type": "ListItem", "position": 2, "name": "CHIME", "item": "https://barelybooting.com/chime.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Barely Booting home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="26" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/>
+                <circle cx="7" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="7" cy="25" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="25" r="1.1" fill="currentColor"/>
+                <text x="16" y="21" font-family="'Courier New', ui-monospace, monospace" font-size="12" font-weight="bold" fill="currentColor" text-anchor="middle" letter-spacing="-0.5">BB</text>
+            </svg>
+            <span>BARELY BOOTING<span class="cursor">_</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/netisa.html">NetISA</a>
+            <a href="/cerberus.html">CERBERUS</a>
+            <a href="/hearo.html">HEARO</a>
+            <a href="/chime.html" class="active">CHIME</a>
+            <a href="/takeover.html">TAKEOVER</a>
+            <a href="/log.html">Log</a>
+            <a href="/about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <h1>CHIME</h1>
+    <p class="tagline">&gt; Ask the network what time it is. Tell DOS.</p>
+    <p class="subtitle">One job, done correctly. DOS clocks drift; the CMOS battery is thirty years old; the PIT is not a frequency standard. CHIME is the small focused tool that fixes this in one keystroke when the network path is up. NetISA suite app, v1.0 foundation phase complete.</p>
+
+    <pre class="ascii-art" aria-hidden="true">
+CHIME 1.0
+NetISA: ready (firmware 1.0.0, IP 192.168.1.42)
+Server: time.cloudflare.com (HTTPS HEAD)
+Time:   2026-04-25 14:30:42 UTC (-08:00 = 06:30:42 local)
+Now:    2026-04-25 06:30:39 (DOS clock)
+Delta:  +3 seconds
+Write to DOS clock? [Y/n]
+    </pre>
+
+    <div class="status">
+        <strong>Where things stand:</strong> Foundation phase complete as of 2026-04-24. Source tree shipped: <code>chime/</code> with 18 files across <code>src/</code> (cmdline, config, netisa_api, timesrc, dos_clock, ui_status), <code>test/</code>, plus <code>Makefile</code> and <code>README.md</code>. Design doc at <code>docs/chime-design.md</code> walks the rationale and the v1.0/v1.1/v1.5 roadmap. The full <code>main()</code> flow is wired: parse <code>CHIME.CFG</code>, parse argv, detect NetISA card or activate the stub, query the configured time source, read current DOS clock, compute delta, confirm with user (unless <code>/AUTO</code> or <code>/DRYRUN</code>), apply timezone, set DOS + CMOS clock, print the result line. <strong>Compilation pending Open Watcom V2.</strong>
+    </div>
+
+    <h2>Why HTTPS Date headers, not SNTP</h2>
+
+    <p>The protocol most people associate with network time is NTP, with its small-form sibling SNTP. Both run over UDP. The NetISA TSR <code>INT 63h</code> API as of v1.0 exposes TLS sessions and plaintext TCP via the session group (group 0x03), but does not yet carry UDP datagrams. CHIME v1.0 cannot speak SNTP.</p>
+
+    <p>What CHIME does instead: HTTPS <code>HEAD</code> against a small set of well-known time-anchor URLs (<code>time.cloudflare.com</code>, <code>time.google.com</code>, <code>worldtimeapi.org</code>), parse the response <code>Date:</code> header per RFC 7231 IMF-fixdate. One-second precision. The handshake is ~600 bytes; the response is ~200 bytes; the parse is character-by-character with no regex, no <code>malloc</code>, no scanf-style locale dependence. A worldtime JSON GET is the second-line fallback. A plain HTTP <code>HEAD</code> diagnostic mode lives behind <code>/MODE=http-head</code> for users with TLS path issues.</p>
+
+    <p>v1.1 adds real SNTP over UDP when NetISA exposes group 0x08, with sub-second precision via the offset/delay calculation against the server's transmit timestamp. v1.2 adds NTS-KE / NTS over UDP per RFC 8915. The HTTP-Date path stays in both versions as the diagnostic fallback; users who never enable UDP keep working without changes.</p>
+
+    <h2>Time-set strategy</h2>
+
+    <p>DOS exposes the system clock through three layers. The CMOS RTC at I/O ports 0x70/0x71 persists across reboots. The BIOS tick counter at memory 0040:006C runs at 18.2 Hz from PIT channel 0, and resets on reboot but reflects RTC at startup. DOS internal date/time via <code>INT 21h</code> AH=2Ah/2Ch get and AH=2Bh/2Dh set typically writes through to both the BIOS tick and the CMOS RTC.</p>
+
+    <p>"Typically" is doing a lot of work in that sentence. On most modern DOS clones (MS-DOS 5+, FreeDOS), AH=2Bh/2Dh propagate to the CMOS RTC. On some older systems (DOS 3.3, OEM 4.x), the DOS layer advances a soft clock and never touches the RTC, so a reboot loses the change. CHIME does a direct CMOS write after the INT 21h call as a backstop: stop RTC updates by setting bit 7 of register 0x0B, BCD-encode and write seconds (reg 0), minutes (2), hour (4), day (7), month (8), year-mod-100 (9), century (32, conventional), then resume updates.</p>
+
+    <p>Timezone is fixed-offset only (<code>/TZ=-08:00</code> or in <code>CHIME.CFG</code>). POSIX-name DST rules are explicitly out of scope. DST is the user's problem; CHIME does not adjust. This is intentional. DST handling is one of the great rabbit holes of computing and CHIME is not the program that solves it.</p>
+
+    <h2>The loop</h2>
+
+    <p>You install NetISA. Your DOS clock says March 1980. You type <code>CHIME</code>; it asks the cloud, asks you, you say yes, the clock catches up to the present. Later, your CMOS battery is dead and the clock reset. You add <code>CHIME /AUTO</code> to <code>AUTOEXEC.BAT</code>. From then on, every boot ends with the clock correct. Periodic sync via a weekly batch job runs <code>CHIME /AUTO /QUIET</code>; drift never exceeds a few seconds. v1.5 ships <code>CHIME.TSR</code>, a 4 KB resident that hooks INT 21h time-of-day calls and silently corrects drift in the background.</p>
+
+    <h2>Suite context</h2>
+
+    <p>CHIME is one of nine NetISA suite apps. It inherits the suite's INI config grammar (<code>CHIME.CFG</code> uses the same shape as <code>HEARO.CFG</code> and <code>NETISA.CFG</code>), the command-line conventions (<code>/SAFE</code>, <code>/STUBNET</code>, <code>/REDETECT</code>, <code>/VERSION</code>, <code>/HELP</code>), and the deadpan tone in terminal output (one machine-readable line per fact, no boxes, no right-justify, no celebratory adjectives).</p>
+
+    <h2>Phased roadmap</h2>
+
+    <ul>
+        <li><strong>v1.0 Foundation (current).</strong> HTTPS HEAD + JSON GET + plain HTTP fallback. Confirmation prompt UI. INT 21h + CMOS write-through. Compilation pending Open Watcom V2.</li>
+        <li><strong>v1.1 SNTP.</strong> Real SNTP over UDP when NetISA exposes the UDP group, sub-second precision, becomes the default time source.</li>
+        <li><strong>v1.2 NTS.</strong> RFC 8915 secure NTP with TLS-extracted keys.</li>
+        <li><strong>v1.3 TSR.</strong> <code>CHIME.TSR</code> resident with periodic resync, INT 21h hooks for transparent correction.</li>
+        <li><strong>v1.4 GPS.</strong> Optional COM-port time source for users with serial GPS receivers (1PPS pulse plus NMEA).</li>
+        <li><strong>v1.5 Multi-server.</strong> Median-of-N consensus across multiple time sources, drift trend reporting, NIST traceability claim when reachable.</li>
+    </ul>
+
+    <h2>Target hardware</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item">
+            <span class="spec-label">Floor</span>
+            <span class="spec-value">286 + 256KB</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">DOS</span>
+            <span class="spec-value">3.3+</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Network</span>
+            <span class="spec-value">NetISA TLS path</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Toolchain</span>
+            <span class="spec-value">OpenWatcom V2</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">Standard</span>
+            <span class="spec-value">C89/C90</span>
+        </div>
+        <div class="spec-item">
+            <span class="spec-label">License</span>
+            <span class="spec-value">MIT</span>
+        </div>
+    </div>
+
+    <h2>Anti-features</h2>
+
+    <p>Not a clock service. Not an NTP daemon. Not a stratum-2 server. Not a DST manager. Not a calendar app. Not a scheduled-task runner. Not a precision instrument; a one-second clock-set is acceptable for DOS and CHIME does not pretend otherwise.</p>
+
+    <p>The other NetISA suite apps are about doing modern things on old machines: streaming, browsing, chatting. CHIME is about doing the most basic thing on old machines: knowing what time it is. That basic thing has been broken on every retro PC for decades. CHIME is the patch.</p>
+
+    <h2>Links</h2>
+    <ul class="link-list">
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">GitHub: tonyuatkins-afk/NetISA</a> (CHIME ships in the <code>chime/</code> subdirectory)</li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/docs/chime-design.md" rel="noopener">CHIME design document</a></li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/chime/README.md" rel="noopener">chime/README.md</a></li>
+        <li><a href="/netisa.html">NetISA project page</a> (the hardware side; CHIME's TLS path depends on it)</li>
+        <li><a href="/hearo.html">HEARO project page</a> (the music player suite app that ships the same template)</li>
+        <li><a href="/log.html">Build log</a></li>
+    </ul>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="copyright">&copy; 2026 Tony Atkins // Barely Booting</div>
+        <div class="footer-links">
+            <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a>
+            <a href="https://github.com/tonyuatkins-afk" rel="noopener">GitHub</a>
+            <a href="/feed.xml">RSS</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
