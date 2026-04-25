@@ -101,6 +101,19 @@
         <figcaption>CHIME report and confirmation prompt. /STUBNET activates the synthetic backend so the captured frame is reproducible.</figcaption>
     </figure>
 
+    <h2>Mode captures</h2>
+
+    <div class="hero-screenshots">
+        <figure>
+            <img src="/img/chime-prompt-dryrun.png" alt="CHIME with /STUBNET /DRYRUN: same report as the default, but the tail line reads 'DOS clock NOT set (dry run or declined)' and the program returns to the DOS prompt without writing." width="720" height="540">
+            <figcaption><code>/DRYRUN</code>: report only, never write.</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/chime-prompt-help.png" alt="CHIME /HELP: prints the flag reference. Lists /AUTO, /DRYRUN, /QUIET, /VERBOSE, /SAFE, /STUBNET, /VERSION, /HELP, /SERVER=host, /PATH=/foo, /PORT=443, /MODE=xxx, /TZ=+/-HH:MM, each with a short description." width="720" height="540">
+            <figcaption><code>/HELP</code>: cmdline reference.</figcaption>
+        </figure>
+    </div>
+
     <pre class="ascii-art" aria-hidden="true">
 CHIME 1.0
 NetISA: ready (firmware 1.0.0, IP 192.168.1.42)

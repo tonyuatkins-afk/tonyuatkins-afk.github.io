@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2026 16:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2026 18:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>HEARO + CHIME tagged v1.0.0</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-25-hearo-chime-v100-tag</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-25-hearo-chime-v100-tag</guid>
+      <pubDate>Sat, 25 Apr 2026 18:00:00 +0000</pubDate>
+      <description>v1.0.0 tag. Detection fixes from the v1.0 captures: SB Pro 2 OPL3 check (was checking wrong port), SB16 ASP false positive (replaced mixer-index probe with DSP cmd 04h), GUS phantom at SB base (require ULTRASND, refuse SB-base collision), cpu_pit_loop calibration. CHIME mode captures for /DRYRUN and /HELP.</description>
+    </item>
 
     <item>
       <title>HEARO and CHIME compile clean. First screenshots.</title>

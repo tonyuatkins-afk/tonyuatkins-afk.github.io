@@ -111,6 +111,24 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-25-hearo-chime-v100-tag">
+            <div class="log-date">
+                <time datetime="2026-04-25">2026-04-25</time>
+            </div>
+            <h2>HEARO + CHIME tagged v1.0.0</h2>
+            <p>v1.0.0 of both apps tagged on the NetISA repo. Captured screenshots refreshed with the post-fix detection. The remaining v1.0 detection bugs visible in the previous tier captures are now fixed: SB Pro 2 is detected, the SB16 ASP false positive is gone, and the GUS-at-SB-base phantom is gone.</p>
+            <p><strong>Detection fixes.</strong> probe_sb's OPL3 check was reading port base+8 instead of base+0, so SB Pro 2 vs SB Pro 1 disambiguation never fired correctly; same off-by-8 in the AWE32 vs AWE64 check. sb_asp_present switched from a loose mixer-index 0x83 read to DSP command 04h (ASP get version), which times out cleanly on plain SB16. probe_gus no longer blind-probes when ULTRASND is unset, and refuses to claim the SB base. cpu_pit_loop calibration switched from count/1000 to count/100, an order of magnitude closer to truth on real iron (still rough under DOSBox-X due to PIT-2 emulation timing).</p>
+
+            <figure>
+                <img src="/img/hearo-boot-max.png" alt="HEARO boot screen on the Maximum tier configuration: Pentium / SVGA 1024 / 32 MB / SB16 + MPU-401. Intel Pentium @ 8 MHz / integrated x87 (Intel) / 34 features unlocked, including the Pentium-class Convolution reverb, Particle system, and Wireframe 3D." width="720" height="540">
+                <figcaption>Maximum tier (Pentium / SVGA / SB16 / MPU). 34 features.</figcaption>
+            </figure>
+
+            <p><strong>CHIME mode captures.</strong> Two extra CHIME screenshots covering the <code>/DRYRUN</code> and <code>/HELP</code> flows. <code>/DRYRUN</code> shows the report and the "DOS clock NOT set" tail. <code>/HELP</code> documents the full flag list as one captured frame.</p>
+
+            <p>Tagged <a href="https://github.com/tonyuatkins-afk/NetISA/releases/tag/v1.0.0" rel="noopener">v1.0.0</a> on the NetISA repo. <a href="/hearo.html">HEARO project page</a>, <a href="/chime.html">CHIME project page</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-25-hearo-chime-first-compile">
             <div class="log-date">
                 <time datetime="2026-04-25">2026-04-25</time>
