@@ -97,9 +97,30 @@
     <p class="subtitle">NetISA suite app. 286 minimum. 24 audio devices, MDA through SVGA. Trackers, MIDI, WAV, and chiptunes play on the host. Compressed formats and streaming go through the NetISA card&rsquo;s ESP32 in v1.1.</p>
 
     <figure>
-        <img src="/img/hearo-boot.png" alt="HEARO boot screen running in DOSBox-X. Big CP437 box-drawing HEARO logo at top in white. Below it the hardware report: CPU Intel 80486DX @ 100 MHz detected; integrated x87 (Intel) ENABLED with unlocks 256-bin FFT, sinc resampling, exact mixing, plasma, tunnel, particle system, fire, wireframe 3D, karaoke vocal removal, parametric EQ, stereo widening, gamma-correct dither, adaptive CORDIC, log-domain effects, 16+ channel mixing, all listed in green. Memory 640K conventional plus 16384K extended detected with library index and visualizer preload unlocked. Video VESA generic 2048KB VRAM detected and ENABLED. Bottom line: Your machine has unlocked 24 features. Press any key to begin." width="720" height="540">
-        <figcaption>HEARO boot screen, 486DX / SVGA configuration in DOSBox-X. 24 of 67 features unlocked.</figcaption>
+        <img src="/img/hearo-boot.png" alt="HEARO boot screen running in DOSBox-X with real hardware probes. Big CP437 box-drawing HEARO logo at top. Hardware report below: New since last boot CPU FPU memory audio audio audio in yellow; CPU Intel 80386DX @ 1 MHz detected; 80387 ENABLED with unlocks 256-bin FFT, sinc resampling, exact mixing, plasma, tunnel, fire, karaoke, parametric EQ, stereo widening, gamma-correct dither, adaptive CORDIC, log-domain effects, 16+ channel mixing in green. Memory 640K + 14912K extended. Bottom: Your machine has unlocked 33 features. VESA 2.0 @ 1024x768x256 ENABLED." width="720" height="540">
+        <figcaption>HEARO boot screen via real probes (Watcom inline asm + INT 86h calls), 386DX / VESA 2.0 / SB16 / GUS in DOSBox-X. 33 of 67 features unlocked. The "New since last boot" line is the Hall change-detection picking up the difference between this run and the previous synthetic-stub run.</figcaption>
     </figure>
+
+    <h2>Tier captures</h2>
+
+    <p>Same binary across three configurations. The unlock count climbs as the hardware does.</p>
+
+    <div class="hero-screenshots">
+        <figure>
+            <img src="/img/hearo-boot-min.png" alt="HEARO boot screen on a Minimum tier configuration: 80286 + EGA + 1 MB + PC Speaker. 17 of 67 features unlocked. The boot screen renders identically on EGA text mode as on SVGA." width="640" height="480">
+            <figcaption>Minimum: 286 / EGA / 1 MB / PC Speaker. 17 features.</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/hearo-boot-std.png" alt="HEARO boot screen on a Standard tier configuration: 80386DX + 80387 + VGA + 4 MB + Sound Blaster Pro 2. 26 of 67 features unlocked." width="720" height="540">
+            <figcaption>Standard: 386DX / VGA / 4 MB. 26 features.</figcaption>
+        </figure>
+        <figure>
+            <img src="/img/hearo-boot-max.png" alt="HEARO boot screen on a Maximum tier configuration: Pentium + SVGA 1024x768 + 32 MB + Sound Blaster 16 + Gravis UltraSound + MPU-401. 33 of 67 features unlocked." width="720" height="540">
+            <figcaption>Maximum: Pentium / SVGA 1024 / 32 MB / SB16 + GUS + MPU. 33 features.</figcaption>
+        </figure>
+    </div>
+
+    <p>Two known v1.0 detection bugs visible in these captures. The Maximum tier reports 80386DX instead of Pentium because <code>cpu_eflags_can_toggle</code> (the EFLAGS bit-21 toggle test that distinguishes 486+ from Pentium+) is stubbed in v1.0; the FLAGS bit walk in <code>cpu_flag_test</code> can only climb past Stage 2 with that probe live. The Standard tier reports only PC Speaker even with Sound Blaster Pro 2 emulated, because the BLASTER environment variable parser plus the DSP probe sequence misses one of the SB Pro 2 paths under DOSBox-X's emulation. Both are tracked for v1.0.1.</p>
 
     <h2>Status</h2>
 
