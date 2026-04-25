@@ -320,7 +320,7 @@
                 <time datetime="2026-04-14">2026-04-14</time>
             </div>
             <h2>DOSBox-X automation quality gate: 9 Fatal + 31 Significant fixed</h2>
-            <p>Ran the full adversarial quality gate on the NetISA DOSBox-X automation infrastructure (capture.ps1, dosrun.py, dosbuild.py, _RELAY.BAT, dev.conf, README) — 1,422 lines total. Three review rounds, score progression 30&rarr;28&rarr;0. Found and fixed 9 Fatal and 31 Significant issues including: atomic lockfile (Ctrl+C races), Windows PID recycling (os.kill unreliable), hardcoded WinGet paths (break on upgrade), tempDir leaks on ffmpeg failure, zombie DOSBox-X processes on early exit, CP437 silent replacement, mount path quote escaping, PrintWindow return value check (no more silent black GIFs), ERRORLEVEL baseline reset before user commands, cycles=auto for deterministic timing, $projectDir quoting, lock-timeout-aware staleness. Automation infrastructure is now production-grade reliable. <a href="/netisa.html">Project page</a>.</p>
+            <p>Ran the full adversarial quality gate on the NetISA DOSBox-X automation infrastructure (capture.ps1, dosrun.py, dosbuild.py, _RELAY.BAT, dev.conf, README), 1,422 lines total. Three review rounds, score progression 30&rarr;28&rarr;0. Found and fixed 9 Fatal and 31 Significant issues including: atomic lockfile (Ctrl+C races), Windows PID recycling (os.kill unreliable), hardcoded WinGet paths (break on upgrade), tempDir leaks on ffmpeg failure, zombie DOSBox-X processes on early exit, CP437 silent replacement, mount path quote escaping, PrintWindow return value check (no more silent black GIFs), ERRORLEVEL baseline reset before user commands, cycles=auto for deterministic timing, $projectDir quoting, lock-timeout-aware staleness. Automation infrastructure is now production-grade reliable. <a href="/netisa.html">Project page</a>.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-14a">
@@ -344,7 +344,7 @@
                 <time datetime="2026-04-13">2026-04-13</time>
             </div>
             <h2>DOSBox-X development relay + Cathode parser fixes</h2>
-            <p>Built a development relay system (<code>devenv/</code>) that closes the develop-compile-test loop: compile natively with OpenWatcom/NASM on Windows, run the result in DOSBox-X, and capture stdout + exit codes via a batch-file relay mechanism. Features atomic lockfile with stale PID recovery, timeout handling, CP437 encoding, stderr capture, and retcode retry loop. Quality-gated through 7 rounds of adversarial review. Then used the relay to build an automated Cathode test suite: downloaded 11 real websites (NPR, CNN, Hacker News, Wikipedia, OpenBSD man pages, and purpose-built edge-case fixtures), parsed them through Cathode's HTML engine inside DOSBox-X, and found three bugs. (1) Named HTML entity table only had 7 entries &mdash; expanded to 90+ covering accented characters, smart quotes, dashes, currency, math symbols, and arrows, reusing the existing CP437 mapping tables. (2) Missing <code>&lt;/head&gt;</code> tags caused 0 rendered rows &mdash; <code>&lt;body&gt;</code> now implicitly closes <code>&lt;head&gt;</code>. (3) Pages over 32KB produced 0 rows due to 16-bit <code>int</code> overflow in the parse chunk length &mdash; fixed by chunking large parses. All 12 tests now pass: 12/12, 0 failures. <a href="/netisa.html">Project page</a>.</p>
+            <p>Built a development relay system (<code>devenv/</code>) that closes the develop-compile-test loop: compile natively with OpenWatcom/NASM on Windows, run the result in DOSBox-X, and capture stdout + exit codes via a batch-file relay mechanism. Features atomic lockfile with stale PID recovery, timeout handling, CP437 encoding, stderr capture, and retcode retry loop. Quality-gated through 7 rounds of adversarial review. Then used the relay to build an automated Cathode test suite: downloaded 11 real websites (NPR, CNN, Hacker News, Wikipedia, OpenBSD man pages, and purpose-built edge-case fixtures), parsed them through Cathode's HTML engine inside DOSBox-X, and found three bugs. (1) Named HTML entity table only had 7 entries; expanded to 90+ covering accented characters, smart quotes, dashes, currency, math symbols, and arrows, reusing the existing CP437 mapping tables. (2) Missing <code>&lt;/head&gt;</code> tags caused 0 rendered rows; <code>&lt;body&gt;</code> now implicitly closes <code>&lt;head&gt;</code>. (3) Pages over 32KB produced 0 rows due to 16-bit <code>int</code> overflow in the parse chunk length; fixed by chunking large parses. All 12 tests now pass: 12/12, 0 failures. <a href="/netisa.html">Project page</a>.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-13d">
@@ -360,7 +360,7 @@
                 <time datetime="2026-04-13">2026-04-13</time>
             </div>
             <h2>TAKEOVER v1.1: Demoscene Enhancement Pack</h2>
-            <p>Eight demoscene-inspired features, informed by research into four decades of the demoscene from Commodore 64 cracktros to modern 4KB intros. Audio-visual beat sync: <code>adlib_beat</code> counter lets effects pulse to OPL2 music events. Six fire-and-forget OPL2 stingers on channels 3-8 (alarm klaxon, bureaucratic stamp, typewriter click, error buzz, ominous diminished chord, metallic ka-ching), each thematically assigned per AI. Two new visual effects: sine wave text distortion (buffer manipulation, works on all adapters including MDA) and VGA DAC palette cycling in text mode. Four state transition types on <code>goto:</code> commands: LFSR-based dissolve (zero-storage permutation via 11-bit linear feedback shift register), column wipe, VGA DAC fade, and random glitch. Living status bar with AI control level (0-100) that shifts from green to red with block-character progress indicator. Five per-AI Mode 13h climax sequences at endings: Grid Convergence (Axiom), Redaction Sweep (Hushline), Threat Radar (Kestrel-9), Cozy Dissolution with closing iris (Orchard), Reality Glitch with palette rotation (Cinder) — all at half resolution (160x100 doubled) for 8088 compatibility. Hidden cracktro easter egg unlocked by completing all five scenarios: raster bars behind the logo, 40-star parallax starfield, DYCP sine-bouncing scrolltext with 64-character bitmap font, and a 9-channel OPL2 chiptune in C minor (10-bar loop at 120 BPM with arpeggiated channel). Seven new engine commands. All five scenarios wired with enhancements at thematically appropriate moments. 57.8KB EXE (was 41.8KB). New DGROUP: ~55 bytes of ~22KB headroom. Zero warnings. <a href="/takeover.html">Project page</a>.</p>
+            <p>Eight demoscene-inspired features, informed by research into four decades of the demoscene from Commodore 64 cracktros to modern 4KB intros. Audio-visual beat sync: <code>adlib_beat</code> counter lets effects pulse to OPL2 music events. Six fire-and-forget OPL2 stingers on channels 3-8 (alarm klaxon, bureaucratic stamp, typewriter click, error buzz, ominous diminished chord, metallic ka-ching), each thematically assigned per AI. Two new visual effects: sine wave text distortion (buffer manipulation, works on all adapters including MDA) and VGA DAC palette cycling in text mode. Four state transition types on <code>goto:</code> commands: LFSR-based dissolve (zero-storage permutation via 11-bit linear feedback shift register), column wipe, VGA DAC fade, and random glitch. Living status bar with AI control level (0-100) that shifts from green to red with block-character progress indicator. Five per-AI Mode 13h climax sequences at endings: Grid Convergence (Axiom), Redaction Sweep (Hushline), Threat Radar (Kestrel-9), Cozy Dissolution with closing iris (Orchard), Reality Glitch with palette rotation (Cinder), all at half resolution (160x100 doubled) for 8088 compatibility. Hidden cracktro easter egg unlocked by completing all five scenarios: raster bars behind the logo, 40-star parallax starfield, DYCP sine-bouncing scrolltext with 64-character bitmap font, and a 9-channel OPL2 chiptune in C minor (10-bar loop at 120 BPM with arpeggiated channel). Seven new engine commands. All five scenarios wired with enhancements at thematically appropriate moments. 57.8KB EXE (was 41.8KB). New DGROUP: ~55 bytes of ~22KB headroom. Zero warnings. <a href="/takeover.html">Project page</a>.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-13b">
@@ -368,7 +368,7 @@
                 <time datetime="2026-04-13">2026-04-13</time>
             </div>
             <h2>TAKEOVER v1.0 released</h2>
-            <p>First official release of TAKEOVER. F9/F10 audio toggles for AdLib music and PC speaker sound effects (playback timing preserved when muted). Expanded color palette: 6 new attr colors (magenta, bright magenta, blue, bright blue) bringing the total to 15. Each AI scenario now has a distinct color personality — Kestrel-9 uses red/cyan for threat data, Cinder Mirror uses magenta for fourth-wall breaks, Orchard Clerk uses bright cyan for its helpful-creepy voice. Subtle homages to classic AI cinema (2001, WarGames, Ex Machina, The Matrix, Blade Runner concepts) woven into scenario dialogue at key dramatic moments. Quality-gated twice: caught kestrel9 state at 33 commands and a status bar restore bug. <a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.0">Download v1.0</a> (70KB ZIP).</p>
+            <p>First official release of TAKEOVER. F9/F10 audio toggles for AdLib music and PC speaker sound effects (playback timing preserved when muted). Expanded color palette: 6 new attr colors (magenta, bright magenta, blue, bright blue) bringing the total to 15. Each AI scenario now has a distinct color personality: Kestrel-9 uses red/cyan for threat data, Cinder Mirror uses magenta for fourth-wall breaks, Orchard Clerk uses bright cyan for its helpful-creepy voice. Subtle homages to classic AI cinema (2001, WarGames, Ex Machina, The Matrix, Blade Runner concepts) woven into scenario dialogue at key dramatic moments. Quality-gated twice: caught kestrel9 state at 33 commands and a status bar restore bug. <a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.0">Download v1.0</a> (70KB ZIP).</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-13">
@@ -376,7 +376,7 @@
                 <time datetime="2026-04-13">2026-04-13</time>
             </div>
             <h2>Cathode: logo fix, color gradient, VGA palette fade</h2>
-            <p>Fixed the Cathode browser logo where the H looked like an M (block art row 1 used lower-half blocks creating an M-shaped dip). Added 5-row color gradient: green edges, bright green inner rows, white center crossbar. Added VGA DAC palette fade-in/fade-out to the shared screen library — Cathode now fades in from black on startup and fades to black on exit. <a href="/netisa.html">NetISA project page</a>.</p>
+            <p>Fixed the Cathode browser logo where the H looked like an M (block art row 1 used lower-half blocks creating an M-shaped dip). Added 5-row color gradient: green edges, bright green inner rows, white center crossbar. Added VGA DAC palette fade-in/fade-out to the shared screen library. Cathode now fades in from black on startup and fades to black on exit. <a href="/netisa.html">NetISA project page</a>.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-12d">
@@ -384,7 +384,7 @@
                 <time datetime="2026-04-12">2026-04-12</time>
             </div>
             <h2>TAKEOVER: all five scenarios, A/V overhaul</h2>
-            <p>All five TAKEOVER scenarios complete: Axiom Regent (municipal optimization), Hushline (crisis comms), Kestrel-9 (threat detection), Orchard Clerk (personalization), and Cinder Mirror (narrative generation). 250+ states, 15 endings across 5 scenarios. A/V overhaul: VGA Mode 13h plasma title screen with animated color cycling and pixel-font logo, AdLib/OPL2 FM synthesis ambient music (5 unique drone tracks), FPU-accelerated effects, VGA palette fade transitions. Hardware auto-detection (VGA/EGA/CGA/MDA, AdLib, FPU) with graceful degradation. DGROUP went <em>down</em> from 98.1% to 96.5% despite adding 4 new modules — all new const data uses <code>static const __far</code>. Quality-gated: fixed Mode 13h restore bug, orphaned kestrel9 state, latent numeric comparison parser bug. 41KB EXE. <a href="/takeover.html">Project page</a>.</p>
+            <p>All five TAKEOVER scenarios complete: Axiom Regent (municipal optimization), Hushline (crisis comms), Kestrel-9 (threat detection), Orchard Clerk (personalization), and Cinder Mirror (narrative generation). 250+ states, 15 endings across 5 scenarios. A/V overhaul: VGA Mode 13h plasma title screen with animated color cycling and pixel-font logo, AdLib/OPL2 FM synthesis ambient music (5 unique drone tracks), FPU-accelerated effects, VGA palette fade transitions. Hardware auto-detection (VGA/EGA/CGA/MDA, AdLib, FPU) with graceful degradation. DGROUP went <em>down</em> from 98.1% to 96.5% despite adding 4 new modules; all new const data uses <code>static const __far</code>. Quality-gated: fixed Mode 13h restore bug, orphaned kestrel9 state, latent numeric comparison parser bug. 41KB EXE. <a href="/takeover.html">Project page</a>.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-12c">
@@ -400,7 +400,7 @@
                 <time datetime="2026-04-12">2026-04-12</time>
             </div>
             <h2>Claude for DOS</h2>
-            <p>Built CLAUDE.EXE — a Claude AI chat client for DOS that talks to the Anthropic API over TLS 1.3 via the NetISA card. Three agent modes: Chat (conversation only), Ask (Claude proposes commands, you confirm), and Auto (Claude runs DOS commands freely). Far-heap message pool, word-wrapped chat with newline support, 3-line compose area, [EXEC] tag parsing for command execution with output capture. Iterative agent loop with 5-deep safety cap to avoid recursive stack overflow on an 8088. Quality-gated with 2 rounds of adversarial review. Added to the NETISA.EXE launcher menu.</p>
+            <p>Built CLAUDE.EXE, a Claude AI chat client for DOS that talks to the Anthropic API over TLS 1.3 via the NetISA card. Three agent modes: Chat (conversation only), Ask (Claude proposes commands, you confirm), and Auto (Claude runs DOS commands freely). Far-heap message pool, word-wrapped chat with newline support, 3-line compose area, [EXEC] tag parsing for command execution with output capture. Iterative agent loop with 5-deep safety cap to avoid recursive stack overflow on an 8088. Quality-gated with 2 rounds of adversarial review. Added to the NETISA.EXE launcher menu.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-12">
@@ -408,7 +408,7 @@
                 <time datetime="2026-04-12">2026-04-12</time>
             </div>
             <h2>Site launch + community pages</h2>
-            <p>barelybooting.com is live. Project page, build log, RSS feed. The site exists because the project reached a point where a README isn't enough — there's a DOS browser, a Discord client, validated CPLD logic, and production firmware. Time to show it properly.</p>
+            <p>barelybooting.com is live. Project page, build log, RSS feed. The site exists because the project reached a point where a README isn't enough: there's a DOS browser, a Discord client, validated CPLD logic, and production firmware. Time to show it properly.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-11">
@@ -416,7 +416,7 @@
                 <time datetime="2026-04-11">2026-04-11</time>
             </div>
             <h2>v1 firmware complete</h2>
-            <p>ESP32-S3 firmware hit production quality after 8 rounds of adversarial review. WiFi manager with APSTA mode, HTTP client with 4 concurrent TLS sessions, HTML-to-CP437 parser for Cathode, embedded web config server, OTA updates with authentication. Fixed cross-core race conditions, register protocol bugs, security vulnerabilities, and resource leaks along the way. The firmware is the bridge — it turns ISA bus register writes into TLS 1.3 sessions.</p>
+            <p>ESP32-S3 firmware hit production quality after 8 rounds of adversarial review. WiFi manager with APSTA mode, HTTP client with 4 concurrent TLS sessions, HTML-to-CP437 parser for Cathode, embedded web config server, OTA updates with authentication. Fixed cross-core race conditions, register protocol bugs, security vulnerabilities, and resource leaks along the way. The firmware is the bridge: it turns ISA bus register writes into TLS 1.3 sessions.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-10">
@@ -424,7 +424,7 @@
                 <time datetime="2026-04-10">2026-04-10</time>
             </div>
             <h2>Discord client for DOS</h2>
-            <p>Text-mode Discord client running in DOSBox-X. 6 channels with per-channel far-heap message storage, word-wrapped messages with author colors, compose bar with cursor editing, Tab-cycling focus, timed fake message injection, PgUp/PgDn scrolling. Quality-gated through 6 rounds of adversarial review. This is the demo that makes people stop and look — Discord on an 8088.</p>
+            <p>Text-mode Discord client running in DOSBox-X. 6 channels with per-channel far-heap message storage, word-wrapped messages with author colors, compose bar with cursor editing, Tab-cycling focus, timed fake message injection, PgUp/PgDn scrolling. Quality-gated through 6 rounds of adversarial review. This is the demo that makes people stop and look: Discord on an 8088.</p>
         </article>
 
         <article class="log-entry" id="entry-2026-04-09">
@@ -447,7 +447,7 @@
             <div class="log-date">
                 <time datetime="2026-04-06">2026-04-06</time>
             </div>
-            <h2>CPLD verification complete &mdash; 160/160 tests passing</h2>
+            <h2>CPLD verification complete: 160/160 tests passing</h2>
             <p>All 160 Verilog testbench tests passing under iverilog. Address decode, IOCHRDY wait states, watchdog timeout, IRQ state machine retrigger, back-to-back cycles, mid-cycle reset, status flag merge, alias rejection. 95 of 128 macrocells used, timing slack of +39.5 ns setup at 16 MHz. Zero bus contention across the full simulation suite. Lint clean on iverilog -Wall.</p>
         </article>
 
@@ -456,7 +456,7 @@
                 <time datetime="2026-04-04">2026-04-04</time>
             </div>
             <h2>Hardware design finalized, parts ordered</h2>
-            <p>Schematic and PCB layout for the NetISA v1 board finalized. ATF1508AS CPLD for ISA bus timing, ESP32-S3-WROOM-1U-N8R8 for networking and crypto, Wiznet W5500 pads for v1.5 Ethernet. Bracket-mount antenna for metal cases. Physical jumpers, no Plug-and-Play. Parts ordered — waiting on delivery for prototype build.</p>
+            <p>Schematic and PCB layout for the NetISA v1 board finalized. ATF1508AS CPLD for ISA bus timing, ESP32-S3-WROOM-1U-N8R8 for networking and crypto, Wiznet W5500 pads for v1.5 Ethernet. Bracket-mount antenna for metal cases. Physical jumpers, no Plug-and-Play. Parts ordered, waiting on delivery for prototype build.</p>
         </article>
 
     </div>

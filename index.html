@@ -147,7 +147,7 @@
 
     <p>I&rsquo;m Tony. By day I work in cybersecurity. By night I&rsquo;m trying to get vintage PCs onto the modern internet, probably the hard way.</p>
 
-    <p><a href="/netisa.html">NetISA</a> is the hardware side &mdash; an ISA expansion card with an ESP32-S3 for WiFi and TLS 1.3, bridged to the bus by a CPLD. The idea is to move all the crypto work off the retro CPU so an 8088 doesn&rsquo;t have to pretend it can do RSA. On top of that sits a growing DOS software stack: <strong><a href="/cathode.html">CATHODE</a></strong> (a text-mode web browser, sort of), <strong><a href="/discord.html">DISCORD</a></strong> v2 for DOS, a <strong><a href="/claude.html">CLAUDE</a></strong> Anthropic API client, <strong><a href="/hearo.html">HEARO</a></strong>, a music player that supports 24 audio devices and turns on features based on what hardware it detects, and <strong><a href="/chime.html">CHIME</a></strong>, a small tool that asks the network for the current time and sets the DOS clock. <a href="/cerberus.html">CERBERUS</a> is the three-headed diagnostic tool that figures out what vintage hardware actually is and whether it&rsquo;s telling the truth. Separately, <a href="/takeover.html">TAKEOVER</a> is an interactive AI takeover simulator that has nothing to do with networking &mdash; I just got carried away with demoscene effects and couldn&rsquo;t stop.</p>
+    <p><a href="/netisa.html">NetISA</a> is the hardware side: an ISA expansion card with an ESP32-S3 for WiFi and TLS 1.3, bridged to the bus by a CPLD. The idea is to move all the crypto work off the retro CPU so an 8088 doesn&rsquo;t have to pretend it can do RSA. On top of that sits a growing DOS software stack: <strong><a href="/cathode.html">CATHODE</a></strong> (a text-mode web browser, sort of), <strong><a href="/discord.html">DISCORD</a></strong> v2 for DOS, a <strong><a href="/claude.html">CLAUDE</a></strong> Anthropic API client, <strong><a href="/hearo.html">HEARO</a></strong>, a music player that supports 24 audio devices and turns on features based on what hardware it detects, and <strong><a href="/chime.html">CHIME</a></strong>, a small tool that asks the network for the current time and sets the DOS clock. <a href="/cerberus.html">CERBERUS</a> is the three-headed diagnostic tool that figures out what vintage hardware actually is and whether it&rsquo;s telling the truth. Separately, <a href="/takeover.html">TAKEOVER</a> is an interactive AI takeover simulator that has nothing to do with networking. I just got carried away with demoscene effects and couldn&rsquo;t stop.</p>
 
     <p>Right now the software all works in DOSBox-X against simulated responses. As of 2026-04-23 the NetISA hardware is actually on the bench; every line of the BOM arrived and bench assembly is the next phase. Which is also where I fully expect things to start going wrong. Everything is open source so you can watch it happen in real time.</p>
 
@@ -159,7 +159,7 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">CPU</span>
-            <span class="spec-value">8088 &ndash; 486+</span>
+            <span class="spec-value">8088 to 486+</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">WiFi</span>

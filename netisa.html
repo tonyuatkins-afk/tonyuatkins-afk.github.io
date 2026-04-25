@@ -212,11 +212,11 @@
     <h2>DOS software</h2>
     <p>The full DOS software stack targets 8088 real mode (OpenWatcom 2.0, small memory model) and runs on anything from a 4.77 MHz XT to a Pentium. At least in DOSBox-X it does.</p>
     <ul>
-        <li><strong>NETISA.COM</strong> &mdash; 678-byte TSR that hooks <code>INT 63h</code>. Under 2 KB resident.</li>
-        <li><strong>NETISA.EXE</strong> &mdash; Launcher with WiFi scanning, signal strength bars, password entry, card status, and system info.</li>
-        <li><strong>Screen library</strong> &mdash; Shared VGA text buffer rendering. Direct writes to <code>0xB800:0000</code> with CP437 box drawing.</li>
-        <li><strong>INT 63h API</strong> &mdash; C wrapper library covering system, WiFi, DNS, sessions, certificates, crypto, events, and diagnostics.</li>
-        <li><strong>Stub layer</strong> &mdash; Fake data layer for testing without hardware. Simulates WiFi networks, connection states, and delays.</li>
+        <li><strong>NETISA.COM</strong>: 678-byte TSR that hooks <code>INT 63h</code>. Under 2 KB resident.</li>
+        <li><strong>NETISA.EXE</strong>: launcher with WiFi scanning, signal strength bars, password entry, card status, and system info.</li>
+        <li><strong>Screen library</strong>: shared VGA text buffer rendering. Direct writes to <code>0xB800:0000</code> with CP437 box drawing.</li>
+        <li><strong>INT 63h API</strong>: C wrapper library covering system, WiFi, DNS, sessions, certificates, crypto, events, and diagnostics.</li>
+        <li><strong>Stub layer</strong>: fake data layer for testing without hardware. Simulates WiFi networks, connection states, and delays.</li>
     </ul>
 
     <div class="screenshots">
@@ -245,7 +245,7 @@
     <h2>Cathode v0.2: text-mode web browser (sort of)</h2>
     <p>Cathode fetches real HTML pages over HTTPS via the NetISA card, parses them through a streaming HTML parser, and renders structured content in 80&times;25 text mode. No JavaScript, no CSS, no regrets. It&rsquo;s good at articles, documentation, wikis, and directory pages. It&rsquo;s bad at everything else. 40 KB EXE.</p>
     <ul>
-        <li>Streaming HTML parser &mdash; headings, paragraphs, links, bold/italic/code, lists, blockquotes, preformatted text, horizontal rules, entities, image alt text</li>
+        <li>Streaming HTML parser: headings, paragraphs, links, bold/italic/code, lists, blockquotes, preformatted text, horizontal rules, entities, image alt text</li>
         <li>HTTP/1.0 fetch with redirect following, UTF-8 to CP437 mapping, relative URL resolution</li>
         <li>Find on page (Ctrl+F) with match highlighting and N/Shift+N cycling</li>
         <li>Bookmarks with disk persistence (Ctrl+D to save, Ctrl+B to view)</li>
@@ -256,7 +256,7 @@
     <div class="screenshots">
         <figure>
             <img src="/img/cathode-browse-new.gif" alt="Animated: Cathode browser navigating from home page to NPR, typing URL, loading page, and scrolling through real news headlines in DOS text mode" width="640" height="400">
-            <figcaption>Navigating to NPR &mdash; real news headlines in text mode</figcaption>
+            <figcaption>Navigating to NPR. Real news headlines in text mode.</figcaption>
         </figure>
         <figure>
             <img src="/img/cathode-links.gif" alt="Animated: Cathode browser on NPR with Tab key cycling through highlighted links, then following a link to a story" width="640" height="400">
@@ -264,7 +264,7 @@
         </figure>
         <figure>
             <img src="/img/cathode-manpage.gif" alt="Animated: Cathode browser rendering OpenBSD ls man page with preformatted text, inline links, and scrolling" width="640" height="400">
-            <figcaption>OpenBSD ls(1) man page &mdash; preformatted text and anchor links</figcaption>
+            <figcaption>OpenBSD ls(1) man page: preformatted text and anchor links.</figcaption>
         </figure>
         <figure>
             <img src="/img/cathode-test-new.gif" alt="Animated: Cathode feature test page showing headings, bold, italic, code, lists, blockquotes, and horizontal rules" width="640" height="400">
@@ -278,7 +278,7 @@
         <li>8 channels with 128 messages each on far heap, unread counts, scroll bar</li>
         <li>Multi-line compose (Shift+Enter), word-wrapped messages, 8 hash-based author colors</li>
         <li>Ctrl+F find in messages with match highlighting and N/Shift+N cycling</li>
-        <li>PC speaker notifications &mdash; blip for current channel, chirp for unread, F9 to toggle</li>
+        <li>PC speaker notifications: blip for current channel, chirp for unread, F9 to toggle</li>
         <li>CP437 reactions (hearts, smileys, notes) and thread reply indicators</li>
         <li>Help overlay (F1), user list overlay (Alt+U), DISCORD.CFG settings persistence</li>
     </ul>
@@ -320,7 +320,7 @@
     </div>
 
     <h2>Firmware</h2>
-    <p>The ESP32-S3 firmware handles the networking side. It preserves the PSTROBE ISR and register file architecture from the hardware spec &mdash; the ISA bus interface is unchanged.</p>
+    <p>The ESP32-S3 firmware handles the networking side. It preserves the PSTROBE ISR and register file architecture from the hardware spec; the ISA bus interface is unchanged.</p>
     <ul>
         <li><strong>WiFi manager:</strong> APSTA mode with auto-connect, network scanning, and a setup AP (&ldquo;NetISA-Setup&rdquo;)</li>
         <li><strong>HTTP client:</strong> Up to 4 concurrent TLS sessions using the ESP-IDF certificate bundle</li>
@@ -350,14 +350,14 @@
     <h2>Design verification</h2>
     <p>The CPLD logic has been through a fairly thorough testbench. Whether that translates to working hardware is another question entirely.</p>
     <ul>
-        <li>160/160 Verilog testbench tests passing (iverilog) &mdash; address decode, IOCHRDY wait states, watchdog timeout, IRQ retrigger, back-to-back cycles, mid-cycle reset, alias rejection</li>
+        <li>160/160 Verilog testbench tests passing (iverilog): address decode, IOCHRDY wait states, watchdog timeout, IRQ retrigger, back-to-back cycles, mid-cycle reset, alias rejection</li>
         <li>95 of 128 macrocells used, 61 of 84 pins</li>
         <li>Timing slack: +39.5 ns setup, +5.0 ns hold at 16 MHz. Zero total negative slack.</li>
         <li>Zero bus contention events across the simulation suite</li>
     </ul>
 
     <h2>What comes next</h2>
-    <p>The current plan ships as a DOS peripheral using Session Mode &mdash; the card owns TCP/IP and TLS, the host talks at the session level. The firmware and CPLD are designed so that native drivers (Windows 95/98 NDIS, Linux <code>net_device</code>) could be added later without hardware changes. Whether I actually get that far depends on how the first prototype goes.</p>
+    <p>The current plan ships as a DOS peripheral using Session Mode: the card owns TCP/IP and TLS, the host talks at the session level. The firmware and CPLD are designed so that native drivers (Windows 95/98 NDIS, Linux <code>net_device</code>) could be added later without hardware changes. Whether I actually get that far depends on how the first prototype goes.</p>
 
     <h2>Links</h2>
     <ul class="link-list">
