@@ -114,6 +114,17 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-25-takeover-v1-2">
+            <div class="log-date">
+                <time datetime="2026-04-25">2026-04-25</time>
+            </div>
+            <h2>TAKEOVER v1.2: robustness and UX polish</h2>
+            <p>v1.2 of TAKEOVER tagged on the takeover repo. The headline fix: Esc now exits any running scenario. Before this release, the engine&rsquo;s input loops only handled Enter and the busy-wait inside long delays had no abort path; a user mid-scenario who hit Esc got nothing and had to reboot. v1.2 routes a global abort flag through engine_run that returns cleanly to the menu with a new END_QUIT result.</p>
+            <p>Other fixes shipped: engine no longer eats keys typed during delays (peek-don&rsquo;t-drain via a new <code>scr_peekkey</code> in the shared screen lib); F9 and F10 audio toggles work mid-scenario, not just at prompts; climax sequence drains held keys on early exit; parser errors include scenario filename plus line number.</p>
+            <p>Added: Space skips the current pause or typing animation. F1 brings up an in-scenario key reference overlay (modal, dismisses on any key). F9/F10 mute states persist across runs (TAKEOVER.DAT save schema bumped to v2 with a v1 upgrade path). Status bar updated to advertise Esc.</p>
+            <p>Binary: 63,050 bytes (v1.1 was 60,492). Compatibility: v1.1 saves load fine and .scn format is unchanged. <a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.2" rel="noopener">Release notes on GitHub</a>. <a href="/takeover.html">TAKEOVER project page</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-25-cathode-discord-claude-pages">
             <div class="log-date">
                 <time datetime="2026-04-25">2026-04-25</time>

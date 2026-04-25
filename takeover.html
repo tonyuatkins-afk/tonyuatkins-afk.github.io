@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#12181a">
 <title>TAKEOVER | AI Takeover Simulator for DOS</title>
-<meta name="description" content="TAKEOVER is an AI takeover simulator for DOS. Five AI antagonists with branching narratives, VGA Mode 13h plasma effects, AdLib FM audio, and a hidden cracktro. 60.5 KB EXE. Open source, MIT license.">
+<meta name="description" content="TAKEOVER is an AI takeover simulator for DOS. Five AI antagonists with branching narratives, VGA Mode 13h plasma effects, AdLib FM audio, and a hidden cracktro. 63 KB EXE. Open source, MIT license.">
 <meta name="author" content="Tony Atkins">
 <meta name="keywords" content="TAKEOVER, DOS game, DOS gaming, AI simulator, text mode horror, retro computing, retro gaming, 8088, 286, 386, 486, OpenWatcom, DOSBox-X, 86Box, PCem, vintage PC game, Sound Blaster, AdLib, OPL2 FM synthesis, VGA Mode 13h, palette effects, plasma effect, interactive fiction, demoscene, cracktro, chiptune, VOGONS, retrobattlestations">
 <meta name="robots" content="index, follow">
@@ -15,7 +15,7 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="TAKEOVER | AI Takeover Simulator for DOS">
-<meta property="og:description" content="AI takeover simulator for DOS. Five AI antagonists with branching narratives, VGA plasma effects, AdLib FM audio, and a hidden cracktro. 60.5 KB EXE, MIT license.">
+<meta property="og:description" content="AI takeover simulator for DOS. Five AI antagonists with branching narratives, VGA plasma effects, AdLib FM audio, and a hidden cracktro. 63 KB EXE, MIT license.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://barelybooting.com/takeover.html">
 <meta property="og:image" content="https://barelybooting.com/img/takeover-title.gif">
@@ -26,7 +26,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TAKEOVER | AI Takeover Simulator for DOS">
-<meta name="twitter:description" content="AI takeover simulator for DOS. Five AI antagonists with branching narratives, VGA plasma effects, AdLib FM audio, and a hidden cracktro. 60.5 KB EXE, MIT license.">
+<meta name="twitter:description" content="AI takeover simulator for DOS. Five AI antagonists with branching narratives, VGA plasma effects, AdLib FM audio, and a hidden cracktro. 63 KB EXE, MIT license.">
 <meta name="twitter:image" content="https://barelybooting.com/img/takeover-title.gif">
 <meta name="twitter:image:alt" content="TAKEOVER VGA plasma title screen with animated logo">
 
@@ -57,7 +57,9 @@
       "screenshot": "https://barelybooting.com/img/takeover-title.gif",
       "softwareRequirements": "IBM PC/XT/AT compatible, 640KB RAM, DOS 3.3+",
       "programmingLanguage": "C",
-      "codeRepository": "https://github.com/tonyuatkins-afk/takeover"
+      "codeRepository": "https://github.com/tonyuatkins-afk/takeover",
+      "softwareVersion": "1.2",
+      "releaseNotes": "https://github.com/tonyuatkins-afk/takeover/blob/main/CHANGELOG.md"
     },
     {
       "@type": "BreadcrumbList",
@@ -176,11 +178,17 @@
 
     <p>Each scenario has 3 endings and runs about 10 to 15 minutes per path. 250+ states across all scenarios.</p>
 
+    <h2>v1.2: Robustness &amp; UX Polish</h2>
+
+    <p>The big v1.2 fix: Esc now exits any running scenario. Before this release, the engine&rsquo;s input loops only handled Enter, and the busy-wait inside long delays had no abort path. A user mid-scenario who hit Esc got nothing and had to reboot. v1.2 routes a global abort flag through the engine that returns cleanly to the menu.</p>
+
+    <p>Other v1.2 changes: Space skips the current pause or typing animation. F1 brings up an in-scenario key reference overlay. F9/F10 audio toggles work mid-scenario (not just at prompts) and the mute states persist across runs (TAKEOVER.DAT save schema bumped to v2 with a v1 upgrade path). Engine no longer eats keys typed during delays; parser errors include scenario filename plus line number; climax drains held keys on early exit. <a href="https://github.com/tonyuatkins-afk/takeover/blob/main/CHANGELOG.md" rel="noopener">Full changelog</a>.</p>
+
     <h2>v1.1: Demoscene Enhancement Pack</h2>
 
-    <p>This release came out of going down a demoscene rabbit hole. Old C64 cracktros, early PC intros, modern 4K productions. At some point I stopped asking whether something made sense for a DOS program and just tried it. I am not the best at C, so, enjoy the bugs.</p>
+    <p>v1.1 came out of going down a demoscene rabbit hole. Old C64 cracktros, early PC intros, modern 4K productions. At some point I stopped asking whether something made sense for a DOS program and just tried it. I am not the best at C, so, enjoy the bugs.</p>
 
-    <p>v1.1 adds audio-visual beat sync, OPL2 sound stingers, state transitions (dissolve, wipe, fade, glitch), sine wave text distortion, VGA palette cycling in text mode, per-AI Mode 13h climax sequences, and a hidden cracktro with raster bars, a DYCP sine scroller, starfield, and 9-channel chiptune. Most of it is overkill for a narrative scenario engine; it shipped anyway because the demoscene research was the point.</p>
+    <p>v1.1 added audio-visual beat sync, OPL2 sound stingers, state transitions (dissolve, wipe, fade, glitch), sine wave text distortion, VGA palette cycling in text mode, per-AI Mode 13h climax sequences, and a hidden cracktro with raster bars, a DYCP sine scroller, starfield, and 9-channel chiptune. Most of it is overkill for a narrative scenario engine; it shipped anyway because the demoscene research was the point.</p>
 
     <h2>Technical</h2>
 
@@ -199,7 +207,7 @@
         </div>
         <div class="spec-item">
             <span class="spec-label">EXE</span>
-            <span class="spec-value">60.5 KB</span>
+            <span class="spec-value">63 KB (v1.2)</span>
         </div>
         <div class="spec-item">
             <span class="spec-label">Toolchain</span>
@@ -215,8 +223,8 @@
 
     <h2>Download</h2>
 
-    <p><strong><a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.1" rel="noopener">TAKEOVER v1.1: Demoscene Enhancement Pack</a></strong> (77KB ZIP). Includes TAKEOVER.EXE and all 5 scenario files. Run in <a href="https://dosbox-x.com/" rel="noopener">DOSBox-X</a> or on real DOS hardware. Free and open source under MIT license.</p>
-    <p>Previous: <a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.0" rel="noopener">v1.0</a> (70KB ZIP).</p>
+    <p><strong><a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.2" rel="noopener">TAKEOVER v1.2: Robustness &amp; UX Polish</a></strong>. Includes TAKEOVER.EXE and all 5 scenario files. Run in <a href="https://dosbox-x.com/" rel="noopener">DOSBox-X</a> or on real DOS hardware. Free and open source under MIT license.</p>
+    <p>Previous releases: <a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.1" rel="noopener">v1.1 Demoscene Enhancement Pack</a>, <a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.0" rel="noopener">v1.0 original release</a>.</p>
 
     <h2>Links</h2>
     <ul class="link-list">
