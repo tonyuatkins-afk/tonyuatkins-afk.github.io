@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12181a">
+<title>CATHODE | Text-Mode Web Browser for DOS</title>
+<meta name="description" content="CATHODE is a text-mode web browser for IBM PC compatibles (8088+, DOS 3.3+), part of the NetISA suite. Renders HTML to the text mode buffer, fetches over the NetISA card's TLS path, handles links and bookmarks. Sort of a browser. v0.2 builds clean under Open Watcom V2.">
+<meta name="author" content="Tony Atkins">
+<meta name="keywords" content="CATHODE, DOS web browser, text-mode browser, vintage PC HTTPS, NetISA, TLS 1.3 DOS, HTML rendering DOS, OpenWatcom, MS-DOS, FreeDOS, retro computing, 8088 web browser, MIT license, open source, barelybooting.com">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://barelybooting.com/cathode.html">
+<link rel="alternate" type="application/rss+xml" title="Barely Booting Build Log" href="/feed.xml">
+
+<meta property="og:title" content="CATHODE | Text-Mode Web Browser for DOS">
+<meta property="og:description" content="A text-mode web browser for vintage DOS PCs, sort of. Renders HTML, follows links, fetches over the NetISA card's TLS path. v0.2 builds clean.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://barelybooting.com/cathode.html">
+<meta property="og:image" content="https://barelybooting.com/img/cathode-start.png">
+<meta property="og:image:alt" content="CATHODE start page in DOSBox-X.">
+<meta property="og:site_name" content="Barely Booting">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CATHODE | Text-Mode Web Browser for DOS">
+<meta name="twitter:description" content="Text-mode web browser for vintage DOS PCs. NetISA suite app.">
+<meta name="twitter:image" content="https://barelybooting.com/img/cathode-start.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://barelybooting.com/cathode.html#app",
+      "name": "CATHODE",
+      "description": "A text-mode web browser for IBM PC compatibles (8088+, DOS 3.3+). Part of the NetISA suite. Renders HTML to the text mode buffer, fetches over the NetISA card's TLS path, supports forms (poorly), follows links (mostly), keeps bookmarks.",
+      "applicationCategory": "WebBrowser",
+      "operatingSystem": "MS-DOS",
+      "softwareVersion": "0.2",
+      "author": { "@type": "Person", "name": "Tony Atkins", "url": "https://barelybooting.com/about.html" },
+      "license": "https://opensource.org/licenses/MIT",
+      "url": "https://barelybooting.com/cathode.html",
+      "softwareRequirements": "IBM PC/XT/AT or compatible, 8088 or later, 256 KB RAM, MS-DOS 3.3+",
+      "programmingLanguage": "C",
+      "codeRepository": "https://github.com/tonyuatkins-afk/NetISA"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",    "item": "https://barelybooting.com/" },
+        { "@type": "ListItem", "position": 2, "name": "CATHODE", "item": "https://barelybooting.com/cathode.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Barely Booting home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="26" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/>
+                <circle cx="7" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="7" cy="25" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="25" r="1.1" fill="currentColor"/>
+                <text x="16" y="21" font-family="'Courier New', ui-monospace, monospace" font-size="12" font-weight="bold" fill="currentColor" text-anchor="middle" letter-spacing="-0.5">BB</text>
+            </svg>
+            <span>BARELY BOOTING<span class="cursor">_</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/netisa.html">NetISA</a>
+            <a href="/cerberus.html">CERBERUS</a>
+            <a href="/hearo.html">HEARO</a>
+            <a href="/chime.html">CHIME</a>
+            <a href="/cathode.html" class="active">CATHODE</a>
+            <a href="/discord.html">DISCORD</a>
+            <a href="/claude.html">CLAUDE</a>
+            <a href="/takeover.html">TAKEOVER</a>
+            <a href="/log.html">Log</a>
+            <a href="/about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <h1>CATHODE</h1>
+    <p class="tagline">&gt; A text-mode web browser for DOS. Sort of.</p>
+    <p class="subtitle">NetISA suite app. Renders HTML to the text mode buffer, fetches over the NetISA card&rsquo;s TLS path, follows links, keeps bookmarks. Forms work poorly. CSS does not work at all. v0.2 builds clean under Open Watcom V2; 8088 is the floor.</p>
+
+    <figure>
+        <img src="/img/cathode-start.png" alt="CATHODE start page in DOSBox-X. Green title bar 'Cathode - Start Page' across top with 'Cathode v0.2' on the right. URL line shows 'about:home'. Big block-letter CATHODE logo in green. Subtitle 'A text-mode web browser for DOS. Sort of.' Followed by 'Powered by NetISA'. 'Quick Links' section header. Status bar at bottom: 'Ln 1/36' on the left, 'Links:6' middle, 'F5:Rel Tab:Link Ctrl+F:Find Esc:Quit' on the right." width="720" height="540">
+        <figcaption>CATHODE start page. Green-on-black phosphor by default.</figcaption>
+    </figure>
+
+    <h2>Status</h2>
+
+    <p>2026-04-25. v0.2. Builds clean under Open Watcom V2 at 40 KB. 12 of 12 fixture tests green. Three parser bugs fixed in the last sweep. Source migrated to <code>cathode/</code> at the NetISA repo root.</p>
+
+    <p>Two binaries:</p>
+    <ul>
+        <li><strong><code>CATHODE.EXE</code></strong>: stub backend, runs on any DOS without a NetISA card. For development and demos.</li>
+        <li><strong><code>CATHODE_HW.EXE</code></strong>: real INT 63h backend, links the NetISA TSR client. Requires the card.</li>
+    </ul>
+
+    <h2>Features</h2>
+
+    <ul>
+        <li>Text-mode UI with a green-on-black phosphor aesthetic.</li>
+        <li>HTML tokenizer and flow renderer with line wrapping at the terminal width.</li>
+        <li>URL bar with history.</li>
+        <li>Bookmarks, persistent across runs.</li>
+        <li>In-page find with <code>Ctrl+F</code>.</li>
+        <li>UTF-8 input collapsed to CP437 for display.</li>
+        <li>Shortcuts: <code>Tab</code> next link, <code>F5</code> reload, <code>Ctrl+F</code> find, <code>Esc</code> quit.</li>
+        <li>Stub pages (<code>about:home</code>, <code>about:blank</code>) for development without network.</li>
+    </ul>
+
+    <h2>Source layout</h2>
+
+    <p>Lives at <code>cathode/</code> in the <a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">NetISA repo</a>.</p>
+
+    <ul>
+        <li><code>src/main.c</code>: entry point, DOS init.</li>
+        <li><code>src/browser.c</code>: navigation, history, error handling.</li>
+        <li><code>src/render.c</code>, <code>src/page.c</code>: rendering and page state.</li>
+        <li><code>src/htmltok.c</code>, <code>src/htmlout.c</code>: HTML parser, output emitter.</li>
+        <li><code>src/input.c</code>, <code>src/urlbar.c</code>: keyboard handling.</li>
+        <li><code>src/fetch.c</code>: NetISA TLS session client (calls into the INT 63h API).</li>
+        <li><code>src/stub_pages.c</code>: canned pages for development.</li>
+        <li><code>src/url.c</code>, <code>src/utf8.c</code>: URL parsing, UTF-8 transcode.</li>
+        <li><code>src/search.c</code>, <code>src/bookmark.c</code>: in-page find, bookmarks.</li>
+        <li><code>../lib/screen.c</code>, <code>../lib/netisa.c</code>, <code>../lib/netisa_stub.c</code>: shared suite library.</li>
+    </ul>
+
+    <h2>Building</h2>
+
+    <pre class="ascii-art" aria-hidden="true">
+cd cathode
+wmake           # CATHODE.EXE   (stub backend)
+wmake hw        # CATHODE_HW.EXE (real INT 63h backend)
+wmake clean     # remove build artifacts
+    </pre>
+
+    <h2>Hardware</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item"><span class="spec-label">Floor</span><span class="spec-value">8088 + 256K + CGA</span></div>
+        <div class="spec-item"><span class="spec-label">DOS</span><span class="spec-value">3.3+</span></div>
+        <div class="spec-item"><span class="spec-label">Network</span><span class="spec-value">NetISA TLS path</span></div>
+        <div class="spec-item"><span class="spec-label">Toolchain</span><span class="spec-value">OpenWatcom V2</span></div>
+        <div class="spec-item"><span class="spec-label">Standard</span><span class="spec-value">C89/C90</span></div>
+        <div class="spec-item"><span class="spec-label">License</span><span class="spec-value">MIT</span></div>
+    </div>
+
+    <p>The 8088 floor is real: <code>-0 -fpi -ms</code> in the Makefile. CATHODE runs on XT-class hardware with a NetISA card. EGA and VGA give a wider terminal (80x43, 80x50) but CGA 80x25 works too.</p>
+
+    <h2>Suite context</h2>
+
+    <p>CATHODE is one of nine NetISA suite apps. Shared screen lib at <code>/lib/screen.c</code>, shared INT 63h API definition at <code>/lib/netisa.h</code>. Cmdline conventions match the rest of the suite (<code>/SAFE</code>, <code>/STUBNET</code>).</p>
+
+    <h2>Out of scope</h2>
+
+    <p>No JavaScript. No CSS rendering. No image display in text mode. Forms are partially implemented and rough. The browser does not pretend to be modern.</p>
+
+    <h2>Links</h2>
+    <ul class="link-list">
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/tree/main/cathode" rel="noopener">cathode/ in the NetISA repo</a></li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/cathode/README.md" rel="noopener">cathode/README.md</a></li>
+        <li><a href="/netisa.html">NetISA project page</a> (the hardware that CATHODE_HW.EXE depends on)</li>
+        <li><a href="/log.html">Build log</a></li>
+    </ul>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="copyright">&copy; 2026 Tony Atkins // Barely Booting</div>
+        <div class="footer-links">
+            <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a>
+            <a href="https://github.com/tonyuatkins-afk" rel="noopener">GitHub</a>
+            <a href="/feed.xml">RSS</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

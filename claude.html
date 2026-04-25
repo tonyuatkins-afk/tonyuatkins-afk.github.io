@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12181a">
+<title>CLAUDE | Anthropic API Client for DOS</title>
+<meta name="description" content="CLAUDE is an Anthropic API client for IBM PC compatibles (8088+, DOS 3.3+), part of the NetISA suite. Chat mode and agent mode with tool calls, conversation history, VGA splash. Stub backend for development; live API requires the NetISA card's TLS path. Builds clean under Open Watcom V2.">
+<meta name="author" content="Tony Atkins">
+<meta name="keywords" content="CLAUDE DOS, Anthropic API DOS, AI client DOS, vintage PC AI, NetISA, OpenWatcom, MS-DOS, FreeDOS, MIT license, open source, barelybooting.com">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://barelybooting.com/claude.html">
+<link rel="alternate" type="application/rss+xml" title="Barely Booting Build Log" href="/feed.xml">
+
+<meta property="og:title" content="CLAUDE | Anthropic API Client for DOS">
+<meta property="og:description" content="An Anthropic API client for vintage DOS PCs. Chat and agent modes. 640K of RAM. Billions of parameters. One ISA slot.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://barelybooting.com/claude.html">
+<meta property="og:image" content="https://barelybooting.com/img/claude-main.png">
+<meta property="og:image:alt" content="CLAUDE splash screen running in DOSBox-X.">
+<meta property="og:site_name" content="Barely Booting">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CLAUDE | Anthropic API Client for DOS">
+<meta name="twitter:description" content="Anthropic API client for vintage DOS PCs. NetISA suite app.">
+<meta name="twitter:image" content="https://barelybooting.com/img/claude-main.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://barelybooting.com/claude.html#app",
+      "name": "CLAUDE",
+      "description": "An Anthropic API client for IBM PC compatibles (8088+, DOS 3.3+). Part of the NetISA suite. Chat mode and agent mode with tool calls and thinking blocks. Conversation history saved to disk. VGA splash on launch. Stub backend ships for development without the NetISA card.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "MS-DOS",
+      "softwareVersion": "0.1",
+      "author": { "@type": "Person", "name": "Tony Atkins", "url": "https://barelybooting.com/about.html" },
+      "license": "https://opensource.org/licenses/MIT",
+      "url": "https://barelybooting.com/claude.html",
+      "softwareRequirements": "IBM PC/XT/AT or compatible, 8088 or later, 256 KB RAM, MS-DOS 3.3+, NetISA card with TLS path for live API",
+      "programmingLanguage": "C",
+      "codeRepository": "https://github.com/tonyuatkins-afk/NetISA"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",   "item": "https://barelybooting.com/" },
+        { "@type": "ListItem", "position": 2, "name": "CLAUDE", "item": "https://barelybooting.com/claude.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Barely Booting home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="26" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/>
+                <circle cx="7" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="7" r="1.1" fill="currentColor"/>
+                <circle cx="7" cy="25" r="1.1" fill="currentColor"/>
+                <circle cx="25" cy="25" r="1.1" fill="currentColor"/>
+                <text x="16" y="21" font-family="'Courier New', ui-monospace, monospace" font-size="12" font-weight="bold" fill="currentColor" text-anchor="middle" letter-spacing="-0.5">BB</text>
+            </svg>
+            <span>BARELY BOOTING<span class="cursor">_</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/netisa.html">NetISA</a>
+            <a href="/cerberus.html">CERBERUS</a>
+            <a href="/hearo.html">HEARO</a>
+            <a href="/chime.html">CHIME</a>
+            <a href="/cathode.html">CATHODE</a>
+            <a href="/discord.html">DISCORD</a>
+            <a href="/claude.html" class="active">CLAUDE</a>
+            <a href="/takeover.html">TAKEOVER</a>
+            <a href="/log.html">Log</a>
+            <a href="/about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <h1>CLAUDE</h1>
+    <p class="tagline">&gt; 640K of RAM. Billions of parameters. One ISA slot.</p>
+    <p class="subtitle">NetISA suite app. Anthropic API client for IBM PC compatibles. Chat mode and agent mode. Conversation history saved to disk. Stub backend for development; live API requires the NetISA card&rsquo;s TLS path. Builds clean under Open Watcom V2; 8088 is the floor.</p>
+
+    <figure>
+        <img src="/img/claude-main.png" alt="CLAUDE splash screen in DOSBox-X. Big green block-letter CLAUDE logo. 'for DOS' subtitle below the logo. Tagline in cyan: '640K of RAM. Billions of parameters. One ISA slot.' Version line: 'CLAUDE.EXE v0.1 | NetISA'. 'Press any key to begin...' prompt in yellow at the bottom." width="720" height="540">
+        <figcaption>CLAUDE splash. Block-letter logo and the NetISA tagline.</figcaption>
+    </figure>
+
+    <h2>Status</h2>
+
+    <p>2026-04-25. v0.1. Builds clean under Open Watcom V2 at 30 KB. Source migrated to <code>claude/</code> at the NetISA repo root.</p>
+
+    <h2>Features</h2>
+
+    <ul>
+        <li>Chat mode: prompt + scrollable conversation + message compose.</li>
+        <li>Agent mode: stream of tool calls + thinking blocks when the API surfaces them.</li>
+        <li>VGA splash on launch.</li>
+        <li>Conversation history saved to disk.</li>
+        <li>Stub backend for development without a NetISA card.</li>
+    </ul>
+
+    <h2>Source layout</h2>
+
+    <p>Lives at <code>claude/</code> in the <a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">NetISA repo</a>.</p>
+
+    <ul>
+        <li><code>src/main.c</code>: entry point.</li>
+        <li><code>src/claude.c</code>: session state.</li>
+        <li><code>src/chat.c</code>: chat mode UI.</li>
+        <li><code>src/compose.c</code>: message editor.</li>
+        <li><code>src/agent.c</code>: agent mode UI.</li>
+        <li><code>src/splash.c</code>: launch splash.</li>
+        <li><code>src/stub_claude.c</code>: stub backend.</li>
+        <li><code>../lib/screen.c</code>: shared suite library.</li>
+    </ul>
+
+    <h2>Building</h2>
+
+    <pre class="ascii-art" aria-hidden="true">
+cd claude
+wmake           # CLAUDE.EXE
+wmake clean     # remove build artifacts
+    </pre>
+
+    <h2>Hardware</h2>
+
+    <div class="specs-strip">
+        <div class="spec-item"><span class="spec-label">Floor</span><span class="spec-value">8088 + 256K + CGA</span></div>
+        <div class="spec-item"><span class="spec-label">Recommended</span><span class="spec-value">EGA/VGA for the splash</span></div>
+        <div class="spec-item"><span class="spec-label">DOS</span><span class="spec-value">3.3+</span></div>
+        <div class="spec-item"><span class="spec-label">Network</span><span class="spec-value">NetISA TLS path</span></div>
+        <div class="spec-item"><span class="spec-label">Toolchain</span><span class="spec-value">OpenWatcom V2</span></div>
+        <div class="spec-item"><span class="spec-label">License</span><span class="spec-value">MIT</span></div>
+    </div>
+
+    <h2>Suite context</h2>
+
+    <p>One of nine NetISA suite apps. Shared screen lib at <code>/lib/screen.c</code>, shared INT 63h API at <code>/lib/netisa.h</code>. Cmdline conventions match the rest of the suite.</p>
+
+    <h2>Notes</h2>
+
+    <p>The Anthropic API endpoint is HTTPS. CLAUDE talks to it via the NetISA card&rsquo;s TLS session API. The DOS host never sees the encrypted bytes. Token streaming arrives line-by-line for the chat UI to render incrementally.</p>
+
+    <p>The agent mode is the more interesting one for a vintage machine: tool calls and thinking blocks render as discrete UI events, which fits a slow text-mode UI better than a wall of streamed prose. A 286 can keep up with the rendering even when it cannot keep up with reading.</p>
+
+    <h2>Links</h2>
+    <ul class="link-list">
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/tree/main/claude" rel="noopener">claude/ in the NetISA repo</a></li>
+        <li><a href="https://github.com/tonyuatkins-afk/NetISA/blob/main/claude/README.md" rel="noopener">claude/README.md</a></li>
+        <li><a href="/netisa.html">NetISA project page</a></li>
+        <li><a href="/log.html">Build log</a></li>
+    </ul>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="copyright">&copy; 2026 Tony Atkins // Barely Booting</div>
+        <div class="footer-links">
+            <a href="https://www.youtube.com/@BarelyBooting" rel="noopener">YouTube</a>
+            <a href="https://github.com/tonyuatkins-afk" rel="noopener">GitHub</a>
+            <a href="/feed.xml">RSS</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

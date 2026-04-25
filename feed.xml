@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2026 20:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2026 21:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CATHODE, DISCORD, and CLAUDE get their own project pages</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-25-cathode-discord-claude-pages</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-25-cathode-discord-claude-pages</guid>
+      <pubDate>Sat, 25 Apr 2026 21:00:00 +0000</pubDate>
+      <description>Three new dedicated pages on barelybooting.com: cathode.html, discord.html, claude.html. Same template as cerberus.html and hearo.html: hero figure, status, features, source layout, build instructions, hardware specs, suite context, out-of-scope, links. Site nav updated across all 12 HTML files; sitemap and the index page intro paragraph and links list updated to point at the new pages.</description>
+    </item>
 
     <item>
       <title>CATHODE, DISCORD, and CLAUDE migrate to the suite-app pattern</title>
