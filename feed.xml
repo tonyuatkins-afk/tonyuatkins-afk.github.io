@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2026 22:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2026 23:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>TAKEOVER v1.2.1: bug-fix release</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-25-takeover-v1-2-1</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-25-takeover-v1-2-1</guid>
+      <pubDate>Sat, 25 Apr 2026 23:00:00 +0000</pubDate>
+      <description>Same-day patch on v1.2. Three fixes: (1) IS_KEY_ESC and IS_KEY_ENTER helpers replace scattered dual-encoding checks across engine.c, cracktro.c, menu.c. (2) The F9/F10 audio status flash no longer leaks a Space press into the outer scenario delay. (3) engine_reset clears g_skip_delay for symmetry. v1.2 saves and .scn files unchanged; drop-in. Binary 63,068 bytes (v1.2 was 63,050).</description>
+    </item>
 
     <item>
       <title>TAKEOVER v1.2: robustness and UX polish</title>

@@ -114,6 +114,16 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-25-takeover-v1-2-1">
+            <div class="log-date">
+                <time datetime="2026-04-25">2026-04-25</time>
+            </div>
+            <h2>TAKEOVER v1.2.1: bug-fix release</h2>
+            <p>Same-day patch on top of v1.2. Three issues from the post-release code review: (1) the Esc and Enter checks across the engine relied on dual-encoding fallbacks scattered through the codebase; cleaned up behind new <code>IS_KEY_ESC</code> and <code>IS_KEY_ENTER</code> helpers in <code>lib/screen.h</code> and replaced six call sites. (2) The 600 ms F9/F10 audio status flash leaked a Space press into the outer scenario delay (so pressing Space during the flash skipped seconds of intended pacing); <code>handle_audio_key</code> now saves and restores <code>g_skip_delay</code> around the flash. (3) <code>engine_reset</code> now also clears <code>g_skip_delay</code> for symmetry with <code>g_abort_requested</code>.</p>
+            <p>Compatibility: v1.2 saves and <code>.scn</code> files are unchanged. v1.2.1 is a drop-in replacement. Site captures (title, menu, axiom, fx) refreshed off the v1.2.1 binary; the new status bar (<code>F9:Mus F10:Snd Esc:Quit</code>) and footer (<code>v1.2.1</code>) are visible across them.</p>
+            <p>Binary: 63,068 bytes (v1.2 was 63,050). <a href="https://github.com/tonyuatkins-afk/takeover/releases/tag/v1.2.1" rel="noopener">Release notes on GitHub</a>. <a href="/takeover.html">TAKEOVER project page</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-25-takeover-v1-2">
             <div class="log-date">
                 <time datetime="2026-04-25">2026-04-25</time>
