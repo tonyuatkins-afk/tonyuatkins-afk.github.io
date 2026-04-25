@@ -111,6 +111,35 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-25-suite-migration">
+            <div class="log-date">
+                <time datetime="2026-04-25">2026-04-25</time>
+            </div>
+            <h2>CATHODE, DISCORD, and CLAUDE migrate to the suite-app pattern</h2>
+            <p>All three older DOS apps now live at the top level of the NetISA repo, matching the shape HEARO and CHIME ship: <code>src/</code> for sources, own <code>Makefile</code> with a LIB_OBJS split, <code>README.md</code>, <code>.gitignore</code>, <code>scripts/</code> for the screenshot toolkit. Shared platform code (<code>screen.c</code>, <code>netisa.h/c</code>, <code>netisa_stub.c</code>) lives in a new <code>/lib/</code> at the repo root that the apps reference via <code>-i=../lib</code> and link as object files.</p>
+
+            <p><strong>What moved.</strong> <code>dos/cathode/</code> &rarr; <code>cathode/src/</code>, <code>dos/discord/</code> &rarr; <code>discord/src/</code>, <code>dos/claude/</code> &rarr; <code>claude/src/</code>. <code>dos/lib/</code> stays in place for the launcher and TSR; identical content lives at <code>/lib/</code> for the migrated apps. Source files moved via <code>git mv</code> to preserve history. <code>dos/Makefile</code> trimmed back to just the TSR + launcher.</p>
+
+            <p><strong>Build sizes match the previous dos/Makefile builds.</strong> CATHODE.EXE 40 KB, DISCORD.EXE 37 KB, CLAUDE.EXE 30 KB. Toolchain unchanged: 8088 floor (<code>-0 -fpi -ms</code>), max optimisation, DOS target. CATHODE builds two variants: <code>CATHODE.EXE</code> (stub backend, runs on any DOS) and <code>CATHODE_HW.EXE</code> (real INT 63h backend, requires NetISA card).</p>
+
+            <div class="hero-screenshots">
+                <figure>
+                    <img src="/img/cathode-start.png" alt="CATHODE start page in DOSBox-X. Green title bar at top. CATHODE block-letter logo in green-on-black. Subtitle 'A text-mode web browser for DOS. Sort of.' Powered by NetISA line. Quick Links section header. Status bar at bottom with shortcuts: Ln 1/36, Links:6, F5:Rel, Tab:Link, Ctrl+F:Find, Esc:Quit." width="720" height="540" loading="lazy">
+                    <figcaption>CATHODE start page.</figcaption>
+                </figure>
+                <figure>
+                    <img src="/img/discord-main.png" alt="DISCORD chat client in DOSBox-X. Channel list on the left with #general highlighted, plus #hardware, #builds (5), #software, #marketplace (2), #off-topic, #help (1), #showcase. Message thread on the right with timestamps and colored usernames: ChipCollector, BarelyBooting, VintageNerd, PCBWizard, SocketSlinger. Type a message field at bottom, status bar with Tab:Focus, Ctrl+F:Find, F1:Help, Ctrl+Q:Quit." width="720" height="540" loading="lazy">
+                    <figcaption>DISCORD v2 with the Retro Computing Hub server populated by stub data.</figcaption>
+                </figure>
+                <figure>
+                    <img src="/img/claude-main.png" alt="CLAUDE splash screen. Big green block-letter CLAUDE logo. 'for DOS' subtitle below. '640K of RAM. Billions of parameters. One ISA slot.' tagline in cyan. CLAUDE.EXE v0.1 | NetISA version line. 'Press any key to begin...' prompt in yellow." width="720" height="540" loading="lazy">
+                    <figcaption>CLAUDE splash with the NetISA tagline.</figcaption>
+                </figure>
+            </div>
+
+            <p>NetISA repo at <a href="https://github.com/tonyuatkins-afk/NetISA" rel="noopener">tonyuatkins-afk/NetISA</a>. The top-level layout is now: <code>lib/</code> (shared) and one directory per suite app (<code>hearo/</code>, <code>chime/</code>, <code>cathode/</code>, <code>discord/</code>, <code>claude/</code>). <code>dos/</code> is just the TSR (<code>NETISA.COM</code>) and the launcher (<code>NETISA.EXE</code> / <code>NETISA_HW.EXE</code>). Four suite apps remain unbuilt: COURIER, CRATE, KIOSK, RADIO.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-25-hearo-chime-v100-tag">
             <div class="log-date">
                 <time datetime="2026-04-25">2026-04-25</time>

@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2026 18:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2026 20:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>CATHODE, DISCORD, and CLAUDE migrate to the suite-app pattern</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-25-suite-migration</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-25-suite-migration</guid>
+      <pubDate>Sat, 25 Apr 2026 20:00:00 +0000</pubDate>
+      <description>All three older DOS apps move from dos/cathode/, dos/discord/, dos/claude/ to top-level cathode/, discord/, claude/. Each gets the suite-app shape: src/, Makefile, README, .gitignore, scripts/. Shared platform code now lives at /lib/. Build sizes unchanged: CATHODE.EXE 40 KB, DISCORD.EXE 37 KB, CLAUDE.EXE 30 KB. dos/ is now just the TSR and launcher. Captures saved for all three.</description>
+    </item>
 
     <item>
       <title>HEARO + CHIME tagged v1.0.0</title>
