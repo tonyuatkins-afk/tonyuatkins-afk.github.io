@@ -114,6 +114,24 @@
 
     <div class="log-timeline">
 
+        <article class="log-entry" id="entry-2026-04-28-hearo-v1-3-0">
+            <div class="log-date">
+                <time datetime="2026-04-28">2026-04-28</time>
+            </div>
+            <h2>HEARO v1.3.0: engine fidelity, visualizers, metadata</h2>
+            <figure>
+                <img src="/img/hearo-v13-boot.png" alt="HEARO v1.3.0 boot screen running in DOSBox-X. Big CP437 box-drawing HEARO logo at top. Hardware report below: CPU Intel 80486SX detected with 80487 ENABLED listing 256-bin FFT, sinc resampling, exact mixing, plasma, tunnel, particle system, fire, wireframe 3D, karaoke vocal removal, parametric EQ, stereo widening, gamma-correct dither, adaptive CORDIC, log-domain effects, 16+ channel mixing in green. Memory 640K conventional + 61440K extended detected with full library index and visualizer preload unlocked. Video VESA generic 2048KB VRAM ENABLED. Bottom: Your machine has unlocked 32 features. Press any key to begin." width="736" height="599">
+                <figcaption>HEARO v1.3.0 boot screen against the workstation tier. 32 features unlocked.</figcaption>
+            </figure>
+            <p>Tagged <a href="https://github.com/tonyuatkins-afk/hearo/releases/tag/v1.3.0" rel="noopener">v1.3.0</a> on the HEARO repo. The demoscene-polish milestone: full XM and IT envelope coverage, IT lowpass filter, NNAs, three visualizer modes, and real now-playing metadata. <a href="/hearo.html">Cluster summary on the project page</a>.</p>
+            <p><strong>Engine fidelity (clusters B&ndash;E).</strong> XM pan envelope wires through to mixer pan; IT instrument-mode files now run vol + pan + pitch envelopes plus the Z40&hellip;Z7F lowpass filter; NNAs are honored via a ghost-voice pool that lets a logical channel&rsquo;s previous note keep ringing while a new note triggers. The lowpass alpha is computed at the active mixer rate so the same cutoff Hz plays the same audibly regardless of output rate.</p>
+            <p><strong>Visualizers (cluster A).</strong> The bottom-right pane cycles between Spectrum / VU meter / frequency Bars via the <code>V</code> key. Pure UI-side addition; no audio engine touched. Pattern observed from <a href="https://github.com/rajeevt2001/Dos-Music-Player" rel="noopener">rajeevt2001/Dos-Music-Player</a>.</p>
+            <p><strong>Metadata (cluster F).</strong> WAV LIST/INFO sub-chunks (INAM/IART/IPRD/ICRD), MIDI track-0 sequence-name (FF 03 meta event with proper VLQ event walk), VGM GD3 tag block (UTF-16LE&rarr;ASCII lossy decode for track + author EN). The empty-state placeholder strings (&ldquo;Axel F / Harold Faltermeyer / Beverly Hills Cop OST&rdquo; demo defaults) were neutralized.</p>
+            <p><strong>Hardening (same day).</strong> Twelve issues closed from external code reviews (mixer loop-bound clamping, <code>safe_fmalloc</code> 64K policy, <code>irq_save</code>/<code>irq_restore</code> helpers, MOD per-pattern allocation, S3M out-of-bounds note guard, XM short-header zero-init, mixer frequency overflow fix, modal UI audio pump, browser extension sync, S3M packed/stereo flag rejection, etc). Five auplay-inspired SB/DMA improvements (DSP4 IRQ self-detection, INTSTAT-driven IRQ ack with ack-both fallback, DSP_END_DMA + 0xD9/0xDA bug fix, <code>audio_callback</code> returns u16 + EOF wiring, unified DMA register tables).</p>
+            <p><strong>Code review.</strong> Three rounds of iterative review closed clean: <strong>5 &rarr; 1 &rarr; 0</strong> Critical+Important findings. Round 2 caught a u32 overflow in IT pitch-envelope frequency multiplication on high notes; fixed via a split-shift form (<code>(base_freq &gt;&gt; 8) * mul &gt;&gt; 8</code>) keeping each intermediate under 2^31.</p>
+            <p>DOSBox-X SB16 smoke runs match canonical sentinels (WAV 67584 / MOD 90112 / XM 67584). Real-iron validation on the Toshiba 320CDT 486 dev box pending; bare-DOS YMF715 PnP isolation is v1.4 work. <a href="https://github.com/tonyuatkins-afk/hearo" rel="noopener">Source on GitHub</a>.</p>
+        </article>
+
         <article class="log-entry" id="entry-2026-04-25-prior-art">
             <div class="log-date">
                 <time datetime="2026-04-25">2026-04-25</time>

@@ -5,8 +5,16 @@
     <link>https://barelybooting.com/log.html</link>
     <description>Build log for the NetISA project. Open-source WiFi and TLS 1.3 for vintage ISA PCs.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://barelybooting.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>HEARO v1.3.0: engine fidelity, visualizers, metadata</title>
+      <link>https://barelybooting.com/log.html#entry-2026-04-28-hearo-v1-3-0</link>
+      <guid isPermaLink="true">https://barelybooting.com/log.html#entry-2026-04-28-hearo-v1-3-0</guid>
+      <pubDate>Tue, 28 Apr 2026 00:00:00 +0000</pubDate>
+      <description>HEARO v1.3.0 tagged. Demoscene-polish milestone: XM volume + pan envelopes; IT volume + pan + pitch envelopes; IT lowpass filter (Z40-Z7F, rate-independent cutoff); IT NNAs (Cut/Continue/Off/Fade-as-Off) via ghost-voice pool; VU meter + frequency-bars visualizer modes (V cycles); real now-playing metadata (WAV LIST/INFO sub-chunks, MIDI track-0 sequence-name, VGM GD3 tag block). Same-day v1.0 hardening pass closing 12 review findings + 5 auplay-inspired SB/DMA improvements. Three rounds of iterative code review closed clean (5 to 1 to 0 Critical+Important). DOSBox-X SB16 sentinels match (WAV 67584 / MOD 90112 / XM 67584).</description>
+    </item>
 
     <item>
       <title>Prior-art writeup: where NetISA fits in the TLS-on-vintage landscape</title>
