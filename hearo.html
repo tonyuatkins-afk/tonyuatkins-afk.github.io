@@ -125,9 +125,30 @@
 
     <p>One detection bug still visible: the Standard tier shows only PC Speaker even with Sound Blaster Pro 2 emulated and BLASTER set, because the SB DSP-3.x probe sequence misses one path under DOSBox-X. Tracked for v1.0.1.</p>
 
+    <h2>Update &mdash; 2026-04-27 (v1.3 audio engine)</h2>
+
+    <figure>
+        <img src="/img/hearo-v13-boot.png" alt="HEARO v1.3 boot screen running in DOSBox-X. Big CP437 box-drawing HEARO logo at top with NetISA Music Player v1.0.0 / MIT License subtitle. CPU Intel 80486SX detected with 80487 ENABLED listing 256-bin FFT, sinc resampling, exact mixing, plasma, tunnel, particle system, fire, wireframe 3D, karaoke vocal removal, parametric EQ, stereo widening, gamma-correct dither, adaptive CORDIC, log-domain effects, 16+ channel mixing in green. Memory 640K conventional + 61440K extended detected with full library index and visualizer preload unlocked. Video VESA generic 2048KB VRAM ENABLED. Bottom: Your machine has unlocked 32 features. Press any key to begin." width="736" height="599">
+        <figcaption>v1.3 boot screen, captured against the current build with the cluster A&ndash;E work landed. Same 32-feature workstation tier as the existing tier strip below.</figcaption>
+    </figure>
+
+    <p>The audio engine landed five clusters this evening, all sentinel-clean (WAV / MOD / XM frame counts unchanged across every commit). The page captures here are limited to the boot screen because the interactive screenshot pipeline relies on <code>SendKeys</code> reaching DOSBox-X, which fails reliably in this environment &mdash; the SDL keyboard layer doesn&rsquo;t always accept synthesized input. Real-iron captures of the visualizer modes, Hall, and Settings panels will follow with the Toshiba 320CDT pass.</p>
+
+    <p>What shipped tonight, in commit order:</p>
+
+    <ul>
+        <li><strong>Cluster A &mdash; visualizer triad.</strong> The bottom-right pane now cycles between three modes via the <code>V</code> key: classic spectrum (default), a stereo VU meter with peak-hold dots, and frequency bars with floating peak caps and tri-color zones. Pure UI-side addition; no audio engine touched. Pattern observed from <a href="https://github.com/rajeevt2001/Dos-Music-Player" rel="noopener">rajeevt2001/Dos-Music-Player</a>.</li>
+        <li><strong>Cluster B &mdash; XM pan envelope + IT volume envelope.</strong> XM pan envelope was parsed but not wired; this commit applies it as an additive offset to mixer pan with the FT2-compatible curve. IT instrument-mode files now run their volume envelope and fadeout end-to-end, including note-off release vs note-cut hard-silence semantics.</li>
+        <li><strong>Cluster C &mdash; IT pan + pitch envelopes.</strong> The pan envelope (parsed in B) wires through to mixer pan as a clamped offset. The 82-byte pitch envelope (previously fseek&rsquo;d past) now applies a Q16 frequency multiplier per tick, mapping its &minus;32&hellip;+32 semitone range through a precomputed table. Filter mode (flags bit 0x80) is honored by skipping pitch modulation, leaving the envelope intact for the lowpass pass that follows.</li>
+        <li><strong>Cluster D &mdash; IT lowpass filter.</strong> Per-channel 1-pole IIR lowpass, gated on <code>filter_active</code> so non-filtered channels pay only a single-byte test on the hot path. IT effect Z (letter 26, Z00&hellip;Z7F) sets cutoff via the default macro; a 128-entry alpha table maps cutoff levels to Q16 IIR coefficients with the OpenMPT-style curve fc(c) = 110 &middot; 2^(c/24) Hz.</li>
+        <li><strong>Cluster E &mdash; IT NNAs (basic).</strong> New Note Actions are honored via a ghost-voice pool. When a logical channel triggers a new note and its instrument&rsquo;s NNA byte is non-zero (Continue / Note Off / Note Fade), the existing voice migrates to a ghost slot in <code>chans[num_channels..31]</code> while the logical channel proceeds with the new note. Both voices then mix independently until the ghost&rsquo;s envelope drains. New <code>mixer_clone_voice</code> API copies the full voice state under <code>irq_save</code>.</li>
+    </ul>
+
+    <p>Also landed earlier the same day: a v1.0 hardening pass closing 12 issues from two external code reviews (mixer loop-bound clamping, <code>safe_fmalloc</code> 64K policy, <code>irq_save</code>/<code>irq_restore</code> helpers, MOD per-pattern allocation, S3M out-of-bounds note guard, XM short-header zero-init, mixer frequency overflow fix, modal UI audio pump, browser extension sync, <code>nowplay_advance</code> wiring, S3M packed/stereo flag rejection); five auplay-inspired SB/DMA improvements (DSP4 IRQ self-detection, INTSTAT-driven IRQ ack, DSP_END_DMA + 0xD9/0xDA bug fix, audio_callback returns u16 + EOF wiring, unified DMA register tables). Eight commits since 0b7330c. <a href="https://github.com/tonyuatkins-afk/hearo" rel="noopener">Source &amp; commits</a>.</p>
+
     <h2>Status</h2>
 
-    <p>2026-04-25. Compiles clean under Open Watcom V2. <code>HEARO.EXE</code> is 73 KB; the six test programs all build alongside it. Boot screen renders, tests pass.</p>
+    <p>2026-04-27. v1.3 release candidate &mdash; engine fidelity items shipped (envelopes, lowpass, NNAs); v1.0 polish items closed (hardening, auplay imports). Compiles clean under Open Watcom V2. <code>HEARO.EXE</code> is 138 KB; the seven test programs all build alongside it. DOSBox-X SB16 sentinels match across every commit.</p>
 
     <p>What is in the tree:</p>
     <ul>
@@ -266,10 +287,16 @@ hardware_events=8
     <h2>Roadmap</h2>
 
     <ul>
-        <li><strong>v1.0 (current):</strong> Foundation. Native formats, unlock matrix, boot screen, Hall, text UI. Builds clean.</li>
-        <li><strong>v1.1:</strong> Streaming. ESP32 path live, internet radio, Bandcamp, ModArchive.</li>
+        <li><strong>v1.0:</strong> Foundation. Native formats, unlock matrix, boot screen, Hall, text UI. Builds clean. Toshiba 320CDT bench pass closes the version.</li>
+        <li><strong>v1.1:</strong> Streaming. ESP32 path live, internet radio, Bandcamp, ModArchive. Single-allocation cap above 64 KB for whole-file loads (WAV / MIDI / VGM streaming, large tracker samples).</li>
         <li><strong>v1.2:</strong> Library. MusicBrainz tags, scrobbling, cover art, lyrics, ReplayGain, smart playlists.</li>
-        <li><strong>v1.3:</strong> Visuals. Demoscene visualizers, skins, karaoke, EQ, graphical tiers (320, 640, 800, 1024).</li>
+        <li><strong>v1.3 (in progress):</strong>
+            <ul>
+                <li>Engine fidelity: <strong>shipped</strong> &mdash; XM volume + pan envelopes; IT volume + pan + pitch envelopes; IT lowpass filter (Z40&hellip;Z7F); IT NNAs (basic, ghost-voice pool).</li>
+                <li>Visualizers: <strong>shipped</strong> &mdash; VU meter + frequency bars alongside the existing spectrum; <code>V</code> cycles modes.</li>
+                <li>Pending: STM / FAR / ULT loaders, EQ, skins, graphical tiers (320, 640, 800, 1024).</li>
+            </ul>
+        </li>
         <li><strong>v1.4:</strong> Network audio. Bluetooth out, AirPlay, Chromecast, DLNA, multi-room.</li>
         <li><strong>v1.5:</strong> Services. Spotify Connect target, YouTube Music, podcasts, audiobooks.</li>
     </ul>
